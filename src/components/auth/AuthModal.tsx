@@ -47,7 +47,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onClose,
   initialMode = 'SIGN_UP',
 }) => {
-  const { registerUser, switchPersona, users, showToast } = useApp();
+  const { registerUser, switchPersona, users, showToast, setIsWorkerRegModalOpen } = useApp();
 
   const [mode, setMode] = useState<'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'OTP' | 'FORGOT_PASSWORD' | 'RESET_SUCCESS'>(
     initialMode
@@ -357,18 +357,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </select>
               </div>
 
-              {/* Account Intent (Customer vs Worker) */}
-              <div className="p-2.5 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-gray-800 text-[11px]">Register as a Service Professional?</p>
-                  <p className="text-[10px] text-gray-500">Enable worker onboarding capabilities</p>
+              {/* Dedicated Partner Registration Banner Link */}
+              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between gap-2">
+                <div className="flex-1">
+                  <p className="font-bold text-emerald-950 text-xs flex items-center gap-1">
+                    <Briefcase className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                    <span>Want to offer services & earn?</span>
+                  </p>
+                  <p className="text-[10px] text-emerald-800">
+                    Complete our dedicated 5-step Worker Onboarding
+                  </p>
                 </div>
-                <input
-                  type="checkbox"
-                  checked={isWorkerIntent}
-                  onChange={(e) => setIsWorkerIntent(e.target.checked)}
-                  className="rounded text-brand-dark focus:ring-brand-dark w-4 h-4"
-                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    setIsWorkerRegModalOpen(true);
+                  }}
+                  className="py-1 px-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg text-[10px] shrink-0 shadow-xs"
+                >
+                  Partner Reg →
+                </button>
               </div>
 
               {/* Referral / Promo Code (Optional) */}
@@ -666,3 +675,4 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     </div>
   );
 };
+

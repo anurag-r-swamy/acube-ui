@@ -16,6 +16,7 @@ import {
   HelpCircle,
   CheckCircle2,
   Calendar,
+  Briefcase,
 } from 'lucide-react';
 
 interface CustomerHomeProps {
@@ -35,7 +36,16 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
   onNavigateToBookings,
   onNavigateToSearch,
 }) => {
-  const { categories, workerProfiles, selectedLocation, bookings, currentUser, setIsAuthModalOpen, setAuthModalMode } = useApp();
+  const {
+    categories,
+    workerProfiles,
+    selectedLocation,
+    bookings,
+    currentUser,
+    setIsAuthModalOpen,
+    setAuthModalMode,
+    setIsWorkerRegModalOpen,
+  } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
   // Check if customer has an active in-progress or accepted booking
@@ -283,6 +293,29 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Partner / Worker Registration Banner */}
+      <div className="p-4 bg-gradient-to-r from-emerald-950 via-brand-dark to-brand-light text-white rounded-2xl shadow-lifted flex items-center justify-between gap-3 relative overflow-hidden">
+        <div className="space-y-1 relative z-10">
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-brand-accent text-brand-charcoal px-2 py-0.5 rounded-full inline-block">
+            Earn with {APP_CONFIG.parentCompany}
+          </span>
+          <h3 className="text-xs font-bold text-white">
+            Register as a Verified Service Partner
+          </h3>
+          <p className="text-[11px] text-white/80 leading-tight">
+            Join 500+ Bengaluru pros. Direct weekly payouts, Aadhaar DigiLocker verification, and smart job broadcasts.
+          </p>
+        </div>
+        <button
+          onClick={() => setIsWorkerRegModalOpen(true)}
+          className="shrink-0 py-2.5 px-3.5 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-1.5 relative z-10"
+        >
+          <Briefcase className="w-3.5 h-3.5" />
+          <span>Register Now</span>
+        </button>
+        <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-brand-accent/20 rounded-full blur-lg pointer-events-none"></div>
       </div>
 
       {/* Trust & Safety Highlights */}

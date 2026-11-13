@@ -7,6 +7,7 @@ import { WorkerLayout } from './components/worker/WorkerLayout';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AuthModal } from './components/auth/AuthModal';
 import { AdminLoginModal } from './components/admin/AdminLoginModal';
+import { WorkerRegistrationModal } from './components/worker/WorkerRegistrationModal';
 
 export const App: React.FC = () => {
   const {
@@ -16,6 +17,8 @@ export const App: React.FC = () => {
     authModalMode,
     isAdminLoginModalOpen,
     setIsAdminLoginModalOpen,
+    isWorkerRegModalOpen,
+    setIsWorkerRegModalOpen,
   } = useApp();
 
   // Route selector
@@ -50,6 +53,12 @@ export const App: React.FC = () => {
       <AdminLoginModal
         isOpen={isAdminLoginModalOpen}
         onClose={() => setIsAdminLoginModalOpen(false)}
+      />
+
+      {/* Dedicated Worker & Partner Registration Wizard */}
+      <WorkerRegistrationModal
+        isOpen={isWorkerRegModalOpen}
+        onClose={() => setIsWorkerRegModalOpen(false)}
       />
 
       {/* Global In-app Toasts */}

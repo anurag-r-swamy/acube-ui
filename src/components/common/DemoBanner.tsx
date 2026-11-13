@@ -10,6 +10,7 @@ import {
   ArrowRightLeft,
   ChevronDown,
   Info,
+  Briefcase,
 } from 'lucide-react';
 
 export const DemoBanner: React.FC = () => {
@@ -26,6 +27,7 @@ export const DemoBanner: React.FC = () => {
     setIsAuthModalOpen,
     setAuthModalMode,
     setIsAdminLoginModalOpen,
+    setIsWorkerRegModalOpen,
   } = useApp();
 
   const isDualRole = currentUser.availableRoles.includes('CUSTOMER') && currentUser.availableRoles.includes('WORKER');
@@ -101,7 +103,17 @@ export const DemoBanner: React.FC = () => {
             className="flex items-center gap-1 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-extrabold px-2.5 py-1 rounded shadow-xs transition-colors"
             title="Open Customer Registration & Sign-In Simulation"
           >
-            <span>Register / Sign In</span>
+            <span>Customer Sign In</span>
+          </button>
+
+          {/* Dedicated Worker & Partner Registration Wizard Trigger */}
+          <button
+            onClick={() => setIsWorkerRegModalOpen(true)}
+            className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1 rounded shadow-xs transition-colors"
+            title="Open 5-Step Worker & Service Partner Registration Wizard"
+          >
+            <Briefcase className="w-3.5 h-3.5 text-brand-accent" />
+            <span>Worker Reg</span>
           </button>
 
           {/* Admin Login Simulation Button */}

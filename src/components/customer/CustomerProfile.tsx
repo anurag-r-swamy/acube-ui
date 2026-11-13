@@ -21,7 +21,14 @@ interface CustomerProfileProps {
 }
 
 export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerOnboarding }) => {
-  const { currentUser, switchPersona, showToast, setIsAuthModalOpen, setAuthModalMode } = useApp();
+  const {
+    currentUser,
+    switchPersona,
+    showToast,
+    setIsAuthModalOpen,
+    setAuthModalMode,
+    setIsWorkerRegModalOpen,
+  } = useApp();
   const [activeTab, setActiveTab] = useState<'DETAILS' | 'ADDRESSES' | 'HELP' | 'LEGAL'>('DETAILS');
   const [showSignOutDialog, setShowSignOutDialog] = useState(false);
 
@@ -62,13 +69,22 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
             <p className="text-white/80 text-[11px] leading-relaxed">
               Are you an electrician, plumber, cleaner, or technician? Register your skills, pass our digital verification, and start receiving job requests.
             </p>
-            <button
-              onClick={onStartWorkerOnboarding}
-              className="mt-2 py-2.5 px-4 bg-brand-accent hover:bg-brand-accent-hover text-white font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
-            >
-              <span>Start Worker Onboarding</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                onClick={() => setIsWorkerRegModalOpen(true)}
+                className="py-2.5 px-4 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
+              >
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Partner Registration Wizard</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={onStartWorkerOnboarding}
+                className="py-2.5 px-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs transition-all"
+              >
+                Quick Convert Account
+              </button>
+            </div>
           </div>
           <div className="absolute -right-4 -bottom-4 w-28 h-28 bg-brand-accent/20 rounded-full blur-xl pointer-events-none"></div>
         </div>

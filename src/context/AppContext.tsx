@@ -65,6 +65,8 @@ interface AppContextType {
   setAuthModalMode: (mode: 'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD') => void;
   isAdminLoginModalOpen: boolean;
   setIsAdminLoginModalOpen: (open: boolean) => void;
+  isWorkerRegModalOpen: boolean;
+  setIsWorkerRegModalOpen: (open: boolean) => void;
 
   // Domain state
   workerProfiles: WorkerProfile[];
@@ -194,6 +196,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [authModalMode, setAuthModalMode] = useState<'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD'>('SIGN_UP');
   const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState<boolean>(false);
+  const [isWorkerRegModalOpen, setIsWorkerRegModalOpen] = useState<boolean>(false);
 
   // Current active user
   const currentUser = users.find((u) => u.id === currentUserId) || users[0];
@@ -1220,6 +1223,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setAuthModalMode,
         isAdminLoginModalOpen,
         setIsAdminLoginModalOpen,
+        isWorkerRegModalOpen,
+        setIsWorkerRegModalOpen,
         workerProfiles,
         currentWorkerProfile,
         categories,
