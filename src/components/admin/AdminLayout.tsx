@@ -78,6 +78,7 @@ export const AdminLayout: React.FC = () => {
     disputes,
     bookings,
     notifications,
+    setIsAdminLoginModalOpen,
   } = useApp();
 
   const [currentSection, setCurrentSection] = useState<AdminSection>('OVERVIEW');
@@ -360,6 +361,15 @@ export const AdminLayout: React.FC = () => {
 
             {/* Top Bar Right: Staff Role Indicator & Persona Switcher */}
             <div className="flex items-center gap-3">
+              <button
+                onClick={() => setIsAdminLoginModalOpen(true)}
+                className="py-1 px-2.5 bg-brand-dark hover:bg-brand-darker text-brand-accent rounded-lg text-xs font-bold transition-colors flex items-center gap-1 shadow-xs"
+                title="Switch Staff Role via Simulated Login"
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span>Staff Sign-In Simulation</span>
+              </button>
+
               <div className="hidden md:flex items-center gap-1.5 bg-brand-bg px-2.5 py-1 rounded-lg border border-gray-200 text-xs text-gray-700">
                 <Shield className="w-3.5 h-3.5 text-brand-dark" />
                 <span>Role:</span>

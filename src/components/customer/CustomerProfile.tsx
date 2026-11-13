@@ -21,7 +21,7 @@ interface CustomerProfileProps {
 }
 
 export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerOnboarding }) => {
-  const { currentUser, switchPersona, showToast } = useApp();
+  const { currentUser, switchPersona, showToast, setIsAuthModalOpen, setAuthModalMode } = useApp();
   const [activeTab, setActiveTab] = useState<'DETAILS' | 'ADDRESSES' | 'HELP' | 'LEGAL'>('DETAILS');
   const [showSignOutDialog, setShowSignOutDialog] = useState(false);
 
@@ -119,6 +119,39 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
                 {new Date(currentUser.createdAt).toLocaleDateString()}
               </span>
             </div>
+          </div>
+
+          <div className="pt-2 border-t border-gray-100 flex flex-col gap-2">
+            <button
+              onClick={() => {
+                setAuthModalMode('SIGN_UP');
+                setIsAuthModalOpen(true);
+              }}
+              className="w-full py-2.5 px-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-xs"
+            >
+              <User className="w-3.5 h-3.5 text-brand-accent" />
+              <span>Register New Customer Account</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setAuthModalMode('SIGN_IN');
+                setIsAuthModalOpen(true);
+              }}
+              className="w-full py-2 px-3 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5"
+            >
+              <span>Sign In with Another Account</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setAuthModalMode('WELCOME');
+                setIsAuthModalOpen(true);
+              }}
+              className="w-full py-1.5 text-gray-500 hover:text-brand-dark font-medium text-[11px] underline text-center"
+            >
+              View Onboarding Walkthrough Slides
+            </button>
           </div>
         </div>
       )}

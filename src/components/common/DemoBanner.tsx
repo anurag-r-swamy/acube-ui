@@ -23,6 +23,9 @@ export const DemoBanner: React.FC = () => {
     setViewMode,
     currentRoute,
     setCurrentRoute,
+    setIsAuthModalOpen,
+    setAuthModalMode,
+    setIsAdminLoginModalOpen,
   } = useApp();
 
   const isDualRole = currentUser.availableRoles.includes('CUSTOMER') && currentUser.availableRoles.includes('WORKER');
@@ -88,6 +91,27 @@ export const DemoBanner: React.FC = () => {
               </optgroup>
             </select>
           </div>
+
+          {/* Auth Simulation: Sign In / Register Modal Trigger */}
+          <button
+            onClick={() => {
+              setAuthModalMode('SIGN_UP');
+              setIsAuthModalOpen(true);
+            }}
+            className="flex items-center gap-1 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-extrabold px-2.5 py-1 rounded shadow-xs transition-colors"
+            title="Open Customer Registration & Sign-In Simulation"
+          >
+            <span>Register / Sign In</span>
+          </button>
+
+          {/* Admin Login Simulation Button */}
+          <button
+            onClick={() => setIsAdminLoginModalOpen(true)}
+            className="hidden sm:flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white font-medium px-2 py-1 rounded transition-colors"
+            title="Open Admin Staff Login Simulation"
+          >
+            <span>Staff Login</span>
+          </button>
 
           {/* Dual Role Switcher Button if user has customer + worker capabilities */}
           {isDualRole && (

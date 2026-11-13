@@ -5,9 +5,18 @@ import { ToastContainer } from './components/common/ToastContainer';
 import { CustomerLayout } from './components/customer/CustomerLayout';
 import { WorkerLayout } from './components/worker/WorkerLayout';
 import { AdminLayout } from './components/admin/AdminLayout';
+import { AuthModal } from './components/auth/AuthModal';
+import { AdminLoginModal } from './components/admin/AdminLoginModal';
 
 export const App: React.FC = () => {
-  const { currentRoute, currentUser } = useApp();
+  const {
+    currentRoute,
+    isAuthModalOpen,
+    setIsAuthModalOpen,
+    authModalMode,
+    isAdminLoginModalOpen,
+    setIsAdminLoginModalOpen,
+  } = useApp();
 
   // Route selector
   const isCustomerRoute = currentRoute.startsWith('/customer');
@@ -30,9 +39,23 @@ export const App: React.FC = () => {
         )}
       </div>
 
+      {/* Auth & Registration Simulation Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
+
+      {/* Staff Admin Login Simulation Modal */}
+      <AdminLoginModal
+        isOpen={isAdminLoginModalOpen}
+        onClose={() => setIsAdminLoginModalOpen(false)}
+      />
+
       {/* Global In-app Toasts */}
       <ToastContainer />
     </div>
   );
 };
+
 

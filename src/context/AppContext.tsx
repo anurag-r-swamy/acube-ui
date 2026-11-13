@@ -56,6 +56,15 @@ interface AppContextType {
   switchPersona: (userId: string) => void;
   switchUserMode: (mode: 'CUSTOMER' | 'WORKER') => void;
   becomeWorker: (profileData: Partial<WorkerProfile>) => WorkerProfile;
+  registerUser: (data: { name: string; email: string; phone: string; area: string; role?: RoleType }) => DemoUser;
+
+  // Auth & Login Modals State
+  isAuthModalOpen: boolean;
+  setIsAuthModalOpen: (open: boolean) => void;
+  authModalMode: 'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD';
+  setAuthModalMode: (mode: 'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD') => void;
+  isAdminLoginModalOpen: boolean;
+  setIsAdminLoginModalOpen: (open: boolean) => void;
 
   // Domain state
   workerProfiles: WorkerProfile[];
@@ -180,6 +189,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentRoute, setCurrentRoute] = useState<string>(initial?.currentRoute || '/customer');
   const [viewMode, setViewMode] = useState<'MOBILE_CONTAINER' | 'RESPONSIVE_FULL'>('MOBILE_CONTAINER');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Auth & Login modal states
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [authModalMode, setAuthModalMode] = useState<'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD'>('SIGN_UP');
+  const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState<boolean>(false);
 
   // Current active user
   const currentUser = users.find((u) => u.id === currentUserId) || users[0];
@@ -332,6 +346,80 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setCurrentRoute('/customer');
       showToast('Switched to Customer mode', 'info');
     }
+  };
+
+  // Register New User (Customer or Worker)
+  const registerUser = (data: { name: string; email: string; phone: string; area: string; role?: RoleType }): DemoUser => {
+    const newUserId = `user-reg-${Date.now()}`;
+    const newUserRole = data.role || 'CUSTOMER';
+    const newUser: DemoUser = {
+      id: newUserId,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      avatarUrl: `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150`,
+      role: newUserRole,
+      availableRoles: [newUserRole],
+      activeMode: newUserRole === 'WORKER' ? 'WORKER' : 'CUSTOMER',
+      addresses: [
+        {
+          id: `addr-${Date.now()}`,
+          label: 'Home',
+          street: '1st Cross, Main Road',
+          area: data.area || 'Koramangala 4th Block',
+          city: 'Bengaluru',
+          pincode: '560034',
+          isDefault: true,
+        },
+      ],
+      createdAt: new Date().toISOString(),
+    };
+
+    setUsers((prev) => [newUser, ...prev]);
+    setCurrentUserId(newUserId);
+
+    if (newUserRole === 'WORKER') {
+      const newWpId = `wp-${Date.now()}`;
+      const newWp: WorkerProfile = {
+        id: newWpId,
+        userId: newUserId,
+        fullName: data.name,
+        phone: data.phone,
+        email: data.email,
+        avatarUrl: newUser.avatarUrl,
+        headline: 'Service Professional Partner',
+        about: 'Registered service specialist in Bengaluru.',
+        primaryCategory: 'Electrical & Appliances',
+        skills: ['General Maintenance', 'Diagnostics'],
+        experienceYears: 2,
+        hourlyRate: 350,
+        baseFare: 199,
+        rating: 5.0,
+        reviewCount: 0,
+        completedJobsCount: 0,
+        serviceAreas: [data.area || 'Koramangala'],
+        languages: ['Kannada', 'English', 'Hindi'],
+        isOnline: true,
+        verificationStatus: 'PENDING_REVIEW',
+        verificationSubmittedAt: new Date().toISOString(),
+        documents: [],
+        joinedDate: new Date().toISOString().split('T')[0],
+        bankDetails: {
+          accountHolder: data.name,
+          bankName: 'HDFC Bank',
+          accountNumberMasked: '•••• •••• 9944',
+          ifscCode: 'HDFC0001048',
+          upiId: `${data.name.toLowerCase().replace(/\s+/g, '')}@hdfc`,
+        },
+      };
+      setWorkerProfiles((prev) => [newWp, ...prev]);
+      setCurrentRoute('/worker');
+    } else {
+      setCurrentRoute('/customer');
+    }
+
+    showToast(`Account created! Welcome, ${data.name}!`, 'success', 'Registration Successful');
+    return newUser;
   };
 
   // "Become a Worker" journey for an existing customer
@@ -1125,6 +1213,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         switchPersona,
         switchUserMode,
         becomeWorker,
+        registerUser,
+        isAuthModalOpen,
+        setIsAuthModalOpen,
+        authModalMode,
+        setAuthModalMode,
+        isAdminLoginModalOpen,
+        setIsAdminLoginModalOpen,
         workerProfiles,
         currentWorkerProfile,
         categories,

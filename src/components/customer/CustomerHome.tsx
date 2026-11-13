@@ -35,7 +35,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
   onNavigateToBookings,
   onNavigateToSearch,
 }) => {
-  const { categories, workerProfiles, selectedLocation, bookings, currentUser } = useApp();
+  const { categories, workerProfiles, selectedLocation, bookings, currentUser, setIsAuthModalOpen, setAuthModalMode } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
 
   // Check if customer has an active in-progress or accepted booking
@@ -74,10 +74,22 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
           <ChevronDown className="w-3.5 h-3.5 text-gray-400 shrink-0" />
         </button>
 
-        <div className="text-right">
-          <span className="text-[11px] text-gray-500">Namaskara,</span>
-          <p className="text-xs font-bold text-gray-900">{currentUser.name.split(' ')[0]}</p>
-        </div>
+        <button
+          onClick={() => {
+            setAuthModalMode('SIGN_UP');
+            setIsAuthModalOpen(true);
+          }}
+          className="text-right p-1 rounded-xl hover:bg-gray-100 transition-colors"
+          title="Sign in or Register new account"
+        >
+          <span className="text-[10px] text-gray-500 block leading-tight">Namaskara,</span>
+          <p className="text-xs font-bold text-gray-900 flex items-center justify-end gap-1">
+            <span>{currentUser.name.split(' ')[0]}</span>
+            <span className="text-[9px] bg-brand-bg text-brand-dark px-1.5 py-0.2 rounded border border-gray-200">
+              Account ▾
+            </span>
+          </p>
+        </button>
       </div>
 
       {/* Hero Banner / Search Bar */}
