@@ -699,3 +699,4 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
     </div>
   );
 };
+

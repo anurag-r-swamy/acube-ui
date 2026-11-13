@@ -137,6 +137,15 @@ interface AppContextType {
   viewMode: 'MOBILE_CONTAINER' | 'RESPONSIVE_FULL';
   setViewMode: (mode: 'MOBILE_CONTAINER' | 'RESPONSIVE_FULL') => void;
 
+  // Android Application Experience
+  androidNavMode: '3_BUTTON' | 'GESTURE';
+  setAndroidNavMode: (mode: '3_BUTTON' | 'GESTURE') => void;
+  isAndroidOverviewOpen: boolean;
+  setIsAndroidOverviewOpen: (open: boolean) => void;
+  isNotificationShadeOpen: boolean;
+  setIsNotificationShadeOpen: (open: boolean) => void;
+  triggerAndroidHaptic: () => void;
+
   // Toasts
   toasts: ToastMessage[];
   showToast: (message: string, type?: 'success' | 'error' | 'info' | 'warning', title?: string) => void;
@@ -197,6 +206,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [authModalMode, setAuthModalMode] = useState<'WELCOME' | 'SIGN_IN' | 'SIGN_UP' | 'FORGOT_PASSWORD'>('SIGN_UP');
   const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState<boolean>(false);
   const [isWorkerRegModalOpen, setIsWorkerRegModalOpen] = useState<boolean>(false);
+
+  // Android System Experience
+  const [androidNavMode, setAndroidNavMode] = useState<'3_BUTTON' | 'GESTURE'>('3_BUTTON');
+  const [isAndroidOverviewOpen, setIsAndroidOverviewOpen] = useState<boolean>(false);
+  const [isNotificationShadeOpen, setIsNotificationShadeOpen] = useState<boolean>(false);
+
+  const triggerAndroidHaptic = () => {
+    try {
+      if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate?.(15);
+      }
+    } catch {}
+  };
 
   // Current active user
   const currentUser = users.find((u) => u.id === currentUserId) || users[0];
@@ -1269,6 +1291,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentRoute,
         viewMode,
         setViewMode,
+        androidNavMode,
+        setAndroidNavMode,
+        isAndroidOverviewOpen,
+        setIsAndroidOverviewOpen,
+        isNotificationShadeOpen,
+        setIsNotificationShadeOpen,
+        triggerAndroidHaptic,
         toasts,
         showToast,
         removeToast,

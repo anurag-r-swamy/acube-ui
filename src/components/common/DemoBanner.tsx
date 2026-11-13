@@ -28,6 +28,8 @@ export const DemoBanner: React.FC = () => {
     setAuthModalMode,
     setIsAdminLoginModalOpen,
     setIsWorkerRegModalOpen,
+    androidNavMode,
+    setAndroidNavMode,
   } = useApp();
 
   const isDualRole = currentUser.availableRoles.includes('CUSTOMER') && currentUser.availableRoles.includes('WORKER');
@@ -167,23 +169,34 @@ export const DemoBanner: React.FC = () => {
         <div className="flex items-center gap-2">
           {/* Frame Toggle (only active on mobile apps screens) */}
           {!currentRoute.startsWith('/admin') && (
-            <button
-              onClick={() => setViewMode(viewMode === 'MOBILE_CONTAINER' ? 'RESPONSIVE_FULL' : 'MOBILE_CONTAINER')}
-              className="flex items-center gap-1 text-white/80 hover:text-white px-2 py-1 rounded bg-white/5 hover:bg-white/10 transition-colors"
-              title="Toggle between 390px mobile frame and full-width responsive preview"
-            >
-              {viewMode === 'MOBILE_CONTAINER' ? (
-                <>
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Full Width</span>
-                </>
-              ) : (
-                <>
-                  <Smartphone className="w-3.5 h-3.5 text-brand-accent" />
-                  <span className="hidden sm:inline">390×844 Mobile Frame</span>
-                </>
-              )}
-            </button>
+            <>
+              {/* Android Nav Mode Switcher */}
+              <button
+                onClick={() => setAndroidNavMode(androidNavMode === '3_BUTTON' ? 'GESTURE' : '3_BUTTON')}
+                className="hidden md:flex items-center gap-1 text-white/80 hover:text-white px-2 py-1 rounded bg-white/5 hover:bg-white/10 transition-colors"
+                title="Toggle between 3-Button and Gesture Nav"
+              >
+                <span>Nav: {androidNavMode === '3_BUTTON' ? '3-Button' : 'Gestures'}</span>
+              </button>
+
+              <button
+                onClick={() => setViewMode(viewMode === 'MOBILE_CONTAINER' ? 'RESPONSIVE_FULL' : 'MOBILE_CONTAINER')}
+                className="flex items-center gap-1 text-white/80 hover:text-white px-2 py-1 rounded bg-white/5 hover:bg-white/10 transition-colors"
+                title="Toggle between Android phone frame and full screen view"
+              >
+                {viewMode === 'MOBILE_CONTAINER' ? (
+                  <>
+                    <Maximize2 className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Full Screen</span>
+                  </>
+                ) : (
+                  <>
+                    <Smartphone className="w-3.5 h-3.5 text-brand-accent" />
+                    <span className="hidden sm:inline">Android Phone Frame</span>
+                  </>
+                )}
+              </button>
+            </>
           )}
 
           {/* Reset Demo Data */}
