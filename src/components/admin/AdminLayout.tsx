@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { APP_CONFIG } from '../../config/branding';
 import { RoleType } from '../../types';
 import { AccessDenied } from '../common/AccessDenied';
+import { AdminLoginPage } from './AdminLoginPage';
 import { AdminDashboard } from './AdminDashboard';
 import { AdminVerification } from './AdminVerification';
 import { AdminDisputes } from './AdminDisputes';
@@ -69,6 +70,15 @@ interface NavItem {
   badge?: number;
 }
 
+const isAdminRole = (role: string) => {
+  return (
+    role === 'SUPER_ADMIN' ||
+    role === 'DISPUTES_VERIFICATION' ||
+    role === 'ACCOUNTS_FINANCE' ||
+    role === 'OPERATIONS_SUPPORT'
+  );
+};
+
 export const AdminLayout: React.FC = () => {
   const {
     currentUser,
@@ -78,12 +88,33 @@ export const AdminLayout: React.FC = () => {
     disputes,
     bookings,
     notifications,
-    setIsAdminLoginModalOpen,
+    showToast,
   } = useApp();
+
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() =>
+    isAdminRole(currentUser.role)
+  );
 
   const [currentSection, setCurrentSection] = useState<AdminSection>('OVERVIEW');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // If user is not authenticated as an admin role or signed out, render AdminLoginPage
+  if (!isAdminRole(currentUser.role) || !isAdminAuthenticated) {
+    return (
+      <AdminLoginPage
+        onLoginSuccess={(staffId) => {
+          switchPersona(staffId);
+          setIsAdminAuthenticated(true);
+        }}
+      />
+    );
+  }
+
+  const handleAdminLogout = () => {
+    setIsAdminAuthenticated(false);
+    showToast('Admin session terminated. Sign in again to access operations.', 'info', 'Signed Out');
+  };
 
   // Pending counts for badges
   const pendingVerificationsCount = workerProfiles.filter(
@@ -359,30 +390,32 @@ export const AdminLayout: React.FC = () => {
               </div>
             </div>
 
-            {/* Top Bar Right: Staff Role Indicator & Persona Switcher */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsAdminLoginModalOpen(true)}
-                className="py-1 px-2.5 bg-brand-dark hover:bg-brand-darker text-brand-accent rounded-lg text-xs font-bold transition-colors flex items-center gap-1 shadow-xs"
-                title="Switch Staff Role via Simulated Login"
-              >
-                <Shield className="w-3.5 h-3.5" />
-                <span>Staff Sign-In Simulation</span>
-              </button>
-
-              <div className="hidden md:flex items-center gap-1.5 bg-brand-bg px-2.5 py-1 rounded-lg border border-gray-200 text-xs text-gray-700">
-                <Shield className="w-3.5 h-3.5 text-brand-dark" />
-                <span>Role:</span>
-                <span className="font-bold text-brand-dark">{currentUser.role.replace('_', ' ')}</span>
+            {/* Top Bar Right: Staff Persona Switcher & Secure Logout */}
+            <div className="flex items-center gap-2.5">
+              {/* Authorized Staff Switcher for testing permission differences */}
+              <div className="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200 text-xs">
+                <span className="text-slate-400 font-medium text-[11px]">Staff Role:</span>
+                <select
+                  aria-label="Switch staff role"
+                  value={currentUser.id}
+                  onChange={(e) => switchPersona(e.target.value)}
+                  className="bg-transparent text-slate-900 font-bold text-xs cursor-pointer outline-none border-none pr-1"
+                >
+                  <option value="user-admin-super">Ayesha Sen (Super Admin)</option>
+                  <option value="user-admin-disputes">Vikram Rao (Disputes & Verification)</option>
+                  <option value="user-admin-finance">Suresh Patel (Accounts & Finance)</option>
+                  <option value="user-admin-ops">Kavita Nair (Operations & Support)</option>
+                </select>
               </div>
 
+              {/* Secure Admin Logout Button */}
               <button
-                onClick={() => setCurrentRoute('/customer')}
-                className="py-1 px-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1"
-                title="Switch to Mobile App Preview"
+                onClick={handleAdminLogout}
+                className="py-1 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 border border-red-200"
+                title="Sign out of Admin Console"
               >
-                <span>Mobile Preview</span>
-                <ExternalLink className="w-3 h-3 text-gray-400" />
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Sign Out</span>
               </button>
             </div>
           </header>

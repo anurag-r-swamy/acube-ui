@@ -196,10 +196,53 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [selectedLocation, setSelectedLocation] = useState<string>(initial?.selectedLocation || 'Koramangala 4th Block, Bengaluru');
   const [locationPermission, setLocationPermission] = useState<'PROMPT' | 'GRANTED' | 'DENIED'>(initial?.locationPermission || 'GRANTED');
 
-  // Navigation & View
-  const [currentRoute, setCurrentRoute] = useState<string>(initial?.currentRoute || '/customer');
+  // Navigation & Platform View with Hash-Sync
+  const getInitialRoute = (): string => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '');
+      if (hash.startsWith('/admin') || window.location.pathname.startsWith('/admin')) {
+        return '/admin';
+      }
+      if (hash.startsWith('/worker') || window.location.pathname.startsWith('/worker')) {
+        return '/worker';
+      }
+      if (hash.startsWith('/customer') || window.location.pathname.startsWith('/customer')) {
+        return '/customer';
+      }
+    }
+    return initial?.currentRoute || '/customer';
+  };
+
+  const [currentRoute, setCurrentRoute] = useState<string>(getInitialRoute);
   const [viewMode, setViewMode] = useState<'MOBILE_CONTAINER' | 'RESPONSIVE_FULL'>('MOBILE_CONTAINER');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Synchronize hash in URL for direct platform deep-linking (#/admin vs #/customer vs #/worker)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const currentHash = window.location.hash.replace('#', '');
+      if (currentHash !== currentRoute) {
+        window.history.replaceState(null, '', `#${currentRoute}`);
+      }
+    }
+  }, [currentRoute]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash !== currentRoute) {
+        if (hash.startsWith('/admin')) {
+          setCurrentRoute('/admin');
+        } else if (hash.startsWith('/worker')) {
+          setCurrentRoute('/worker');
+        } else if (hash.startsWith('/customer')) {
+          setCurrentRoute('/customer');
+        }
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [currentRoute]);
 
   // Auth & Login modal states
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
@@ -355,6 +398,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Switch User Mode (between Customer and Worker for dual-capability accounts)
   const switchUserMode = (mode: 'CUSTOMER' | 'WORKER') => {
+    if (mode === 'WORKER') {
+      const hasWorkerProfile = workerProfiles.some((wp) => wp.userId === currentUser.id);
+      if (!hasWorkerProfile && currentUser.role !== 'WORKER') {
+        showToast('Worker profile required. Please complete partner onboarding.', 'warning', 'Role Authorization Required');
+        setIsWorkerRegModalOpen(true);
+        return;
+      }
+    }
+
     setUsers((prev) =>
       prev.map((u) => {
         if (u.id === currentUser.id) {

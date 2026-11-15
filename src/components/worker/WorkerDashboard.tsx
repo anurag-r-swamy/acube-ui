@@ -113,7 +113,7 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
           <div className="space-y-0.5 text-xs">
             <p className="font-bold">Verification Pending Review</p>
             <p className="text-[11px] text-amber-800">
-              Our Bengaluru quality assurance team is authenticating your Aadhaar & trade credentials. Switch to <strong>Vikram Rao (Disputes & Verification)</strong> in Admin to approve this profile.
+              Our Bengaluru quality assurance team is authenticating your Aadhaar & trade credentials. Review is conducted by the Verification & Quality Assurance desk within 24-48 hours.
             </p>
           </div>
         </div>

@@ -355,10 +355,10 @@ export const WorkerOnboardingModal: React.FC<WorkerOnboardingModalProps> = ({
               </p>
               <div className="p-3.5 bg-brand-bg rounded-xl text-left text-[11px] text-gray-700 space-y-1">
                 <p>
-                  • Verification case dispatched to <strong>Vikram Rao (Disputes & Verification)</strong>.
+                  • Verification case dispatched to the City Verification & Quality Assurance desk.
                 </p>
-                <p>• You can switch between Customer and Worker view from the top demo bar.</p>
-                <p>• Try switching to Vikram Rao's role in the Admin dashboard to approve your profile!</p>
+                <p>• Your documents will be reviewed and authenticated within 24-48 hours.</p>
+                <p>• You can start receiving incoming job requests as soon as approval is granted.</p>
               </div>
               <button
                 onClick={onClose}

@@ -601,7 +601,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                 </div>
                 <p>• Category: <strong>{primaryCat}</strong></p>
                 <p>• Localities: <strong>{selectedZones.join(', ')}</strong></p>
-                <p>• Your application is now in the Admin Verification Queue assigned to <strong>Vikram Rao</strong>.</p>
+                <p>• Your application is submitted to the City Verification & Quality Assurance desk.</p>
               </div>
 
               <button
