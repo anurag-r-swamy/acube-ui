@@ -67,59 +67,51 @@ const SEARCH_PLACEHOLDERS = [
 const UC_CATEGORIES = [
   {
     id: 'cat-4',
-    name: 'AC & Appliance',
-    subtext: 'Repair & Gas Refill',
+    name: 'AC Repair',
     icon: Wind,
-    bgTint: 'bg-sky-50 text-sky-600 border-sky-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-3',
-    name: 'Cleaning & Pest',
-    subtext: 'Deep Home & Bath',
+    name: 'Cleaning',
     icon: Sparkles,
-    bgTint: 'bg-emerald-50 text-emerald-600 border-emerald-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-1',
     name: 'Electrician',
-    subtext: 'Wiring & Fixtures',
     icon: Zap,
-    bgTint: 'bg-amber-50 text-amber-600 border-amber-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-2',
     name: 'Plumber',
-    subtext: 'Pipes & Drainage',
     icon: Droplets,
-    bgTint: 'bg-emerald-50 text-emerald-800 border-emerald-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-5',
     name: 'Carpenter',
-    subtext: 'Doors & Furniture',
     icon: Hammer,
-    bgTint: 'bg-orange-50 text-orange-600 border-orange-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-6',
     name: 'Painting',
-    subtext: 'Waterproofing & Putty',
     icon: Paintbrush,
-    bgTint: 'bg-rose-50 text-rose-600 border-rose-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-water',
-    name: 'Water Purifier',
-    subtext: 'Native RO & Filter',
+    name: 'Purifier',
     icon: Wrench,
-    bgTint: 'bg-teal-50 text-teal-600 border-teal-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-salon',
     name: 'Salon & Spa',
-    subtext: 'Women & Men',
     icon: Scissors,
-    bgTint: 'bg-purple-50 text-purple-600 border-purple-100',
+    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
 ];
 
@@ -127,9 +119,8 @@ const UC_CATEGORIES = [
 const PROMO_BANNERS = [
   {
     id: 'banner-ac',
-    tag: 'SUMMER COOLING FEST',
-    title: 'Split AC Deep Clean (Powerjet)',
-    subtitle: 'Thorough indoor & outdoor jet spray wash + 30-Day cooling warranty',
+    tag: 'SUMMER COOLING',
+    title: 'Split AC Deep Clean',
     price: 499,
     originalPrice: 799,
     discountBadge: '37% OFF',
@@ -139,9 +130,8 @@ const PROMO_BANNERS = [
   },
   {
     id: 'banner-clean',
-    tag: 'HYGIENE SPECIAL',
+    tag: 'HYGIENE PRO',
     title: 'Intensive Bathroom Cleaning',
-    subtitle: 'Mechanized hard water tile descaling and mirror buffing by vetted pros',
     price: 399,
     originalPrice: 599,
     discountBadge: '33% OFF',
@@ -152,8 +142,7 @@ const PROMO_BANNERS = [
   {
     id: 'banner-elec',
     tag: 'INSTANT ASSIST',
-    title: 'Electrician Doorstep in 30 Mins',
-    subtitle: 'Short circuit tracing, MCB tripping, chandelier & ceiling fan mounting',
+    title: 'Electrician Doorstep (30 Mins)',
     price: 199,
     originalPrice: 299,
     discountBadge: '33% OFF',
@@ -511,9 +500,6 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
                   <h2 className="text-base font-extrabold text-white leading-tight">
                     {banner.title}
                   </h2>
-                  <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                    {banner.subtitle}
-                  </p>
                 </div>
 
                 <div className="flex items-center justify-between pt-1">
@@ -535,7 +521,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
                     }
                     className={`py-1.5 px-3.5 ${banner.buttonColor} text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm`}
                   >
-                    <span>Book Now</span>
+                    <span>Book</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -560,16 +546,13 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
 
       {/* ================= URBAN COMPANY CATEGORIES (WHAT ARE YOU LOOKING FOR?) ================= */}
       <div className="px-1">
-        <div className="flex items-center justify-between mb-2.5">
-          <div>
-            <h3 className="text-sm font-black text-brand-charcoal tracking-tight">All Services</h3>
-            <p className="text-[11px] text-brand-muted">Fixed rate cards & verified local experts</p>
-          </div>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Services</h3>
           <button
             onClick={() => onNavigateToSearch()}
             className="text-[11px] font-bold text-[#1B4D3E] hover:underline flex items-center gap-0.5"
           >
-            <span>See Catalog</span>
+            <span>See All</span>
             <ChevronRight className="w-3 h-3" />
           </button>
         </div>
@@ -583,18 +566,15 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(matchedCategory)}
-                className="flex flex-col items-center p-2 rounded-2xl bg-white hover:bg-forest-50/40 border border-brand-border/60 hover:border-forest-200 transition-all text-center group shadow-2xs"
+                className="flex flex-col items-center py-2.5 px-1 rounded-2xl bg-white hover:bg-forest-50/40 border border-brand-border/60 hover:border-forest-200 transition-all text-center group shadow-2xs"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-1.5 border transition-transform group-hover:scale-105 ${cat.bgTint}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center mb-1.5 border transition-transform group-hover:scale-105 ${cat.bgTint}`}
                 >
-                  <IconComponent className="w-6 h-6" />
+                  <IconComponent className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-bold text-brand-charcoal leading-tight line-clamp-1">
                   {cat.name}
-                </span>
-                <span className="text-[9px] text-brand-muted leading-none mt-0.5 line-clamp-1">
-                  {cat.subtext}
                 </span>
               </button>
             );
@@ -603,21 +583,16 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
       </div>
 
       {/* ================= URBAN COMPANY "UC PLUS" MEMBERSHIP BANNER ================= */}
-      <div className="mx-1 p-3.5 bg-gradient-to-r from-[#0E241A] via-[#143527] to-[#1C4635] text-white rounded-2xl border border-[#235841] flex items-center justify-between shadow-soft">
-        <div className="space-y-0.5">
-          <div className="flex items-center gap-1.5">
-            <span className="px-1.5 py-0.5 rounded bg-amber-400 text-[#0E241A] text-[9px] font-black uppercase tracking-wider">
-              UC Plus
-            </span>
-            <span className="text-xs font-bold text-white">Save 15% on every booking</span>
-          </div>
-          <p className="text-[11px] text-emerald-100/70">
-            Free ₹10,000 damage protection + Priority weekend slots
-          </p>
+      <div className="mx-1 p-3 bg-gradient-to-r from-[#0E241A] via-[#143527] to-[#1C4635] text-white rounded-2xl border border-[#235841] flex items-center justify-between shadow-soft">
+        <div className="flex items-center gap-2">
+          <span className="px-1.5 py-0.5 rounded bg-amber-400 text-[#0E241A] text-[9px] font-black uppercase tracking-wider">
+            Plus
+          </span>
+          <span className="text-xs font-bold text-white">Save 15% on every booking</span>
         </div>
         <button
           onClick={() => onOpenBookingFlow()}
-          className="shrink-0 py-1.5 px-3 bg-amber-400 hover:bg-amber-300 text-[#0E241A] font-bold rounded-xl text-xs transition-colors shadow-2xs"
+          className="shrink-0 py-1 px-3 bg-amber-400 hover:bg-amber-300 text-[#0E241A] font-bold rounded-xl text-xs transition-colors shadow-2xs"
         >
           Join ₹299
         </button>
@@ -625,11 +600,8 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
 
       {/* ================= MOST BOOKED SERVICES (INTERACTIVE ADD TO CART STEPPER) ================= */}
       <div className="px-1">
-        <div className="flex items-center justify-between mb-2.5">
-          <div>
-            <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Most Booked Services</h3>
-            <p className="text-[11px] text-brand-muted">Trusted by 1.2M+ Bengaluru homeowners</p>
-          </div>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Most Booked</h3>
           <button
             onClick={() => onNavigateToSearch()}
             className="text-[11px] font-bold text-[#1B4D3E] hover:underline"
@@ -727,152 +699,88 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         </div>
       </div>
 
-      {/* ================= THE URBAN COMPANY PROMISE (QUALITY & SAFETY) ================= */}
-      <div className="mx-1 p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-5 h-5 text-[#1B4D3E]" />
-            <h4 className="font-black text-brand-charcoal text-xs">
-              The {APP_CONFIG.parentCompany} Promise
-            </h4>
-          </div>
-          <span className="text-[10px] font-bold text-brand-muted uppercase tracking-wider">
-            Verified Standard
-          </span>
+      {/* ================= THE URBAN COMPANY PROMISE (CLEAN TRUST BAR) ================= */}
+      <div className="mx-1 py-2.5 px-3 bg-white rounded-2xl border border-brand-border flex items-center justify-between text-[11px] font-semibold text-brand-charcoal shadow-2xs">
+        <div className="flex items-center gap-1.5">
+          <BadgeCheck className="w-4 h-4 text-[#1B4D3E]" />
+          <span>Verified Pros</span>
         </div>
-
-        <div className="grid grid-cols-2 gap-2 text-[11px] text-brand-charcoal">
-          <div className="p-2.5 bg-white rounded-xl border border-brand-border/80 space-y-1">
-            <div className="flex items-center gap-1 font-bold text-brand-charcoal">
-              <BadgeCheck className="w-3.5 h-3.5 text-[#1B4D3E]" />
-              <span>Verified Experts</span>
-            </div>
-            <p className="text-[10px] text-brand-muted leading-tight">
-              Aadhaar authenticated & police background checked
-            </p>
-          </div>
-
-          <div className="p-2.5 bg-white rounded-xl border border-brand-border/80 space-y-1">
-            <div className="flex items-center gap-1 font-bold text-brand-charcoal">
-              <Percent className="w-3.5 h-3.5 text-[#1B4D3E]" />
-              <span>Upfront Pricing</span>
-            </div>
-            <p className="text-[10px] text-brand-muted leading-tight">
-              Standardized rate card with no hidden quote bargaining
-            </p>
-          </div>
-
-          <div className="p-2.5 bg-white rounded-xl border border-brand-border/80 space-y-1">
-            <div className="flex items-center gap-1 font-bold text-brand-charcoal">
-              <Award className="w-3.5 h-3.5 text-[#1B4D3E]" />
-              <span>30-Day Warranty</span>
-            </div>
-            <p className="text-[10px] text-brand-muted leading-tight">
-              Free rework if service is not 100% satisfactory
-            </p>
-          </div>
-
-          <div className="p-2.5 bg-white rounded-xl border border-brand-border/80 space-y-1">
-            <div className="flex items-center gap-1 font-bold text-brand-charcoal">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#1B4D3E]" />
-              <span>Escrow Security</span>
-            </div>
-            <p className="text-[10px] text-brand-muted leading-tight">
-              Funds held safe; released only after completion OTP
-            </p>
-          </div>
+        <span className="text-brand-border">•</span>
+        <div className="flex items-center gap-1.5">
+          <Percent className="w-4 h-4 text-[#1B4D3E]" />
+          <span>Upfront Pricing</span>
+        </div>
+        <span className="text-brand-border">•</span>
+        <div className="flex items-center gap-1.5">
+          <Award className="w-4 h-4 text-[#1B4D3E]" />
+          <span>30-Day Warranty</span>
         </div>
       </div>
 
-      {/* ================= VERIFIED HOMEOWNER REVIEWS ================= */}
+      {/* ================= RECENT RATINGS ================= */}
       <div className="px-1">
-        <div className="flex items-center justify-between mb-2.5">
-          <div>
-            <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Customer Testimonials</h3>
-            <p className="text-[11px] text-brand-muted">4.84 ★ rating from 1.2M+ happy homes</p>
-          </div>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Top Ratings</h3>
           <span className="text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full flex items-center gap-1">
             <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
             4.84 / 5
           </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-2">
-          {CUSTOMER_REVIEWS.map((rev) => (
+        <div className="grid grid-cols-2 gap-2">
+          {CUSTOMER_REVIEWS.slice(0, 2).map((rev) => (
             <div
               key={rev.id}
-              className="p-3 bg-white rounded-2xl border border-brand-border space-y-1.5 shadow-2xs"
+              className="p-2.5 bg-white rounded-xl border border-brand-border space-y-1 shadow-2xs"
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-forest-50 text-[#1B4D3E] font-bold text-xs flex items-center justify-center">
-                    {rev.customerName.charAt(0)}
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-bold text-brand-charcoal">{rev.customerName}</h5>
-                    <p className="text-[10px] text-brand-muted">{rev.area}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-0.5">
-                  {[...Array(rev.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  ))}
+                <span className="text-xs font-bold text-brand-charcoal truncate">{rev.customerName}</span>
+                <div className="flex items-center gap-0.5 text-amber-500">
+                  <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                  <span className="text-[10px] font-bold text-brand-charcoal">{rev.rating}.0</span>
                 </div>
               </div>
-
-              <p className="text-[11px] text-brand-muted leading-relaxed italic">
-                "{rev.comment}"
-              </p>
-
-              <div className="flex items-center justify-between pt-1 border-t border-brand-border/60 text-[10px] text-brand-muted">
-                <span className="font-semibold text-[#1B4D3E]">{rev.service}</span>
-                <span>{rev.date}</span>
-              </div>
+              <span className="text-[10px] font-semibold text-[#1B4D3E] bg-[#EBF5EE] px-1.5 py-0.5 rounded block truncate">
+                {rev.service}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
       {/* ================= PARTNER NETWORK RECRUITMENT BANNER ================= */}
-      <div className="mx-1 p-4 bg-[#0E241A] text-white rounded-2xl flex items-center justify-between gap-3 shadow-soft border border-[#1E4D37]">
-        <div className="space-y-0.5">
+      <div className="mx-1 p-3 bg-[#0E241A] text-white rounded-2xl flex items-center justify-between gap-3 shadow-soft border border-[#1E4D37]">
+        <div>
           <span className="text-[9px] font-black uppercase tracking-wider text-[#82C3A3] block">
             Partner Network
           </span>
-          <h4 className="text-xs font-bold text-white">Join as a Service Partner in Bengaluru</h4>
-          <p className="text-[11px] text-emerald-100/70">
-            Earn up to ₹45,000/month with DigiLocker verification & weekly bank payouts.
-          </p>
+          <h4 className="text-xs font-bold text-white">Join as a Service Professional</h4>
         </div>
         <button
           onClick={() => setIsWorkerRegModalOpen(true)}
-          className="shrink-0 py-2 px-3.5 bg-[#1B4D3E] hover:bg-[#256653] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+          className="shrink-0 py-1.5 px-3 bg-[#1B4D3E] hover:bg-[#256653] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow-sm"
         >
           <Briefcase className="w-3.5 h-3.5" />
-          <span>Join as Pro</span>
+          <span>Register</span>
         </button>
       </div>
 
       {/* ================= STICKY FLOATING CART BAR (URBAN COMPANY BOTTOM BAR) ================= */}
       {totalCartCount > 0 && (
         <div className="fixed bottom-14 left-0 right-0 max-w-[420px] mx-auto p-3 z-30 animate-in slide-in-from-bottom-3 duration-200">
-          <div className="bg-[#0E241A] text-white p-3 rounded-2xl shadow-lifted flex items-center justify-between border border-[#1E4D37]">
+          <div className="bg-[#0E241A] text-white p-2.5 rounded-2xl shadow-lifted flex items-center justify-between border border-[#1E4D37]">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#2D6A4F] text-white flex items-center justify-center font-black text-xs shadow-xs">
+              <div className="w-7 h-7 rounded-xl bg-[#2D6A4F] text-white flex items-center justify-center font-black text-xs shadow-xs">
                 {totalCartCount}
               </div>
-              <div>
-                <p className="text-xs font-black text-white">
-                  {totalCartCount} {totalCartCount === 1 ? 'service' : 'services'} added • {APP_CONFIG.currencySymbol}{totalCartPrice}
-                </p>
-                <p className="text-[10px] text-emerald-100/70">UC 30-Day Guarantee included</p>
-              </div>
+              <p className="text-xs font-black text-white">
+                {totalCartCount} {totalCartCount === 1 ? 'service' : 'services'} • {APP_CONFIG.currencySymbol}{totalCartPrice}
+              </p>
             </div>
 
             <button
               onClick={handleCheckoutCart}
-              className="py-2 px-4 bg-[#2D6A4F] hover:bg-[#23563F] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm"
+              className="py-1.5 px-3.5 bg-[#2D6A4F] hover:bg-[#23563F] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm"
             >
               <span>View Cart</span>
               <ArrowRight className="w-3.5 h-3.5" />

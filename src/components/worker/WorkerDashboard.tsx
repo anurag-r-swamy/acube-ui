@@ -108,25 +108,22 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
 
       {/* Verification Status Banner */}
       {worker.verificationStatus === 'PENDING_REVIEW' && (
-        <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3 text-amber-950">
-          <Clock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-          <div className="space-y-0.5 text-xs">
-            <p className="font-bold">Verification Pending Review</p>
-            <p className="text-[11px] text-amber-800">
-              Our Bengaluru quality assurance team is authenticating your Aadhaar & trade credentials. Review is conducted by the Verification & Quality Assurance desk within 24-48 hours.
-            </p>
+        <div className="py-2.5 px-3 bg-amber-50 border border-amber-200 rounded-2xl flex items-center justify-between text-amber-950 text-xs">
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-amber-600 shrink-0" />
+            <span className="font-bold">Verification Pending Review</span>
           </div>
+          <span className="text-[10px] text-amber-800 bg-white px-2 py-0.5 rounded-full font-semibold border border-amber-200">
+            ETA 24-48 hrs
+          </span>
         </div>
       )}
 
       {worker.verificationStatus === 'RESUBMISSION_REQUIRED' && (
-        <div className="p-3.5 bg-orange-50 border border-orange-200 rounded-2xl flex items-start gap-3 text-orange-950">
-          <AlertCircle className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
-          <div className="space-y-0.5 text-xs">
-            <p className="font-bold">Document Resubmission Required</p>
-            <p className="text-[11px] text-orange-800">
-              {worker.verificationNotes || 'Uploaded trade certificate scan was unclear. Please submit a clearer copy.'}
-            </p>
+        <div className="py-2.5 px-3 bg-orange-50 border border-orange-200 rounded-2xl flex items-center justify-between text-orange-950 text-xs">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-orange-600 shrink-0" />
+            <span className="font-bold">Document Resubmission Required</span>
           </div>
         </div>
       )}

@@ -476,9 +476,9 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
           {/* ================= STEP 4: DOCUMENTS ================= */}
           {step === 'DOCUMENTS' && (
             <div className="space-y-3.5">
-              <div className="p-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D] text-[11px] leading-relaxed">
-                <ShieldCheck className="w-4 h-4 text-[#1B4D3E] inline mr-1" />
-                <strong>DigiLocker Verification Sandbox:</strong> All uploads in this prototype are local simulations. Safe fictional filenames are pre-attached for testing.
+              <div className="py-2 px-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D] flex items-center gap-1.5 text-xs font-semibold">
+                <ShieldCheck className="w-4 h-4 text-[#1B4D3E]" />
+                <span>DigiLocker Verification</span>
               </div>
 
               <div className="p-3.5 bg-gray-50 border border-gray-200 rounded-xl space-y-2">

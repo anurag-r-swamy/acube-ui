@@ -66,9 +66,6 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
             <h3 className="font-extrabold text-sm leading-snug">
               Earn with {APP_CONFIG.parentCompany} in Bengaluru
             </h3>
-            <p className="text-emerald-100/70 text-[11px] leading-relaxed">
-              Are you an electrician, plumber, cleaner, or technician? Register your skills, pass our digital verification, and start receiving job requests.
-            </p>
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => setIsWorkerRegModalOpen(true)}

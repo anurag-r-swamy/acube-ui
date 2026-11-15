@@ -437,9 +437,9 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               </div>
 
               {/* Cancellation Terms */}
-              <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-xl text-amber-900 text-[11px] leading-relaxed">
-                <span className="font-semibold block mb-0.5">Cancellation & Protection Policy</span>
-                Free cancellation up to 2 hours before the scheduled time. 100% money-back guarantee if the verified pro fails to arrive.
+              <div className="flex items-center gap-1.5 text-[11px] text-[#1B4D3E] font-medium bg-[#EBF5EE] p-2.5 rounded-xl border border-[#C8DFD2]">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Free cancellation up to 2 hours before schedule</span>
               </div>
             </div>
           )}
@@ -448,14 +448,12 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
           {step === 'PAYMENT' && (
             <div className="space-y-4">
               {/* Demo Payment Notice */}
-              <div className="p-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D]">
-                <div className="flex items-center gap-1.5 font-bold mb-0.5 text-[#1B4D3E]">
-                  <ShieldCheck className="w-4 h-4 text-[#1B4D3E]" />
-                  <span>Prototype Sandbox Checkout</span>
-                </div>
-                <p className="text-[11px] text-slate-700">
-                  <strong>Demo payment — no money is charged.</strong> Do not enter real banking credentials. All payment methods below are simulated for prototype evaluation.
-                </p>
+              <div className="py-2 px-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D] flex items-center justify-between text-xs font-semibold">
+                <span className="flex items-center gap-1.5 text-[#1B4D3E]">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Sandbox Demo Payment</span>
+                </span>
+                <span className="text-[10px] text-brand-muted">No real charge</span>
               </div>
 
               {/* Payment Methods */}
@@ -473,13 +471,10 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
                       onChange={() => setPaymentMethod('UPI')}
                       className="text-brand-dark"
                     />
-                    <div>
-                      <p className="text-gray-900 text-xs">UPI (Google Pay / PhonePe / Paytm)</p>
-                      <p className="text-[10px] text-gray-500 font-normal">Instant mock UPI authorization</p>
-                    </div>
+                    <p className="text-gray-900 text-xs font-semibold">UPI (Google Pay / PhonePe / Paytm)</p>
                   </div>
                   <span className="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded">
-                    Popular in Bengaluru
+                    Popular
                   </span>
                 </label>
 
@@ -496,10 +491,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
                       onChange={() => setPaymentMethod('CARD')}
                       className="text-brand-dark"
                     />
-                    <div>
-                      <p className="text-gray-900 text-xs">Credit / Debit Card</p>
-                      <p className="text-[10px] text-gray-500 font-normal">Simulated Visa / Mastercard gateway</p>
-                    </div>
+                    <p className="text-gray-900 text-xs font-semibold">Credit / Debit Card</p>
                   </div>
                   <CreditCard className="w-4 h-4 text-gray-400" />
                 </label>
@@ -517,10 +509,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
                       onChange={() => setPaymentMethod('NET_BANKING')}
                       className="text-brand-dark"
                     />
-                    <div>
-                      <p className="text-gray-900 text-xs">Net Banking (HDFC, SBI, ICICI)</p>
-                      <p className="text-[10px] text-gray-500 font-normal">Simulated institutional portal</p>
-                    </div>
+                    <p className="text-gray-900 text-xs font-semibold">Net Banking</p>
                   </div>
                 </label>
               </div>

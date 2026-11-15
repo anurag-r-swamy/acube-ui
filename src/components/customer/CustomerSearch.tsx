@@ -227,8 +227,6 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                     </span>
                   </div>
 
-                  <p className="text-slate-500 text-[11px] mt-0.5 line-clamp-1">{worker.headline}</p>
-
                   <div className="flex flex-wrap items-center gap-2.5 mt-2 text-[11px]">
                     <span className="flex items-center gap-0.5 text-amber-600 font-extrabold">
                       <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />

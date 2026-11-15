@@ -280,6 +280,8 @@ export const CustomerLayout: React.FC = () => {
             </span>
           </button>
         </div>
+        {/* Android Native Gesture Navigation Handle */}
+        <div className="w-28 h-1 bg-slate-300 rounded-full mx-auto mt-1 mb-0.5" />
       </nav>
 
       {/* Modals */}

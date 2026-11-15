@@ -29,6 +29,19 @@ export const DemoBanner: React.FC = () => {
 
   const isAdminPlatform = currentRoute.startsWith('/admin');
   const isWorkerMode = currentRoute.startsWith('/worker') || currentUser.activeMode === 'WORKER';
+  const [isMobileCollapsed, setIsMobileCollapsed] = React.useState(false);
+
+  if (isMobileCollapsed) {
+    return (
+      <button
+        onClick={() => setIsMobileCollapsed(false)}
+        className="sm:hidden fixed top-1.5 right-2 z-50 bg-[#0E241A]/90 backdrop-blur-md text-[#82C3A3] border border-[#1B4330] rounded-full px-2.5 py-1 text-[10px] font-bold shadow-lg flex items-center gap-1.5"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#82C3A3] animate-pulse"></span>
+        <span>Role / Platform</span>
+      </button>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-[#0E241A] text-white border-b border-[#1B4330] shadow-sm text-xs select-none">
@@ -39,6 +52,13 @@ export const DemoBanner: React.FC = () => {
             <span className="font-black text-[#6FA78A] tracking-wider uppercase text-[11px]">
               {APP_CONFIG.parentCompany}
             </span>
+            <button
+              onClick={() => setIsMobileCollapsed(true)}
+              className="sm:hidden text-[10px] text-slate-400 hover:text-white px-1.5 py-0.5 rounded bg-white/5 border border-white/10"
+              title="Hide top bar on mobile"
+            >
+              Hide
+            </button>
           </div>
 
           {/* Strict Platform Selector */}

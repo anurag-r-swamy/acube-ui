@@ -163,19 +163,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const welcomeSlides = [
     {
       title: 'Verified Home Services in Bengaluru',
-      description: 'Book licensed electricians, expert plumbers, and 5-star home cleaning teams with DigiLocker background checks.',
       badge: '100% Background Checked',
       icon: <ShieldCheck className="w-8 h-8 text-emerald-400" />,
     },
     {
       title: 'Fixed Pricing & Escrow Protection',
-      description: 'Transparent base fares with no hidden surcharges. Your money is protected in platform escrow until work is confirmed complete.',
-      badge: 'Zero Cash Extortion',
+      badge: 'Transparent Rates',
       icon: <Sparkles className="w-8 h-8 text-brand-accent" />,
     },
     {
       title: 'Live Tracking & Instant Messaging',
-      description: 'Track your assigned technician in real time, message inside the app with photo uploads, and enjoy masked phone privacy.',
       badge: 'Private & Secure',
       icon: <Clock className="w-8 h-8 text-[#82C3A3]" />,
     },
@@ -223,9 +220,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <h3 className="font-extrabold text-base leading-snug">
                   {welcomeSlides[welcomeSlide].title}
                 </h3>
-                <p className="text-emerald-100/70 text-[11px] leading-relaxed">
-                  {welcomeSlides[welcomeSlide].description}
-                </p>
                 {/* Dots indicator */}
                 <div className="flex items-center justify-center gap-1.5 pt-2">
                   {welcomeSlides.map((_, idx) => (

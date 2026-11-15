@@ -45,20 +45,11 @@ export const WorkerEarnings: React.FC = () => {
 
   return (
     <div className="space-y-4 pb-24 text-xs">
-      <div>
-        <h1 className="text-base font-bold text-gray-900">Earnings & Payout Ledger</h1>
-        <p className="text-[11px] text-gray-500">Read-only financial records for weekly settlements</p>
-      </div>
-
-      {/* Provisional Commission Disclaimer Alert */}
-      <div className="p-3 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-2.5 text-amber-950">
-        <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-        <div className="text-[11px] leading-relaxed">
-          <p className="font-bold">Illustrative & Provisional Commission Model</p>
-          <p className="text-amber-800">
-            Platform service commissions (shown at ~15% baseline) are illustrative estimates for prototype calculation. Actual commercial fee schedules are governed by formal partner agreements.
-          </p>
-        </div>
+      <div className="flex items-center justify-between">
+        <h1 className="text-base font-bold text-gray-900">Earnings</h1>
+        <span className="text-[10px] bg-[#EBF5EE] text-[#1B4D3E] font-bold px-2 py-0.5 rounded-full border border-[#C8DFD2]">
+          Weekly Payouts
+        </span>
       </div>
 
       {/* Hero Financial Summary Card */}

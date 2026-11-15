@@ -64,7 +64,6 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
             </div>
             <div>
               <h3 className="font-bold text-gray-900 text-sm">Choose Your Location</h3>
-              <p className="text-[11px] text-gray-500">Serving Bengaluru local areas</p>
             </div>
           </div>
           <button
@@ -92,8 +91,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
               <div className="flex items-center gap-2.5">
                 <Navigation className="w-4 h-4 text-brand-dark shrink-0" />
                 <div className="text-xs">
-                  <p className="font-semibold text-brand-dark">Use Current Device Location</p>
-                  <p className="text-[11px] text-brand-muted">Simulate high-accuracy GPS fix</p>
+                  <p className="font-semibold text-brand-dark">Use Device Location</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">

@@ -123,7 +123,6 @@ export const MyBookings: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-base font-bold text-gray-900">My Bookings</h1>
-          <p className="text-[11px] text-gray-500">Live service tracking and order history</p>
         </div>
         <span className="bg-brand-bg text-brand-dark px-2.5 py-1 rounded-full font-bold text-xs border border-gray-200">
           {myBookings.length} Total

@@ -71,7 +71,7 @@ export const ProviderProfileModal: React.FC<ProviderProfileModalProps> = ({
                   </span>
                 )}
               </div>
-              <p className="text-xs text-white/80 mt-0.5">{worker.headline}</p>
+              <p className="text-xs text-white/80 mt-0.5">{worker.primaryCategory}</p>
 
               <div className="flex flex-wrap items-center gap-3 mt-2 text-xs">
                 <div className="flex items-center gap-1 font-semibold text-brand-accent">
