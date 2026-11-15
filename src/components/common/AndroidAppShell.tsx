@@ -189,8 +189,8 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
           onClick={() => setIsNotificationShadeOpen(!isNotificationShadeOpen)}
           className={`h-8 px-4 flex items-center justify-between text-[11px] font-medium tracking-tight select-none cursor-pointer z-50 shrink-0 transition-colors ${
             isDarkStatus
-              ? 'bg-brand-dark text-white'
-              : 'bg-white text-gray-800 border-b border-gray-100'
+              ? 'bg-[#0A192F] text-white border-b border-slate-800/40'
+              : 'bg-white text-slate-800 border-b border-slate-100'
           }`}
           title="Tap to pull down Android Quick Settings & Notification Shade"
         >
@@ -198,9 +198,9 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
           <div className="flex items-center gap-2">
             <span className="font-bold tracking-normal">{currentTime}</span>
             <div className="flex items-center gap-1 opacity-80">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               {userNotifs.some((n) => !n.isRead) && (
-                <Bell className="w-2.5 h-2.5 text-brand-accent animate-pulse" />
+                <Bell className="w-2.5 h-2.5 text-cyan-400 animate-pulse" />
               )}
             </div>
           </div>
@@ -212,7 +212,7 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
 
           {/* Right: Connectivity & Battery Icons */}
           <div className="flex items-center gap-1.5 opacity-90 text-[10px]">
-            <span className="text-[9px] font-bold px-1 py-0.2 bg-white/20 rounded">5G</span>
+            <span className="text-[9px] font-extrabold px-1 py-0.2 bg-cyan-500/20 text-cyan-300 rounded border border-cyan-500/30">5G</span>
             <Signal className="w-3 h-3" />
             <Wifi className="w-3 h-3" />
             <div className="flex items-center gap-0.5">
@@ -224,7 +224,7 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
 
         {/* ================= ANDROID NOTIFICATION SHADE (PULL-DOWN) ================= */}
         {isNotificationShadeOpen && (
-          <div className="absolute inset-0 z-60 bg-slate-950/95 text-white flex flex-col p-4 animate-fadeIn backdrop-blur-md overflow-y-auto">
+          <div className="absolute inset-0 z-60 bg-[#0A192F]/98 text-white flex flex-col p-4 animate-fadeIn backdrop-blur-md overflow-y-auto">
             {/* Header: Digital Clock & Close */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-800">
               <div>
@@ -247,8 +247,8 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 onClick={() => setIsWifiOn(!isWifiOn)}
                 className={`p-2.5 rounded-2xl flex items-center gap-2.5 text-left transition-all ${
                   isWifiOn
-                    ? 'bg-emerald-600 text-white font-bold'
-                    : 'bg-slate-800/80 text-slate-400'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400'
                 }`}
               >
                 <Wifi className="w-4 h-4 shrink-0" />
@@ -262,8 +262,8 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 onClick={() => setIsBluetoothOn(!isBluetoothOn)}
                 className={`p-2.5 rounded-2xl flex items-center gap-2.5 text-left transition-all ${
                   isBluetoothOn
-                    ? 'bg-emerald-600 text-white font-bold'
-                    : 'bg-slate-800/80 text-slate-400'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400'
                 }`}
               >
                 <Bluetooth className="w-4 h-4 shrink-0" />
@@ -277,8 +277,8 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 onClick={() => setIsLocationOn(!isLocationOn)}
                 className={`p-2.5 rounded-2xl flex items-center gap-2.5 text-left transition-all ${
                   isLocationOn
-                    ? 'bg-emerald-600 text-white font-bold'
-                    : 'bg-slate-800/80 text-slate-400'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400'
                 }`}
               >
                 <MapPin className="w-4 h-4 shrink-0" />
@@ -294,8 +294,8 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 onClick={() => setIsDoNotDisturb(!isDoNotDisturb)}
                 className={`p-2.5 rounded-2xl flex items-center gap-2.5 text-left transition-all ${
                   isDoNotDisturb
-                    ? 'bg-amber-600 text-white font-bold'
-                    : 'bg-slate-800/80 text-slate-400'
+                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400'
                 }`}
               >
                 <Volume2 className="w-4 h-4 shrink-0" />
@@ -308,14 +308,14 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
 
             {/* Brightness Slider */}
             <div className="flex items-center gap-3 px-2 py-1 bg-slate-900/80 rounded-xl mb-4 border border-slate-800">
-              <Sun className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <Sun className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
               <input
                 type="range"
                 min="20"
                 max="100"
                 value={brightness}
                 onChange={(e) => setBrightness(Number(e.target.value))}
-                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
               />
               <span className="text-[10px] text-slate-400 w-7 text-right">{brightness}%</span>
             </div>
@@ -342,9 +342,9 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 userNotifs.slice(0, 4).map((n) => (
                   <div
                     key={n.id}
-                    className="p-3 bg-slate-900 border border-slate-800 rounded-2xl flex items-start gap-2.5 text-xs"
+                    className="p-3 bg-slate-900/90 border border-slate-800 rounded-2xl flex items-start gap-2.5 text-xs"
                   >
-                    <div className="w-7 h-7 rounded-full bg-emerald-950 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-7 h-7 rounded-full bg-cyan-950 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 border border-cyan-800/40">
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
                     <div className="flex-1">
@@ -374,10 +374,10 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
 
         {/* ================= ANDROID OVERVIEW / MULTITASKING (RECENT APPS) ================= */}
         {isAndroidOverviewOpen && (
-          <div className="absolute inset-0 z-60 bg-slate-950/95 flex flex-col p-5 animate-fadeIn backdrop-blur-md">
-            <div className="flex items-center justify-between pb-4">
+          <div className="absolute inset-0 z-60 bg-[#0A192F]/98 flex flex-col p-5 animate-fadeIn backdrop-blur-md">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
               <div className="flex items-center gap-2 text-white">
-                <Layers className="w-4 h-4 text-emerald-400" />
+                <Layers className="w-4 h-4 text-cyan-400" />
                 <h3 className="font-extrabold text-sm">Recent Android Apps</h3>
               </div>
               <button
@@ -400,22 +400,22 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 }}
                 className={`p-4 rounded-3xl border transition-all cursor-pointer transform hover:scale-[1.02] shadow-xl ${
                   activeApp === 'CUSTOMER'
-                    ? 'bg-gradient-to-br from-brand-dark to-slate-900 border-emerald-500 ring-2 ring-emerald-500/40'
-                    : 'bg-slate-900 border-slate-800 opacity-80'
+                    ? 'bg-gradient-to-br from-slate-900 to-[#0A192F] border-cyan-500 ring-2 ring-cyan-500/40'
+                    : 'bg-slate-900/90 border-slate-800 opacity-80'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-brand-accent text-brand-charcoal flex items-center justify-center font-black text-xs shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-500 text-slate-950 flex items-center justify-center font-black text-xs shadow-xs">
                       A
                     </div>
                     <div>
                       <p className="font-bold text-white text-xs">{APP_CONFIG.parentCompany} Marketplace</p>
-                      <p className="text-[10px] text-emerald-400">Customer Application</p>
+                      <p className="text-[10px] text-cyan-400">Customer Application</p>
                     </div>
                   </div>
                   {activeApp === 'CUSTOMER' && (
-                    <span className="text-[9px] font-bold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/40">
+                    <span className="text-[9px] font-bold bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/40">
                       Active Now
                     </span>
                   )}
@@ -435,22 +435,22 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 }}
                 className={`p-4 rounded-3xl border transition-all cursor-pointer transform hover:scale-[1.02] shadow-xl ${
                   activeApp === 'WORKER'
-                    ? 'bg-gradient-to-br from-brand-dark to-slate-900 border-amber-500 ring-2 ring-amber-500/40'
-                    : 'bg-slate-900 border-slate-800 opacity-80'
+                    ? 'bg-gradient-to-br from-slate-900 to-[#0A192F] border-cyan-400 ring-2 ring-cyan-400/40'
+                    : 'bg-slate-900/90 border-slate-800 opacity-80'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-amber-500 text-brand-charcoal flex items-center justify-center font-black text-xs shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-cyan-400 text-slate-950 flex items-center justify-center font-black text-xs shadow-xs">
                       <Briefcase className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="font-bold text-white text-xs">{APP_CONFIG.parentCompany} Partner</p>
-                      <p className="text-[10px] text-amber-400">Worker & Pro Application</p>
+                      <p className="text-[10px] text-cyan-300">Worker & Pro Application</p>
                     </div>
                   </div>
                   {activeApp === 'WORKER' && (
-                    <span className="text-[9px] font-bold bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/40">
+                    <span className="text-[9px] font-bold bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-500/40">
                       Active Now
                     </span>
                   )}
@@ -470,7 +470,7 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
                 className="p-3 bg-slate-900/70 border border-slate-800 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-slate-800 text-xs transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-brand-accent" />
+                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
                   <span className="text-white font-medium">Desktop Admin Web Portal</span>
                 </div>
                 <span className="text-slate-400 text-[11px]">Open →</span>
@@ -563,3 +563,4 @@ export const AndroidAppShell: React.FC<AndroidAppShellProps> = ({
     </div>
   );
 };
+

@@ -147,10 +147,10 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.name)}
-              className={`px-3 py-1.5 rounded-xl border whitespace-nowrap text-xs font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-xl border whitespace-nowrap text-xs font-semibold transition-colors ${
                 selectedCategory === c.name
-                  ? 'bg-brand-dark text-white border-brand-dark font-semibold'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
+                  ? 'bg-[#0A192F] text-cyan-400 border-[#0A192F] shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
               }`}
             >
               {c.name}
@@ -211,36 +211,36 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                     alt={worker.fullName}
                     className="w-14 h-14 rounded-2xl object-cover border border-gray-200"
                   />
-                  <div className="absolute -bottom-1 -right-1 bg-brand-accent text-white p-0.5 rounded-full">
+                  <div className="absolute -bottom-1 -right-1 bg-cyan-500 text-slate-950 p-0.5 rounded-full ring-2 ring-white">
                     <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 <div className="flex-1 cursor-pointer" onClick={() => onSelectWorker(worker)}>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-gray-900 text-sm hover:text-brand-dark">
+                    <h3 className="font-bold text-slate-900 text-sm hover:text-cyan-700">
                       {worker.fullName}
                     </h3>
-                    <span className="font-extrabold text-brand-dark text-xs">
+                    <span className="font-extrabold text-[#0A192F] text-xs">
                       {APP_CONFIG.currencySymbol}{worker.baseFare}
-                      <span className="text-[10px] text-gray-400 font-normal"> base</span>
+                      <span className="text-[10px] text-slate-400 font-normal"> base</span>
                     </span>
                   </div>
 
-                  <p className="text-gray-500 text-[11px] mt-0.5 line-clamp-1">{worker.headline}</p>
+                  <p className="text-slate-500 text-[11px] mt-0.5 line-clamp-1">{worker.headline}</p>
 
                   <div className="flex flex-wrap items-center gap-2.5 mt-2 text-[11px]">
-                    <span className="flex items-center gap-0.5 text-brand-accent font-bold">
-                      <Star className="w-3.5 h-3.5 fill-brand-accent" />
+                    <span className="flex items-center gap-0.5 text-cyan-700 font-extrabold">
+                      <Star className="w-3.5 h-3.5 fill-cyan-500 text-cyan-500" />
                       {worker.rating.toFixed(1)}
-                      <span className="text-gray-400 font-normal">({worker.reviewCount})</span>
+                      <span className="text-slate-400 font-normal">({worker.reviewCount})</span>
                     </span>
-                    <span className="text-gray-300">•</span>
-                    <span className="text-gray-600 font-medium">
+                    <span className="text-slate-300">•</span>
+                    <span className="text-slate-600 font-medium">
                       {worker.completedJobsCount} jobs
                     </span>
-                    <span className="text-gray-300">•</span>
-                    <span className="text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold text-[10px]">
+                    <span className="text-slate-300">•</span>
+                    <span className="text-cyan-800 bg-cyan-50 px-1.5 py-0.5 rounded font-semibold text-[10px] border border-cyan-200">
                       {worker.experienceYears}+ yrs exp
                     </span>
                   </div>
@@ -274,7 +274,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                   </button>
                   <button
                     onClick={() => onBookWorker(worker)}
-                    className="py-1.5 px-3.5 bg-brand-dark hover:bg-brand-darker text-white font-semibold rounded-xl shadow-xs"
+                    className="py-1.5 px-3.5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl shadow-xs transition-colors"
                   >
                     Book Now
                   </button>

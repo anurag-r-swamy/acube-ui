@@ -13,10 +13,13 @@ import {
   Sparkles,
   Clock,
   PlusCircle,
-  HelpCircle,
   CheckCircle2,
-  Calendar,
   Briefcase,
+  Zap,
+  Award,
+  ChevronRight,
+  Flame,
+  BadgeCheck,
 } from 'lucide-react';
 
 interface CustomerHomeProps {
@@ -27,6 +30,66 @@ interface CustomerHomeProps {
   onNavigateToBookings: () => void;
   onNavigateToSearch: (query?: string) => void;
 }
+
+const POPULAR_SEARCH_CHIPS = [
+  'AC Deep Clean',
+  'Bathroom Scrub',
+  'Switchboard Fix',
+  'Water Purifier',
+  'Plumber',
+  'Fan Installation',
+];
+
+const CURATED_BESTSELLERS = [
+  {
+    id: 'bs-1',
+    name: 'Split AC Power Jet Servicing',
+    category: 'Electrical & Appliances',
+    rating: 4.88,
+    reviewsCount: '84k',
+    price: 499,
+    originalPrice: 799,
+    discount: '37% OFF',
+    tag: 'Bestseller',
+    timeEst: '45 mins',
+  },
+  {
+    id: 'bs-2',
+    name: 'Intense Bathroom Deep Cleaning',
+    category: 'Cleaning & Housekeeping',
+    rating: 4.84,
+    reviewsCount: '62k',
+    price: 389,
+    originalPrice: 599,
+    discount: '35% OFF',
+    tag: 'Popular',
+    timeEst: '60 mins',
+  },
+  {
+    id: 'bs-3',
+    name: 'Smart Switch & MCB Diagnostics',
+    category: 'Electrical & Appliances',
+    rating: 4.92,
+    reviewsCount: '31k',
+    price: 199,
+    originalPrice: 299,
+    discount: '33% OFF',
+    tag: 'Quick Fix',
+    timeEst: '30 mins',
+  },
+  {
+    id: 'bs-4',
+    name: 'Kitchen Sink & Pipe Unclogging',
+    category: 'Plumbing & Sanitary',
+    rating: 4.81,
+    reviewsCount: '19k',
+    price: 249,
+    originalPrice: 399,
+    discount: '38% OFF',
+    tag: 'Same Day',
+    timeEst: '40 mins',
+  },
+];
 
 export const CustomerHome: React.FC<CustomerHomeProps> = ({
   onSelectCategory,
@@ -46,9 +109,10 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
     setAuthModalMode,
     setIsWorkerRegModalOpen,
   } = useApp();
+
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Check if customer has an active in-progress or accepted booking
+  // Active in-progress or accepted booking
   const activeBooking = bookings.find(
     (b) =>
       b.customerId === currentUser.id &&
@@ -65,176 +129,303 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
   };
 
   return (
-    <div className="space-y-5 pb-24">
-      {/* Top Location Bar & Welcome */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 pb-28 text-slate-900 bg-slate-50/50">
+      {/* ================= TOP EDITORIAL HEADER ================= */}
+      <div className="flex items-center justify-between pt-1">
+        {/* Location Dropdown */}
         <button
           onClick={onOpenLocationModal}
-          className="flex items-center gap-1.5 text-left py-1 px-2.5 bg-white border border-gray-200 rounded-full shadow-xs hover:border-brand-dark transition-colors"
+          className="flex items-center gap-2 py-1 px-3 bg-white border border-slate-200/90 rounded-full shadow-xs hover:border-cyan-500 transition-all text-left group"
         >
-          <MapPin className="w-4 h-4 text-brand-accent shrink-0" />
-          <div className="truncate max-w-[200px]">
-            <span className="block text-[10px] text-gray-400 font-semibold uppercase leading-tight">
+          <div className="w-6 h-6 rounded-full bg-cyan-50 flex items-center justify-center shrink-0">
+            <MapPin className="w-3.5 h-3.5 text-cyan-600" />
+          </div>
+          <div className="truncate max-w-[170px]">
+            <span className="block text-[9px] text-slate-400 font-extrabold uppercase tracking-wider leading-none">
               Location
             </span>
-            <span className="text-xs font-bold text-gray-900 truncate">
+            <span className="text-xs font-bold text-slate-900 truncate block mt-0.5 group-hover:text-cyan-700">
               {selectedLocation.split(',')[0]}
             </span>
           </div>
-          <ChevronDown className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+          <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0 group-hover:text-slate-600" />
         </button>
 
+        {/* User Account / Welcome Pill */}
         <button
           onClick={() => {
             setAuthModalMode('SIGN_UP');
             setIsAuthModalOpen(true);
           }}
-          className="text-right p-1 rounded-xl hover:bg-gray-100 transition-colors"
-          title="Sign in or Register new account"
+          className="flex items-center gap-2 py-1 px-2.5 bg-white border border-slate-200/90 rounded-full shadow-xs hover:border-cyan-500 transition-colors"
+          title="Account Profile & Sign-In"
         >
-          <span className="text-[10px] text-gray-500 block leading-tight">Namaskara,</span>
-          <p className="text-xs font-bold text-gray-900 flex items-center justify-end gap-1">
-            <span>{currentUser.name.split(' ')[0]}</span>
-            <span className="text-[9px] bg-brand-bg text-brand-dark px-1.5 py-0.2 rounded border border-gray-200">
-              Account ▾
-            </span>
-          </p>
+          <div className="w-6 h-6 rounded-full bg-[#0A192F] text-cyan-400 font-extrabold text-[11px] flex items-center justify-center shrink-0">
+            {currentUser.name.charAt(0)}
+          </div>
+          <span className="text-xs font-bold text-slate-800">
+            {currentUser.name.split(' ')[0]}
+          </span>
         </button>
       </div>
 
-      {/* Hero Banner / Search Bar */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-dark to-brand-light p-5 text-white shadow-lifted">
-        <div className="relative z-10 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-semibold text-brand-accent border border-white/10">
-            <Sparkles className="w-3 h-3" />
-            <span>Bengaluru Verified Home Services</span>
-          </div>
+      {/* ================= URBAN COMPANY SEARCH EXPERIENCE ================= */}
+      <div className="space-y-2.5">
+        <form onSubmit={handleSearchSubmit} className="relative">
+          <input
+            type="text"
+            placeholder="Search for 'AC service', 'deep cleaning', 'electrician'..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full py-3.5 pl-11 pr-24 bg-white text-slate-900 rounded-2xl text-xs placeholder:text-slate-400 border border-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+          />
+          <Search className="w-4 h-4 text-slate-400 absolute left-4 top-4" />
+          <button
+            type="submit"
+            className="absolute right-2 top-2 bottom-2 px-3.5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-xs"
+          >
+            <span>Find</span>
+          </button>
+        </form>
 
-          <h1 className="text-lg font-extrabold leading-snug">
-            Need an Electrician, Plumber or Cleaner today?
-          </h1>
-
-          <form onSubmit={handleSearchSubmit} className="relative">
-            <input
-              type="text"
-              placeholder="Search 'fan repair', 'AC service', 'deep cleaning'..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2.5 pl-9 pr-20 bg-white text-gray-900 rounded-xl text-xs placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent shadow"
-            />
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
+        {/* Quick Search Chips */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+          {POPULAR_SEARCH_CHIPS.map((chip) => (
             <button
-              type="submit"
-              className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-brand-accent hover:bg-brand-accent-hover text-white font-semibold rounded-lg text-xs transition-colors"
+              key={chip}
+              type="button"
+              onClick={() => onNavigateToSearch(chip)}
+              className="shrink-0 py-1 px-2.5 bg-white hover:bg-cyan-50 hover:border-cyan-400/60 border border-slate-200/90 rounded-full text-[11px] font-semibold text-slate-600 transition-all shadow-2xs"
             >
-              Search
+              {chip}
             </button>
-          </form>
+          ))}
         </div>
-
-        {/* Decorative corner glow */}
-        <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-accent/20 rounded-full blur-2xl pointer-events-none"></div>
       </div>
 
-      {/* Active Booking Banner (if exists) */}
+      {/* ================= ACTIVE BOOKING BANNER (IF IN PROGRESS) ================= */}
       {activeBooking && (
         <div
           onClick={onNavigateToBookings}
-          className="p-3.5 bg-gradient-to-r from-emerald-900 to-brand-dark text-white rounded-2xl shadow-md cursor-pointer hover:shadow-lg transition-all border border-emerald-500/30"
+          className="p-4 bg-gradient-to-r from-[#0A192F] via-[#0F172A] to-slate-900 text-white rounded-3xl shadow-lifted cursor-pointer border border-cyan-500/30 hover:border-cyan-400 transition-all relative overflow-hidden group"
         >
-          <div className="flex items-center justify-between mb-1.5">
-            <div className="flex items-center gap-1.5 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>Active Job in Progress</span>
+          <div className="relative z-10 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                Live Active Service
+              </span>
+              <span className="text-[10px] font-mono text-slate-400">
+                {activeBooking.referenceNumber}
+              </span>
             </div>
-            <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full font-mono">
-              {activeBooking.referenceNumber}
-            </span>
-          </div>
 
-          <div className="flex items-center justify-between text-xs">
-            <div>
-              <p className="font-bold text-white text-sm">{activeBooking.serviceName}</p>
-              <p className="text-white/70 text-[11px]">
-                {activeBooking.workerName ? `With ${activeBooking.workerName}` : 'Awaiting worker arrival'} •{' '}
-                <span className="text-brand-accent font-semibold">{activeBooking.status.replace('_', ' ')}</span>
-              </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="text-sm font-extrabold text-white group-hover:text-cyan-300 transition-colors">
+                  {activeBooking.serviceName}
+                </h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  {activeBooking.workerName ? `Assigned to ${activeBooking.workerName}` : 'Dispatching technician'} •{' '}
+                  <span className="text-cyan-400 font-bold">{activeBooking.status.replace('_', ' ')}</span>
+                </p>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
+                <ChevronRight className="w-4 h-4" />
+              </div>
             </div>
-            <span className="text-xs text-brand-accent font-semibold flex items-center gap-1">
-              View Status <ArrowRight className="w-3.5 h-3.5" />
-            </span>
           </div>
+          <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
         </div>
       )}
 
-      {/* Service Categories Grid */}
+      {/* ================= APPLE APP STORE STYLE FEATURED SPOTLIGHT CARD ================= */}
+      <div className="relative rounded-3xl bg-gradient-to-br from-[#0A192F] via-[#0E2038] to-[#122A48] text-white p-5 shadow-lifted overflow-hidden border border-slate-800">
+        <div className="relative z-10 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400">
+              FEATURED SPOTLIGHT • BENGALURU
+            </span>
+            <span className="text-[10px] font-bold bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-full shadow-xs">
+              40% OFF
+            </span>
+          </div>
+
+          <div>
+            <h2 className="text-lg font-black text-white leading-tight">
+              Master Split AC Power-Jet Overhaul
+            </h2>
+            <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+              High-pressure indoor & outdoor jet clean, cooling coil sterilization, and gas pressure check with a 30-day warranty.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between pt-1">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-black text-cyan-300">
+                {APP_CONFIG.currencySymbol}499
+              </span>
+              <span className="text-xs text-slate-400 line-through">
+                {APP_CONFIG.currencySymbol}799
+              </span>
+            </div>
+
+            <button
+              onClick={() => onOpenBookingFlow()}
+              className="py-2.5 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold rounded-xl text-xs transition-all shadow-md flex items-center gap-1.5 active:scale-95"
+            >
+              <span>Book Service</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Ambient Cyan glow */}
+        <div className="absolute top-0 right-0 w-44 h-44 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
+
+      {/* ================= SERVICE CATEGORIES (URBAN COMPANY GRID) ================= */}
       <div>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-bold text-gray-900">Explore Services</h2>
+        <div className="flex items-center justify-between mb-3.5">
+          <div>
+            <h3 className="text-sm font-extrabold text-slate-900 tracking-tight">
+              Categories
+            </h3>
+            <p className="text-[11px] text-slate-500">Standardized fixed-price local services</p>
+          </div>
           <button
             onClick={() => onNavigateToSearch()}
-            className="text-[11px] font-semibold text-brand-dark hover:underline flex items-center gap-0.5"
+            className="text-[11px] font-bold text-cyan-700 hover:text-cyan-800 flex items-center gap-0.5"
           >
-            <span>All Categories</span>
-            <ArrowRight className="w-3 h-3" />
+            <span>See All</span>
+            <ChevronRight className="w-3 h-3" />
           </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-2.5">
-          {categories.slice(0, 6).map((cat) => (
+        <div className="grid grid-cols-4 gap-2.5">
+          {categories.slice(0, 8).map((cat) => (
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat)}
-              className="flex flex-col items-center p-3 rounded-2xl bg-white border border-gray-100 shadow-soft hover:shadow-medium hover:border-brand-dark/20 transition-all text-center group"
+              className="flex flex-col items-center p-2.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:border-cyan-500/60 hover:shadow-soft hover:bg-cyan-50/20 transition-all text-center group"
             >
-              <div className="w-11 h-11 rounded-xl bg-brand-bg text-brand-dark group-hover:bg-brand-dark group-hover:text-brand-accent flex items-center justify-center transition-colors mb-1.5">
+              <div className="w-12 h-12 rounded-2xl bg-slate-50 group-hover:bg-[#0A192F] text-slate-800 group-hover:text-cyan-400 flex items-center justify-center transition-all duration-200 mb-1.5 border border-slate-100 group-hover:border-slate-800 shadow-2xs">
                 <CategoryIcon name={cat.iconName} className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold text-gray-800 leading-tight line-clamp-2">
-                {cat.name}
-              </span>
-              <span className="text-[10px] text-gray-400 mt-0.5">
-                {cat.subcategories.length} services
+              <span className="text-[11px] font-bold text-slate-800 leading-tight line-clamp-2">
+                {cat.name.split('&')[0].trim()}
               </span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* "Don't know what to pick? Post a General Request" Card */}
-      <div className="p-4 bg-brand-accent-light border border-amber-200/80 rounded-2xl flex items-center justify-between gap-3 shadow-soft">
+      {/* ================= CURATED BESTSELLERS (URBAN COMPANY FORMAT) ================= */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-1.5">
+            <Flame className="w-4 h-4 text-cyan-600" />
+            <h3 className="text-sm font-extrabold text-slate-900 tracking-tight">
+              Most Booked in Bengaluru
+            </h3>
+          </div>
+          <button
+            onClick={() => onNavigateToSearch()}
+            className="text-[11px] font-bold text-cyan-700 hover:underline"
+          >
+            View Directory
+          </button>
+        </div>
+
+        <div className="space-y-2.5">
+          {CURATED_BESTSELLERS.map((item) => (
+            <div
+              key={item.id}
+              className="p-3.5 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-soft transition-all flex items-center justify-between gap-3"
+            >
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-cyan-50 text-cyan-800 border border-cyan-200">
+                    {item.tag}
+                  </span>
+                  <span className="text-[10px] text-slate-400 flex items-center gap-1">
+                    <Clock className="w-2.5 h-2.5" />
+                    {item.timeEst}
+                  </span>
+                </div>
+
+                <h4 className="text-xs font-bold text-slate-900 leading-tight">
+                  {item.name}
+                </h4>
+
+                <div className="flex items-center gap-2 text-[11px]">
+                  <span className="flex items-center gap-0.5 font-bold text-slate-800">
+                    <Star className="w-3 h-3 text-cyan-500 fill-cyan-500" />
+                    {item.rating}
+                  </span>
+                  <span className="text-slate-400 text-[10px]">({item.reviewsCount} reviews)</span>
+                </div>
+
+                <div className="flex items-baseline gap-1.5 pt-0.5">
+                  <span className="font-extrabold text-xs text-slate-900">
+                    {APP_CONFIG.currencySymbol}{item.price}
+                  </span>
+                  <span className="text-[10px] text-slate-400 line-through">
+                    {APP_CONFIG.currencySymbol}{item.originalPrice}
+                  </span>
+                  <span className="text-[9px] font-extrabold text-cyan-700">
+                    {item.discount}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => onOpenBookingFlow()}
+                className="shrink-0 py-2 px-3.5 bg-white hover:bg-cyan-50 border border-cyan-500 text-cyan-700 font-extrabold rounded-xl text-xs transition-colors shadow-2xs hover:shadow-xs active:scale-95"
+              >
+                Add +
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ================= GENERAL REQUEST BROADCAST PROMPT ================= */}
+      <div className="p-4 bg-white rounded-3xl border border-slate-200 shadow-2xs flex items-center justify-between gap-3">
         <div className="space-y-1">
-          <span className="text-[10px] font-bold text-brand-dark uppercase tracking-wider bg-white/80 px-2 py-0.5 rounded">
-            Fast Broadcast
+          <span className="text-[9px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-700 px-2 py-0.5 rounded">
+            Instant Match
           </span>
-          <h3 className="text-xs font-bold text-brand-charcoal">
-            Unsure which pro to pick?
-          </h3>
-          <p className="text-[11px] text-gray-600">
-            Post your problem and let qualified nearby professionals accept your request.
+          <h4 className="text-xs font-bold text-slate-900">
+            Unsure which pro to choose?
+          </h4>
+          <p className="text-[11px] text-slate-500 leading-tight">
+            Describe your requirement and let available nearby experts accept your slot.
           </p>
         </div>
         <button
           onClick={() => onOpenBookingFlow()}
-          className="shrink-0 py-2.5 px-3.5 bg-brand-dark hover:bg-brand-darker text-white font-semibold rounded-xl text-xs shadow-sm transition-all flex items-center gap-1.5"
+          className="shrink-0 py-2.5 px-3.5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs transition-all shadow-xs flex items-center gap-1.5"
         >
-          <PlusCircle className="w-3.5 h-3.5 text-brand-accent" />
+          <PlusCircle className="w-3.5 h-3.5" />
           <span>Post Request</span>
         </button>
       </div>
 
-      {/* Top Verified Bengaluru Professionals */}
+      {/* ================= TOP VERIFIED PROFESSIONALS (APPLE APP STORE CARDS) ================= */}
       <div>
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h2 className="text-sm font-bold text-gray-900">Recommended Verified Pros</h2>
-            <p className="text-[11px] text-gray-500">Background checked & skill certified</p>
+            <h3 className="text-sm font-extrabold text-slate-900 tracking-tight">
+              Top Rated Verified Pros
+            </h3>
+            <p className="text-[11px] text-slate-500">Background checked & skill certified</p>
           </div>
           <button
             onClick={() => onNavigateToSearch()}
-            className="text-[11px] font-semibold text-brand-dark hover:underline"
+            className="text-[11px] font-bold text-cyan-700 hover:underline"
           >
-            View All ({approvedWorkers.length})
+            All Pros ({approvedWorkers.length})
           </button>
         </div>
 
@@ -242,7 +433,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
           {approvedWorkers.slice(0, 4).map((worker) => (
             <div
               key={worker.id}
-              className="p-3.5 bg-white rounded-2xl border border-gray-100 shadow-soft hover:shadow-medium transition-all flex items-center justify-between gap-3"
+              className="p-3.5 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-soft transition-all flex items-center justify-between gap-3"
             >
               <div
                 onClick={() => onSelectWorker(worker)}
@@ -252,32 +443,32 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
                   <img
                     src={worker.avatarUrl}
                     alt={worker.fullName}
-                    className="w-13 h-13 rounded-xl object-cover border border-gray-200"
+                    className="w-12 h-12 rounded-2xl object-cover border border-slate-200"
                   />
-                  <div className="absolute -bottom-1 -right-1 bg-brand-accent text-white p-0.5 rounded-full">
-                    <ShieldCheck className="w-3 h-3" />
+                  <div className="absolute -bottom-1 -right-1 bg-cyan-500 text-slate-950 p-0.5 rounded-full ring-2 ring-white">
+                    <BadgeCheck className="w-3 h-3" />
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <h3 className="font-bold text-gray-900 text-xs hover:text-brand-dark">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1">
+                    <h4 className="font-bold text-slate-900 text-xs hover:text-cyan-700">
                       {worker.fullName}
-                    </h3>
+                    </h4>
                   </div>
-                  <p className="text-[11px] text-gray-500 line-clamp-1">{worker.headline}</p>
+                  <p className="text-[11px] text-slate-500 line-clamp-1">{worker.headline}</p>
 
-                  <div className="flex items-center gap-2 mt-1 text-[11px]">
-                    <span className="flex items-center gap-0.5 text-brand-accent font-bold">
-                      <Star className="w-3 h-3 fill-brand-accent" />
+                  <div className="flex items-center gap-2 text-[10px]">
+                    <span className="flex items-center gap-0.5 text-cyan-700 font-extrabold">
+                      <Star className="w-2.5 h-2.5 fill-cyan-500 text-cyan-500" />
                       {worker.rating.toFixed(1)}
                     </span>
-                    <span className="text-gray-300">•</span>
-                    <span className="text-gray-600 font-medium">
+                    <span className="text-slate-300">•</span>
+                    <span className="text-slate-600 font-medium">
                       {worker.completedJobsCount} jobs
                     </span>
-                    <span className="text-gray-300">•</span>
-                    <span className="font-bold text-brand-dark">
+                    <span className="text-slate-300">•</span>
+                    <span className="font-bold text-slate-900">
                       From {APP_CONFIG.currencySymbol}{worker.baseFare}
                     </span>
                   </div>
@@ -286,7 +477,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
 
               <button
                 onClick={() => onOpenBookingFlow(worker)}
-                className="shrink-0 py-2 px-3 bg-brand-bg hover:bg-brand-dark hover:text-white text-brand-dark font-semibold rounded-xl text-xs border border-gray-200 transition-colors"
+                className="shrink-0 py-1.5 px-3 bg-slate-50 hover:bg-[#0A192F] hover:text-cyan-400 text-slate-800 font-bold rounded-xl text-xs border border-slate-200 transition-colors"
               >
                 Book
               </button>
@@ -295,55 +486,56 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         </div>
       </div>
 
-      {/* Partner / Worker Registration Banner */}
-      <div className="p-4 bg-gradient-to-r from-emerald-950 via-brand-dark to-brand-light text-white rounded-2xl shadow-lifted flex items-center justify-between gap-3 relative overflow-hidden">
+      {/* ================= PARTNER REGISTRATION BANNER ================= */}
+      <div className="p-4 bg-gradient-to-r from-[#0A192F] via-[#0E2038] to-[#122A48] text-white rounded-3xl shadow-lifted flex items-center justify-between gap-3 relative overflow-hidden border border-slate-800">
         <div className="space-y-1 relative z-10">
-          <span className="text-[10px] font-bold uppercase tracking-wider bg-brand-accent text-brand-charcoal px-2 py-0.5 rounded-full inline-block">
-            Earn with {APP_CONFIG.parentCompany}
+          <span className="text-[9px] font-extrabold uppercase tracking-widest bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-full inline-block">
+            PARTNER NETWORK
           </span>
-          <h3 className="text-xs font-bold text-white">
-            Register as a Verified Service Partner
-          </h3>
-          <p className="text-[11px] text-white/80 leading-tight">
-            Join 500+ Bengaluru pros. Direct weekly payouts, Aadhaar DigiLocker verification, and smart job broadcasts.
+          <h4 className="text-xs font-bold text-white">
+            Are you a service professional in Bengaluru?
+          </h4>
+          <p className="text-[11px] text-slate-300 leading-tight">
+            Register your trade, submit Aadhaar DigiLocker verification, and start receiving job requests.
           </p>
         </div>
         <button
           onClick={() => setIsWorkerRegModalOpen(true)}
-          className="shrink-0 py-2.5 px-3.5 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-1.5 relative z-10"
+          className="shrink-0 py-2.5 px-3.5 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold rounded-xl text-xs shadow-md transition-all flex items-center gap-1.5 relative z-10"
         >
           <Briefcase className="w-3.5 h-3.5" />
           <span>Register Now</span>
         </button>
-        <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-brand-accent/20 rounded-full blur-lg pointer-events-none"></div>
+        <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
-      {/* Trust & Safety Highlights */}
-      <div className="p-4 bg-white rounded-2xl border border-gray-100 shadow-soft space-y-2.5">
-        <h3 className="font-bold text-gray-900 text-xs flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>The {APP_CONFIG.parentCompany} Trust Promise</span>
-        </h3>
-        <div className="grid grid-cols-2 gap-2 text-[11px] text-gray-600">
-          <div className="flex items-start gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-            <span>DigiLocker Verified ID & Aadhaar</span>
+      {/* ================= URBAN COMPANY STYLE TRUST PROMISE ================= */}
+      <div className="p-4 bg-white rounded-3xl border border-slate-200/80 shadow-2xs space-y-3">
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="w-4 h-4 text-cyan-600" />
+          <h4 className="font-extrabold text-slate-900 text-xs">
+            The {APP_CONFIG.parentCompany} Quality Guarantee
+          </h4>
+        </div>
+        <div className="grid grid-cols-2 gap-2.5 text-[11px] text-slate-600">
+          <div className="flex items-start gap-2 p-2 bg-slate-50/80 rounded-xl">
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0 mt-0.5" />
+            <span className="font-medium leading-tight">DigiLocker Verified ID & Aadhaar</span>
           </div>
-          <div className="flex items-start gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-            <span>Upfront Fixed Diagnostic Quotes</span>
+          <div className="flex items-start gap-2 p-2 bg-slate-50/80 rounded-xl">
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0 mt-0.5" />
+            <span className="font-medium leading-tight">Upfront Fixed Diagnostic Quotes</span>
           </div>
-          <div className="flex items-start gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-            <span>Dedicated Bengaluru Dispute Desk</span>
+          <div className="flex items-start gap-2 p-2 bg-slate-50/80 rounded-xl">
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0 mt-0.5" />
+            <span className="font-medium leading-tight">30-Day Service Re-work Warranty</span>
           </div>
-          <div className="flex items-start gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-            <span>Escrow Payment Protection</span>
+          <div className="flex items-start gap-2 p-2 bg-slate-50/80 rounded-xl">
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0 mt-0.5" />
+            <span className="font-medium leading-tight">Escrow Payment Protection</span>
           </div>
         </div>
       </div>
     </div>
   );
 };
-

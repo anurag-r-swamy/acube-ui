@@ -8,38 +8,43 @@ export default {
     extend: {
       colors: {
         brand: {
-          dark: '#183D35',
-          darker: '#112C26',
-          light: '#215248',
-          accent: '#E9A23B',
-          'accent-hover': '#D48E28',
-          'accent-light': '#FDF6EC',
-          bg: '#F7F8F5',
+          dark: '#0A192F', // Deep Midnight Blue
+          darker: '#050C1A',
+          light: '#172554', // Rich Navy Slate
+          accent: '#06B6D4', // Vibrant Cyan / Electric Teal
+          'accent-hover': '#0891B2', // Deep Cyan
+          'accent-light': '#ECFEFF', // Ultra-clean Cyan wash
+          cyan: '#06B6D4',
+          'cyan-dark': '#0891B2',
+          'cyan-light': '#ECFEFF',
+          'cyan-glow': 'rgba(6, 182, 212, 0.25)',
+          bg: '#F8FAFC', // Ultra-clean Crisp Off-White Slate
           card: '#FFFFFF',
-          charcoal: '#202724',
-          muted: '#667085',
-          border: '#E4E7EC',
-          subtle: '#EEF0EC',
+          charcoal: '#0F172A', // Slate 900
+          muted: '#64748B', // Slate 500
+          border: '#E2E8F0', // Slate 200
+          subtle: '#F1F5F9', // Slate 100
         },
         semantic: {
-          success: '#15803D',
-          'success-bg': '#F0FDF4',
+          success: '#059669',
+          'success-bg': '#ECFDF5',
           warning: '#D97706',
           'warning-bg': '#FFFBEB',
-          error: '#DC2626',
-          'error-bg': '#FEF2F2',
-          info: '#2563EB',
-          'info-bg': '#EFF6FF',
+          error: '#E11D48',
+          'error-bg': '#FFF1F2',
+          info: '#0284C7',
+          'info-bg': '#F0F9FF',
         }
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        'soft': '0 2px 10px rgba(24, 61, 53, 0.06)',
-        'medium': '0 8px 24px rgba(24, 61, 53, 0.08)',
-        'lifted': '0 16px 36px rgba(24, 61, 53, 0.12)',
-        'sheet': '0 -4px 20px rgba(0, 0, 0, 0.12)',
+        'soft': '0 2px 10px rgba(10, 25, 47, 0.04)',
+        'medium': '0 8px 24px rgba(10, 25, 47, 0.07)',
+        'lifted': '0 16px 36px rgba(10, 25, 47, 0.10)',
+        'glow': '0 0 20px rgba(6, 182, 212, 0.20)',
+        'sheet': '0 -4px 20px rgba(10, 25, 47, 0.08)',
       }
     },
   },

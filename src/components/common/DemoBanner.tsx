@@ -36,23 +36,23 @@ export const DemoBanner: React.FC = () => {
   const isWorkerMode = currentUser.activeMode === 'WORKER';
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-dark text-white border-b border-brand-light shadow-md">
+    <header className="sticky top-0 z-50 bg-[#0A192F] text-white border-b border-cyan-950/80 shadow-md">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
         {/* Left: Parent Branding & Configurable App Name */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 bg-black/30 px-2 py-1 rounded border border-white/10">
-            <span className="font-semibold text-brand-accent tracking-wide uppercase text-[10px]">
+          <div className="flex items-center gap-1.5 bg-cyan-950/40 px-2.5 py-1 rounded-lg border border-cyan-500/20">
+            <span className="font-extrabold text-cyan-400 tracking-wider uppercase text-[10px]">
               {APP_CONFIG.parentCompany}
             </span>
-            <span className="text-white/40">|</span>
-            <span className="text-white/90 font-medium">
+            <span className="text-white/30">|</span>
+            <span className="text-white/95 font-semibold">
               [{APP_CONFIG.appDisplayNamePlaceholder}]
             </span>
           </div>
 
-          <span className="hidden md:inline-flex items-center gap-1 text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full text-[11px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Simulated Demo Prototype
+          <span className="hidden md:inline-flex items-center gap-1 text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-2 py-0.5 rounded-full text-[11px]">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            Prototype Simulation
           </span>
         </div>
 
@@ -102,7 +102,7 @@ export const DemoBanner: React.FC = () => {
               setAuthModalMode('SIGN_UP');
               setIsAuthModalOpen(true);
             }}
-            className="flex items-center gap-1 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-extrabold px-2.5 py-1 rounded shadow-xs transition-colors"
+            className="flex items-center gap-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-2.5 py-1 rounded shadow-xs transition-colors"
             title="Open Customer Registration & Sign-In Simulation"
           >
             <span>Customer Sign In</span>
@@ -111,10 +111,10 @@ export const DemoBanner: React.FC = () => {
           {/* Dedicated Worker & Partner Registration Wizard Trigger */}
           <button
             onClick={() => setIsWorkerRegModalOpen(true)}
-            className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1 rounded shadow-xs transition-colors"
+            className="flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold px-2.5 py-1 rounded shadow-xs transition-colors"
             title="Open 5-Step Worker & Service Partner Registration Wizard"
           >
-            <Briefcase className="w-3.5 h-3.5 text-brand-accent" />
+            <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
             <span>Worker Reg</span>
           </button>
 
@@ -131,10 +131,10 @@ export const DemoBanner: React.FC = () => {
           {isDualRole && (
             <button
               onClick={() => switchUserMode(isWorkerMode ? 'CUSTOMER' : 'WORKER')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded font-medium transition-all ${
+              className={`flex items-center gap-1 px-2.5 py-1 rounded font-bold transition-all ${
                 isWorkerMode
-                  ? 'bg-amber-500 hover:bg-amber-600 text-brand-charcoal font-semibold shadow-sm'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
+                  ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-sm'
+                  : 'bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/40 shadow-sm'
               }`}
               title="Toggle between Customer and Worker view"
             >

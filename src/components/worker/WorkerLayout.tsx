@@ -113,7 +113,7 @@ export const WorkerLayout: React.FC = () => {
       </main>
 
       {/* Material 3 Styled Android Worker Bottom Navigation Bar */}
-      <nav className="shrink-0 bg-white/95 backdrop-blur-md border-t border-gray-200 z-40 select-none">
+      <nav className="shrink-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 select-none shadow-sm">
         <div className="grid grid-cols-5 py-1 px-1">
           <button
             onClick={() => switchTab('DASHBOARD')}
@@ -122,15 +122,15 @@ export const WorkerLayout: React.FC = () => {
             <div
               className={`px-3 py-1 rounded-full transition-all duration-200 flex items-center justify-center ${
                 activeTab === 'DASHBOARD'
-                  ? 'bg-brand-dark text-brand-accent shadow-xs scale-105'
-                  : 'text-gray-500 hover:text-gray-900'
+                  ? 'bg-[#0A192F] text-cyan-400 shadow-xs scale-105'
+                  : 'text-slate-500 hover:text-slate-900'
               }`}
             >
-              <Zap className="w-5 h-5 text-brand-accent" />
+              <Zap className="w-5 h-5 text-cyan-400" />
             </div>
             <span
               className={`text-[10px] tracking-tight ${
-                activeTab === 'DASHBOARD' ? 'font-extrabold text-brand-dark' : 'font-medium text-gray-500'
+                activeTab === 'DASHBOARD' ? 'font-extrabold text-[#0A192F]' : 'font-medium text-slate-500'
               }`}
             >
               Dashboard
@@ -145,21 +145,21 @@ export const WorkerLayout: React.FC = () => {
               <div
                 className={`px-3 py-1 rounded-full transition-all duration-200 flex items-center justify-center ${
                   activeTab === 'JOBS'
-                    ? 'bg-brand-dark text-brand-accent shadow-xs scale-105'
-                    : 'text-gray-500 hover:text-gray-900'
+                    ? 'bg-[#0A192F] text-cyan-400 shadow-xs scale-105'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <Briefcase className="w-5 h-5" />
               </div>
               {myAssignedJobsCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-accent text-brand-charcoal text-[9px] font-black rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 text-slate-950 text-[9px] font-black rounded-full flex items-center justify-center shadow-xs">
                   {myAssignedJobsCount}
                 </span>
               )}
             </div>
             <span
               className={`text-[10px] tracking-tight ${
-                activeTab === 'JOBS' ? 'font-extrabold text-brand-dark' : 'font-medium text-gray-500'
+                activeTab === 'JOBS' ? 'font-extrabold text-[#0A192F]' : 'font-medium text-slate-500'
               }`}
             >
               My Jobs
@@ -173,15 +173,15 @@ export const WorkerLayout: React.FC = () => {
             <div
               className={`px-3 py-1 rounded-full transition-all duration-200 flex items-center justify-center ${
                 activeTab === 'EARNINGS'
-                  ? 'bg-brand-dark text-brand-accent shadow-xs scale-105'
-                  : 'text-gray-500 hover:text-gray-900'
+                  ? 'bg-[#0A192F] text-cyan-400 shadow-xs scale-105'
+                  : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               <DollarSign className="w-5 h-5" />
             </div>
             <span
               className={`text-[10px] tracking-tight ${
-                activeTab === 'EARNINGS' ? 'font-extrabold text-brand-dark' : 'font-medium text-gray-500'
+                activeTab === 'EARNINGS' ? 'font-extrabold text-[#0A192F]' : 'font-medium text-slate-500'
               }`}
             >
               Earnings
@@ -196,21 +196,21 @@ export const WorkerLayout: React.FC = () => {
               <div
                 className={`px-3 py-1 rounded-full transition-all duration-200 flex items-center justify-center ${
                   activeTab === 'NOTIFICATIONS'
-                    ? 'bg-brand-dark text-brand-accent shadow-xs scale-105'
-                    : 'text-gray-500 hover:text-gray-900'
+                    ? 'bg-[#0A192F] text-cyan-400 shadow-xs scale-105'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 <Bell className="w-5 h-5" />
               </div>
               {unreadNotifsCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white text-[9px] font-black rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[9px] font-black rounded-full flex items-center justify-center shadow-xs">
                   {unreadNotifsCount}
                 </span>
               )}
             </div>
             <span
               className={`text-[10px] tracking-tight ${
-                activeTab === 'NOTIFICATIONS' ? 'font-extrabold text-brand-dark' : 'font-medium text-gray-500'
+                activeTab === 'NOTIFICATIONS' ? 'font-extrabold text-[#0A192F]' : 'font-medium text-slate-500'
               }`}
             >
               Alerts
@@ -224,15 +224,15 @@ export const WorkerLayout: React.FC = () => {
             <div
               className={`px-3 py-1 rounded-full transition-all duration-200 flex items-center justify-center ${
                 activeTab === 'PROFILE'
-                  ? 'bg-brand-dark text-brand-accent shadow-xs scale-105'
-                  : 'text-gray-500 hover:text-gray-900'
+                  ? 'bg-[#0A192F] text-cyan-400 shadow-xs scale-105'
+                  : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               <User className="w-5 h-5" />
             </div>
             <span
               className={`text-[10px] tracking-tight ${
-                activeTab === 'PROFILE' ? 'font-extrabold text-brand-dark' : 'font-medium text-gray-500'
+                activeTab === 'PROFILE' ? 'font-extrabold text-[#0A192F]' : 'font-medium text-slate-500'
               }`}
             >
               Profile

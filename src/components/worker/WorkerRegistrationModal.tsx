@@ -168,13 +168,13 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
       <div className="w-full max-w-lg bg-white rounded-t-3xl sm:rounded-2xl max-h-[92vh] flex flex-col shadow-lifted animate-in slide-in-from-bottom-4 text-xs">
         {/* Header */}
-        <div className="bg-brand-dark text-white p-4 rounded-t-3xl sm:rounded-t-2xl flex items-center justify-between">
+        <div className="bg-[#0A192F] text-white p-4 rounded-t-3xl sm:rounded-t-2xl flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-brand-light flex items-center justify-center text-brand-accent">
+            <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-cyan-400">
               <Briefcase className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-bold text-brand-accent uppercase tracking-wider block">
+              <span className="text-[10px] font-extrabold text-cyan-400 uppercase tracking-wider block">
                 {APP_CONFIG.parentCompany} Partner Network
               </span>
               <h2 className="text-sm font-bold text-white">
@@ -197,7 +197,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
 
         {/* Step Progress Bar */}
         {step !== 'SUCCESS' && (
-          <div className="grid grid-cols-5 gap-1 p-2 bg-brand-bg border-b border-gray-100">
+          <div className="grid grid-cols-5 gap-1 p-2 bg-slate-50 border-b border-slate-200">
             {['Personal', 'Skills', 'Rates', 'Docs', 'Payout'].map((label, idx) => {
               const stepIndex =
                 step === 'PERSONAL'
@@ -214,12 +214,12 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                 <div key={label} className="text-center">
                   <div
                     className={`h-1.5 rounded-full mb-1 transition-all ${
-                      isPast ? 'bg-brand-accent' : 'bg-gray-200'
+                      isPast ? 'bg-cyan-500' : 'bg-slate-200'
                     }`}
                   ></div>
                   <span
                     className={`text-[9px] font-bold uppercase ${
-                      isPast ? 'text-brand-dark' : 'text-gray-400'
+                      isPast ? 'text-[#0A192F]' : 'text-slate-400'
                     }`}
                   >
                     {label}
@@ -643,10 +643,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('TRADE_SKILLS')}
-                className="flex-1 py-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Trade & Skills</span>
-                <ChevronRight className="w-4 h-4 text-brand-accent" />
+                <ChevronRight className="w-4 h-4 text-cyan-400" />
               </button>
             )}
 
@@ -654,10 +654,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('RATES_ZONES')}
-                className="flex-1 py-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Rates & Bengaluru Localities</span>
-                <ChevronRight className="w-4 h-4 text-brand-accent" />
+                <ChevronRight className="w-4 h-4 text-cyan-400" />
               </button>
             )}
 
@@ -665,10 +665,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('DOCUMENTS')}
-                className="flex-1 py-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Document Upload</span>
-                <ChevronRight className="w-4 h-4 text-brand-accent" />
+                <ChevronRight className="w-4 h-4 text-cyan-400" />
               </button>
             )}
 
@@ -676,10 +676,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('BANK')}
-                className="flex-1 py-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Settlement Payout Details</span>
-                <ChevronRight className="w-4 h-4 text-brand-accent" />
+                <ChevronRight className="w-4 h-4 text-cyan-400" />
               </button>
             )}
 
@@ -687,7 +687,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={handleSubmitRegistration}
-                className="flex-1 py-3 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-extrabold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 py-3 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors active:scale-95"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Submit Partner Registration</span>

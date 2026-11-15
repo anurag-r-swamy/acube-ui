@@ -187,11 +187,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-xs uppercase tracking-wider text-brand-accent bg-brand-dark px-2 py-0.5 rounded">
+            <span className="font-extrabold text-xs uppercase tracking-wider text-cyan-400 bg-[#0A192F] px-2 py-0.5 rounded">
               {APP_CONFIG.parentCompany}
             </span>
-            <span className="text-gray-400 text-xs">|</span>
-            <h2 className="text-xs font-bold text-gray-900">
+            <span className="text-slate-400 text-xs">|</span>
+            <h2 className="text-xs font-bold text-slate-900">
               {mode === 'WELCOME' && 'Welcome Walkthrough'}
               {mode === 'SIGN_UP' && 'Create Customer Account'}
               {mode === 'OTP' && 'Verify Phone Number'}
@@ -202,7 +202,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+            className="p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100"
           >
             <X className="w-5 h-5" />
           </button>
@@ -213,17 +213,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* ================= MODE: WELCOME ONBOARDING ================= */}
           {mode === 'WELCOME' && (
             <div className="space-y-5 text-center py-2">
-              <div className="p-6 bg-gradient-to-br from-brand-dark to-brand-light text-white rounded-3xl shadow-medium relative overflow-hidden space-y-3">
+              <div className="p-6 bg-gradient-to-br from-[#0A192F] via-[#0F172A] to-slate-900 text-white rounded-3xl shadow-medium relative overflow-hidden space-y-3 border border-slate-800">
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto border border-white/20">
                   {welcomeSlides[welcomeSlide].icon}
                 </div>
-                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-brand-accent text-brand-charcoal px-2.5 py-0.5 rounded-full">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-cyan-500 text-slate-950 px-2.5 py-0.5 rounded-full">
                   {welcomeSlides[welcomeSlide].badge}
                 </span>
                 <h3 className="font-extrabold text-base leading-snug">
                   {welcomeSlides[welcomeSlide].title}
                 </h3>
-                <p className="text-white/80 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-[11px] leading-relaxed">
                   {welcomeSlides[welcomeSlide].description}
                 </p>
                 {/* Dots indicator */}
@@ -233,7 +233,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       key={idx}
                       onClick={() => setWelcomeSlide(idx)}
                       className={`h-1.5 rounded-full transition-all ${
-                        welcomeSlide === idx ? 'w-6 bg-brand-accent' : 'w-1.5 bg-white/30'
+                        welcomeSlide === idx ? 'w-6 bg-cyan-400' : 'w-1.5 bg-white/30'
                       }`}
                     />
                   ))}
@@ -243,10 +243,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="space-y-2 pt-2">
                 <button
                   onClick={() => setMode('SIGN_UP')}
-                  className="w-full py-3 bg-brand-dark hover:bg-brand-darker text-white font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-2"
                 >
                   <span>Register New Account</span>
-                  <ArrowRight className="w-4 h-4 text-brand-accent" />
+                  <ArrowRight className="w-4 h-4 text-cyan-400" />
                 </button>
 
                 <button

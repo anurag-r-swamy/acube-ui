@@ -57,22 +57,22 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
 
       {/* Prominent "Become a Worker" Banner (if not already worker) */}
       {!isAlreadyWorker && (
-        <div className="p-4 bg-gradient-to-r from-brand-dark to-brand-light text-white rounded-2xl shadow-lifted relative overflow-hidden">
+        <div className="p-4 bg-gradient-to-r from-[#0A192F] via-[#0E2038] to-[#122A48] text-white rounded-3xl shadow-lifted relative overflow-hidden border border-slate-800">
           <div className="relative z-10 space-y-2">
-            <span className="inline-flex items-center gap-1 bg-brand-accent text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1 bg-cyan-500 text-slate-950 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider">
               <Sparkles className="w-3 h-3" />
               Partner Opportunity
             </span>
             <h3 className="font-extrabold text-sm leading-snug">
               Earn with {APP_CONFIG.parentCompany} in Bengaluru
             </h3>
-            <p className="text-white/80 text-[11px] leading-relaxed">
+            <p className="text-slate-300 text-[11px] leading-relaxed">
               Are you an electrician, plumber, cleaner, or technician? Register your skills, pass our digital verification, and start receiving job requests.
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => setIsWorkerRegModalOpen(true)}
-                className="py-2.5 px-4 bg-brand-accent hover:bg-brand-accent-hover text-brand-charcoal font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
+                className="py-2.5 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
               >
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>Partner Registration Wizard</span>
