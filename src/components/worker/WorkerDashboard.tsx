@@ -77,9 +77,8 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
               className="w-12 h-12 rounded-xl object-cover border border-gray-200"
             />
             <span
-              className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white ${
-                worker.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
-              }`}
+              className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white ${worker.isOnline ? 'bg-emerald-500' : 'bg-gray-400'
+                }`}
             ></span>
           </div>
 
@@ -97,11 +96,10 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
         {/* Online / Offline Toggle */}
         <button
           onClick={() => toggleWorkerOnline(worker.id)}
-          className={`flex items-center gap-1.5 py-2 px-3.5 rounded-xl font-bold text-xs transition-all shadow-xs ${
-            worker.isOnline
-              ? 'bg-emerald-600 text-white'
-              : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
-          }`}
+          className={`flex items-center gap-1.5 py-2 px-3.5 rounded-xl font-bold text-xs transition-all shadow-xs ${worker.isOnline
+            ? 'bg-emerald-600 text-white'
+            : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+            }`}
         >
           <Power className="w-3.5 h-3.5" />
           <span>{worker.isOnline ? 'Online' : 'Offline'}</span>

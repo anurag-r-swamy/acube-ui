@@ -35,6 +35,7 @@ export const CustomerLayout: React.FC = () => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [selectedWorkerForProfile, setSelectedWorkerForProfile] = useState<WorkerProfile | null>(null);
   const [bookingFlowWorker, setBookingFlowWorker] = useState<WorkerProfile | null>(null);
+  const [initialBookingService, setInitialBookingService] = useState<{ name: string; price: number; categoryName?: string } | null>(null);
   const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState('');
   const [isWorkerOnboardingOpen, setIsWorkerOnboardingOpen] = useState(false);
@@ -50,8 +51,12 @@ export const CustomerLayout: React.FC = () => {
   const myNotifications = notifications.filter((n) => n.userId === currentUser.id);
   const unreadNotifsCount = myNotifications.filter((n) => !n.isRead).length;
 
-  const handleOpenBookingFlow = (worker?: WorkerProfile) => {
+  const handleOpenBookingFlow = (
+    worker?: WorkerProfile,
+    serviceDetails?: { name: string; price: number; categoryName?: string }
+  ) => {
     setBookingFlowWorker(worker || null);
+    setInitialBookingService(serviceDetails || null);
     setIsBookingFlowOpen(true);
   };
 
@@ -119,6 +124,7 @@ export const CustomerLayout: React.FC = () => {
               setSearchInitialQuery(q || '');
               setActiveTab('SEARCH');
             }}
+            onNavigateToNotifications={() => setActiveTab('NOTIFICATIONS')}
           />
         )}
 
@@ -292,6 +298,7 @@ export const CustomerLayout: React.FC = () => {
         isOpen={isBookingFlowOpen}
         onClose={() => setIsBookingFlowOpen(false)}
         preselectedWorker={bookingFlowWorker}
+        initialServiceDetails={initialBookingService}
         onBookingSuccess={(booking) => {
           setActiveTab('BOOKINGS');
         }}

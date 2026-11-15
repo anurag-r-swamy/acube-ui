@@ -203,24 +203,22 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                 step === 'PERSONAL'
                   ? 0
                   : step === 'TRADE_SKILLS'
-                  ? 1
-                  : step === 'RATES_ZONES'
-                  ? 2
-                  : step === 'DOCUMENTS'
-                  ? 3
-                  : 4;
+                    ? 1
+                    : step === 'RATES_ZONES'
+                      ? 2
+                      : step === 'DOCUMENTS'
+                        ? 3
+                        : 4;
               const isPast = idx <= stepIndex;
               return (
                 <div key={label} className="text-center">
                   <div
-                    className={`h-1.5 rounded-full mb-1 transition-all ${
-                      isPast ? 'bg-blue-600' : 'bg-slate-200'
-                    }`}
+                    className={`h-1.5 rounded-full mb-1 transition-all ${isPast ? 'bg-blue-600' : 'bg-slate-200'
+                      }`}
                   ></div>
                   <span
-                    className={`text-[9px] font-bold uppercase ${
-                      isPast ? 'text-slate-900' : 'text-slate-400'
-                    }`}
+                    className={`text-[9px] font-bold uppercase ${isPast ? 'text-slate-900' : 'text-slate-400'
+                      }`}
                   >
                     {label}
                   </span>
@@ -434,11 +432,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                         key={zone}
                         type="button"
                         onClick={() => toggleZone(zone)}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-                          isSelected
-                            ? 'bg-brand-dark text-white shadow-xs'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${isSelected
+                          ? 'bg-brand-dark text-white shadow-xs'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
                       >
                         {isSelected && '✓ '}
                         {zone}
@@ -461,11 +458,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                         key={lang}
                         type="button"
                         onClick={() => toggleLang(lang)}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-                          isSelected
-                            ? 'bg-brand-accent text-white shadow-xs'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        }`}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${isSelected
+                          ? 'bg-brand-accent text-white shadow-xs'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
                       >
                         {isSelected && '✓ '}
                         {lang}

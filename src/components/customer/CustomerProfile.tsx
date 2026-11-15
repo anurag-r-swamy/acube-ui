@@ -101,9 +101,8 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key as any)}
-            className={`py-2 text-center font-bold text-[11px] rounded-lg transition-all ${
-              activeTab === tab.key ? 'bg-white text-brand-dark shadow-xs' : 'text-gray-500'
-            }`}
+            className={`py-2 text-center font-bold text-[11px] rounded-lg transition-all ${activeTab === tab.key ? 'bg-white text-brand-dark shadow-xs' : 'text-gray-500'
+              }`}
           >
             {tab.label}
           </button>

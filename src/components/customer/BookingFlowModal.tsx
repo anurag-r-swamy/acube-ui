@@ -23,6 +23,7 @@ interface BookingFlowModalProps {
   onClose: () => void;
   preselectedWorker?: WorkerProfile | null;
   preselectedCategory?: ServiceCategory | null;
+  initialServiceDetails?: { name: string; price: number; categoryName?: string } | null;
   onBookingSuccess: (booking: Booking) => void;
 }
 
@@ -33,6 +34,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
   onClose,
   preselectedWorker,
   preselectedCategory,
+  initialServiceDetails,
   onBookingSuccess,
 }) => {
   const {
@@ -43,12 +45,14 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
     showToast,
   } = useApp();
 
-  const [step, setStep] = useState<Step>('DETAILS');
+  const [step, setStep] = useState<Step>(initialServiceDetails ? 'SCHEDULE_ADDRESS' : 'DETAILS');
   const [selectedCatId, setSelectedCatId] = useState<string>(
     preselectedCategory?.id || preselectedWorker?.primaryCategory || categories[0]?.id || ''
   );
   const [selectedSubId, setSelectedSubId] = useState<string>('');
-  const [serviceDescription, setServiceDescription] = useState<string>('');
+  const [serviceDescription, setServiceDescription] = useState<string>(
+    initialServiceDetails?.name ? `Requested: ${initialServiceDetails.name}` : ''
+  );
   const [selectedDate, setSelectedDate] = useState<string>('2026-03-05');
   const [selectedSlot, setSelectedSlot] = useState<string>('10:00 AM - 12:00 PM');
   const [selectedAddressIndex, setSelectedAddressIndex] = useState<number>(0);
@@ -66,7 +70,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
   const subcategories = currentCategory?.subcategories || [];
 
   // Calculate pricing
-  const baseFare = preselectedWorker ? preselectedWorker.baseFare : 399;
+  const baseFare = initialServiceDetails?.price || (preselectedWorker ? preselectedWorker.baseFare : 399);
   const platformFee = 49;
   const taxes = Math.round(baseFare * 0.08);
   const totalAmount = baseFare + platformFee + taxes;
@@ -97,6 +101,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
           categoryName: currentCategory.name,
           subcategoryId: selectedSubId,
           serviceName:
+            initialServiceDetails?.name ||
             subcategories.find((s) => s.id === selectedSubId)?.name ||
             `${currentCategory.name} General Service`,
           serviceArea: selectedLocation,
