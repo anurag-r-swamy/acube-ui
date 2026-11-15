@@ -177,7 +177,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       title: 'Live Tracking & Instant Messaging',
       description: 'Track your assigned technician in real time, message inside the app with photo uploads, and enjoy masked phone privacy.',
       badge: 'Private & Secure',
-      icon: <Clock className="w-8 h-8 text-blue-400" />,
+      icon: <Clock className="w-8 h-8 text-[#82C3A3]" />,
     },
   ];
 
@@ -213,17 +213,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* ================= MODE: WELCOME ONBOARDING ================= */}
           {mode === 'WELCOME' && (
             <div className="space-y-5 text-center py-2">
-              <div className="p-6 bg-slate-900 text-white rounded-2xl shadow-medium relative overflow-hidden space-y-3 border border-slate-800">
+              <div className="p-6 bg-[#0E241A] text-white rounded-2xl shadow-medium relative overflow-hidden space-y-3 border border-[#1E4D37]">
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto border border-white/20">
                   {welcomeSlides[welcomeSlide].icon}
                 </div>
-                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-blue-600 text-white px-2.5 py-0.5 rounded-full">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-[#1B4D3E] text-white px-2.5 py-0.5 rounded-full border border-[#2D6A4F]">
                   {welcomeSlides[welcomeSlide].badge}
                 </span>
                 <h3 className="font-extrabold text-base leading-snug">
                   {welcomeSlides[welcomeSlide].title}
                 </h3>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
+                <p className="text-emerald-100/70 text-[11px] leading-relaxed">
                   {welcomeSlides[welcomeSlide].description}
                 </p>
                 {/* Dots indicator */}
@@ -233,7 +233,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       key={idx}
                       onClick={() => setWelcomeSlide(idx)}
                       className={`h-1.5 rounded-full transition-all ${
-                        welcomeSlide === idx ? 'w-6 bg-blue-500' : 'w-1.5 bg-white/30'
+                        welcomeSlide === idx ? 'w-6 bg-[#2D6A4F]' : 'w-1.5 bg-white/30'
                       }`}
                     />
                   ))}
@@ -243,7 +243,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="space-y-2 pt-2">
                 <button
                   onClick={() => setMode('SIGN_UP')}
-                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-sm flex items-center justify-center gap-2 transition-colors"
+                  className="w-full py-3 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-sm flex items-center justify-center gap-2 transition-colors"
                 >
                   <span>Register New Account</span>
                   <ArrowRight className="w-4 h-4 text-white" />

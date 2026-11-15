@@ -56,7 +56,7 @@ export const AdminReports: React.FC = () => {
             { name: 'Electrical & Appliances', pct: 36, color: 'bg-brand-dark' },
             { name: 'Plumbing & Sanitary', pct: 28, color: 'bg-emerald-700' },
             { name: 'Cleaning & Pest Control', pct: 18, color: 'bg-brand-accent' },
-            { name: 'AC & Refrigeration', pct: 12, color: 'bg-blue-600' },
+            { name: 'AC & Refrigeration', pct: 12, color: 'bg-teal-700' },
             { name: 'Carpentry & Furniture', pct: 6, color: 'bg-purple-600' },
           ].map((item) => (
             <div key={item.name} className="space-y-1">

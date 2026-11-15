@@ -122,12 +122,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigateTo }) 
         <div className="p-5 bg-white rounded-2xl border border-gray-200 shadow-soft space-y-2">
           <div className="flex items-center justify-between text-gray-500">
             <span className="font-bold text-[11px] uppercase tracking-wider">Active Bookings</span>
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#EBF5EE] text-[#1B4D3E] flex items-center justify-center">
               <Calendar className="w-4 h-4" />
             </div>
           </div>
           <p className="text-2xl font-extrabold text-gray-900">{inProgressBookings.length}</p>
-          <p className="text-[11px] text-blue-600 font-medium">
+          <p className="text-[11px] text-[#1B4D3E] font-medium">
             Total bookings on platform: {bookings.length}
           </p>
         </div>
@@ -264,7 +264,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigateTo }) 
                 className="w-full p-2.5 bg-brand-bg hover:bg-gray-100 rounded-xl text-left flex items-center justify-between"
               >
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-blue-600" />
+                  <Calendar className="w-4 h-4 text-[#1B4D3E]" />
                   <span className="font-semibold text-gray-800">Manage Categories</span>
                 </div>
                 <span className="font-bold text-gray-500">6 Active</span>

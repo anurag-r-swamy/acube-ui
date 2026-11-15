@@ -261,8 +261,8 @@ export const WorkerOnboardingModal: React.FC<WorkerOnboardingModalProps> = ({
 
           {step === 'DOCUMENTS' && (
             <div className="space-y-3.5">
-              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-900 text-[11px] leading-relaxed">
-                <ShieldCheck className="w-4 h-4 text-blue-600 inline mr-1" />
+              <div className="p-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D] text-[11px] leading-relaxed">
+                <ShieldCheck className="w-4 h-4 text-[#1B4D3E] inline mr-1" />
                 <strong>Prototype Verification Notice:</strong> Document uploads are simulated in prototype state. Do not upload sensitive identity documents. Safe fictional demo files are provided.
               </div>
 

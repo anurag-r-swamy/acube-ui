@@ -204,12 +204,12 @@ export const CustomerLayout: React.FC = () => {
       </main>
 
       {/* Clean Professional Bottom Navigation Bar */}
-      <nav className="shrink-0 bg-white border-t border-slate-200 z-40 select-none shadow-soft">
+      <nav className="shrink-0 bg-[#FBFBFA]/95 backdrop-blur-md border-t border-[#E3E6DF] z-40 select-none shadow-soft">
         <div className="grid grid-cols-5 py-2 px-1">
           <button
             onClick={() => switchTab('HOME')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'HOME' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'HOME' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <Home className="w-5 h-5" />
@@ -221,7 +221,7 @@ export const CustomerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('SEARCH')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'SEARCH' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'SEARCH' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <Search className="w-5 h-5" />
@@ -233,13 +233,13 @@ export const CustomerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('BOOKINGS')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'BOOKINGS' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'BOOKINGS' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <div className="relative">
               <Calendar className="w-5 h-5" />
               {activeBookingsCount > 0 && (
-                <span className="absolute -top-1 -right-1.5 w-4 h-4 bg-blue-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1.5 w-4 h-4 bg-forest-800 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                   {activeBookingsCount}
                 </span>
               )}
@@ -252,7 +252,7 @@ export const CustomerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('NOTIFICATIONS')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'NOTIFICATIONS' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'NOTIFICATIONS' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <div className="relative">
@@ -271,7 +271,7 @@ export const CustomerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('PROFILE')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'PROFILE' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'PROFILE' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <User className="w-5 h-5" />

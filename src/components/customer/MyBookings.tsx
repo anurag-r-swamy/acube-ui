@@ -71,7 +71,7 @@ export const MyBookings: React.FC = () => {
         );
       case 'WORKER_ARRIVED':
         return (
-          <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#EBF5EE] text-[#1B4D3E] border border-[#C8DFD2] px-2 py-0.5 rounded-full">
             Worker Arrived
           </span>
         );

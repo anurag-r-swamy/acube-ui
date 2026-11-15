@@ -448,12 +448,12 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
           {step === 'PAYMENT' && (
             <div className="space-y-4">
               {/* Demo Payment Notice */}
-              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-900">
-                <div className="flex items-center gap-1.5 font-bold mb-0.5">
-                  <ShieldCheck className="w-4 h-4 text-blue-600" />
+              <div className="p-3 bg-[#EBF5EE] border border-[#C8DFD2] rounded-xl text-[#11291D]">
+                <div className="flex items-center gap-1.5 font-bold mb-0.5 text-[#1B4D3E]">
+                  <ShieldCheck className="w-4 h-4 text-[#1B4D3E]" />
                   <span>Prototype Sandbox Checkout</span>
                 </div>
-                <p className="text-[11px]">
+                <p className="text-[11px] text-slate-700">
                   <strong>Demo payment — no money is charged.</strong> Do not enter real banking credentials. All payment methods below are simulated for prototype evaluation.
                 </p>
               </div>
@@ -634,7 +634,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('SCHEDULE_ADDRESS')}
-                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
+                className="flex-1 py-3 px-5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
               >
                 Continue to Schedule & Address →
               </button>
@@ -644,7 +644,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('SUMMARY')}
-                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
+                className="flex-1 py-3 px-5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
               >
                 Review Booking Details →
               </button>
@@ -654,10 +654,10 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('PAYMENT')}
-                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
+                className="flex-1 py-3 px-5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
               >
                 <span>Proceed to Demo Payment</span>
-                <span className="bg-blue-800 text-white px-2 py-0.5 rounded text-[11px] font-bold">
+                <span className="bg-[#11291D] text-white px-2 py-0.5 rounded text-[11px] font-bold">
                   {APP_CONFIG.currencySymbol}{totalAmount}
                 </span>
               </button>
@@ -667,7 +667,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={handleCreateAndPay}
-                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
+                className="flex-1 py-3 px-5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Authorize Demo Payment ({APP_CONFIG.currencySymbol}{totalAmount})</span>

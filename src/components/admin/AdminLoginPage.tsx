@@ -35,7 +35,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
       role: 'SUPER_ADMIN',
       email: 'ayesha.sen@acubex-demo.internal',
       department: 'Executive Operations & Platform Admin',
-      badgeColor: 'bg-blue-600 text-white',
+      badgeColor: 'bg-[#1B4D3E] text-white border border-[#2D6A4F]',
       permissions: 'Full access to all 15 operational modules',
     },
     {
@@ -44,7 +44,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
       role: 'DISPUTES_VERIFICATION',
       email: 'vikram.rao@acubex-demo.internal',
       department: 'Trust & Safety / Quality Assurance',
-      badgeColor: 'bg-indigo-600 text-white',
+      badgeColor: 'bg-[#2D6A4F] text-white border border-[#3E8565]',
       permissions: 'Worker identity verification & customer dispute resolution',
     },
     {
@@ -89,20 +89,20 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
   const selectedStaff = staffProfiles.find((s) => s.id === selectedStaffId) || staffProfiles[0];
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center p-4 sm:p-6 font-sans">
+    <div className="min-h-screen bg-[#07130D] flex flex-col justify-center items-center p-4 sm:p-6 font-sans">
       <div className="w-full max-w-xl">
         {/* Brand Header */}
         <div className="text-center mb-6 space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-full mb-2">
-            <Shield className="w-4 h-4 text-blue-500" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0E241A] border border-[#1E4D37] rounded-full mb-2">
+            <Shield className="w-4 h-4 text-[#82C3A3]" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-100/80">
               {APP_CONFIG.parentCompany} Governance Network
             </span>
           </div>
           <h1 className="text-2xl font-black text-white tracking-tight">
             Administrator Web Console
           </h1>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-emerald-100/60">
             Dedicated desktop platform for platform governance, verification, and operations
           </p>
         </div>
@@ -116,16 +116,16 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
         </div>
 
         {/* Login Card */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-lifted overflow-hidden">
+        <div className="bg-[#0E241A] rounded-2xl border border-[#1E4D37] shadow-lifted overflow-hidden">
           {/* Card Top Strip */}
-          <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+          <div className="p-4 border-b border-[#1E4D37] flex items-center justify-between bg-[#0B1C14]/80">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-8 h-8 rounded-lg bg-[#1B4D3E]/30 border border-[#2D6A4F]/40 flex items-center justify-center text-[#82C3A3]">
                 <Lock className="w-4 h-4" />
               </div>
               <div>
                 <h2 className="text-xs font-bold text-white">Staff Credential Verification</h2>
-                <p className="text-[10px] text-slate-400">2-Factor Authentication Required</p>
+                <p className="text-[10px] text-emerald-100/60">2-Factor Authentication Required</p>
               </div>
             </div>
             <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
@@ -136,7 +136,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
           <form onSubmit={handleSubmit} className="p-5 space-y-4 text-xs">
             {/* Quick Demo Staff Profile Selector */}
             <div className="space-y-1.5">
-              <label className="text-[11px] font-bold text-slate-300 block">
+              <label className="text-[11px] font-bold text-emerald-100/90 block">
                 Select Authorized Staff Persona (Demo Quick-Fill)
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -147,8 +147,8 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
                     onClick={() => handleSelectStaff(staff.id)}
                     className={`p-2.5 rounded-xl border text-left transition-all ${
                       selectedStaffId === staff.id
-                        ? 'bg-blue-600/10 border-blue-500 text-white ring-1 ring-blue-500'
-                        : 'bg-slate-850 hover:bg-slate-800 border-slate-800 text-slate-300'
+                        ? 'bg-[#163829] border-[#2D6A4F] text-white ring-1 ring-[#2D6A4F]'
+                        : 'bg-[#0B1C14] hover:bg-[#122A1F] border-[#1E4D37] text-slate-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -157,7 +157,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
                         {staff.role.replace('_', ' ')}
                       </span>
                     </div>
-                    <p className="text-[10px] text-slate-400 truncate">{staff.department}</p>
+                    <p className="text-[10px] text-emerald-100/60 truncate">{staff.department}</p>
                   </button>
                 ))}
               </div>
@@ -165,26 +165,26 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
 
             {/* Email / Staff ID */}
             <div className="space-y-1">
-              <label className="text-[11px] font-bold text-slate-300 block">Staff Email</label>
+              <label className="text-[11px] font-bold text-emerald-100/90 block">Staff Email</label>
               <input
                 type="email"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 required
-                className="w-full py-2.5 px-3 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full py-2.5 px-3 bg-[#0B1C14] border border-[#1E4D37] text-white rounded-xl text-xs focus:outline-none focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] transition-colors"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1">
-              <label className="text-[11px] font-bold text-slate-300 block">Password</label>
+              <label className="text-[11px] font-bold text-emerald-100/90 block">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                   required
-                  className="w-full py-2.5 pl-3 pr-10 bg-slate-800 border border-slate-700 text-white rounded-xl text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full py-2.5 pl-3 pr-10 bg-[#0B1C14] border border-[#1E4D37] text-white rounded-xl text-xs focus:outline-none focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] transition-colors"
                 />
                 <button
                   type="button"
@@ -199,8 +199,8 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
             {/* 2FA Token Code */}
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label className="text-[11px] font-bold text-slate-300">2FA Security Token</label>
-                <span className="text-[10px] text-blue-400">Demo Code: 749102</span>
+                <label className="text-[11px] font-bold text-emerald-100/90">2FA Security Token</label>
+                <span className="text-[10px] text-[#82C3A3]">Demo Code: 749102</span>
               </div>
               <div className="relative">
                 <input
@@ -209,26 +209,26 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess }
                   onChange={(e) => setTwoFactorCode(e.target.value)}
                   maxLength={6}
                   required
-                  className="w-full py-2.5 pl-9 pr-3 bg-slate-800 border border-slate-700 text-white font-mono tracking-widest text-sm rounded-xl focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full py-2.5 pl-9 pr-3 bg-[#0B1C14] border border-[#1E4D37] text-white font-mono tracking-widest text-sm rounded-xl focus:outline-none focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] transition-colors"
                 />
-                <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <KeyRound className="w-4 h-4 text-emerald-200/50 absolute left-3 top-3" />
               </div>
             </div>
 
             {/* Role Permissions Preview */}
-            <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 space-y-1">
-              <div className="flex items-center gap-1.5 text-blue-400 text-[10px] font-bold uppercase tracking-wider">
+            <div className="p-3 bg-[#07130D]/80 rounded-xl border border-[#1E4D37] space-y-1">
+              <div className="flex items-center gap-1.5 text-[#82C3A3] text-[10px] font-bold uppercase tracking-wider">
                 <UserCheck className="w-3.5 h-3.5" />
                 <span>Granted Role Privileges:</span>
               </div>
-              <p className="text-[11px] text-slate-300">{selectedStaff.permissions}</p>
+              <p className="text-[11px] text-emerald-100/80">{selectedStaff.permissions}</p>
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs shadow-md transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 bg-[#1B4D3E] hover:bg-[#256653] text-white font-bold rounded-xl text-xs shadow-md transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isLoading ? (
                 <span>Authenticating Credentials...</span>

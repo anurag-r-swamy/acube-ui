@@ -86,7 +86,7 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
             <div className="flex items-center gap-1.5">
               <h2 className="text-sm font-bold text-slate-900">{worker.fullName}</h2>
               {worker.verificationStatus === 'APPROVED' && (
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600 fill-blue-50" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#1B4D3E] fill-forest-50" />
               )}
             </div>
             <p className="text-[11px] text-slate-500">{worker.primaryCategory}</p>
@@ -183,22 +183,22 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
 
       {/* ACTIVE JOB IN PROGRESS CARD (if exists) */}
       {activeJob && (
-        <div className="p-4 bg-slate-900 text-white rounded-2xl shadow-lifted space-y-3 border border-slate-800">
+        <div className="p-4 bg-[#0E241A] text-white rounded-2xl shadow-lifted space-y-3 border border-[#1E4D37]">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+            <span className="text-[10px] bg-[#1B4D3E] text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 border border-[#2D6A4F]">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
               Current Job ({activeJob.status.replace('_', ' ')})
             </span>
-            <span className="font-mono text-[10px] text-slate-400">{activeJob.referenceNumber}</span>
+            <span className="font-mono text-[10px] text-emerald-200/70">{activeJob.referenceNumber}</span>
           </div>
 
           <div>
             <h3 className="font-bold text-sm text-white">{activeJob.serviceName}</h3>
-            <p className="text-xs text-slate-300 mt-0.5 flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-blue-400" />
+            <p className="text-xs text-emerald-100/80 mt-0.5 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-[#82C3A3]" />
               <span>{activeJob.address?.street}, {activeJob.address?.area}</span>
             </p>
-            <p className="text-[11px] text-slate-400 mt-1">Customer: {activeJob.customerName} ({activeJob.customerPhone})</p>
+            <p className="text-[11px] text-emerald-100/60 mt-1">Customer: {activeJob.customerName} ({activeJob.customerPhone})</p>
           </div>
 
           {/* Quick Lifecycle Action Buttons */}
@@ -212,7 +212,7 @@ export const WorkerDashboard: React.FC<WorkerDashboardProps> = ({
                     'Worker arrived at customer premises in Bengaluru.'
                   )
                 }
-                className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs"
+                className="flex-1 py-2 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl text-xs shadow-xs"
               >
                 Mark Arrived at Location
               </button>

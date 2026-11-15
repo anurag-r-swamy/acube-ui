@@ -82,7 +82,7 @@ export const AdminSupport: React.FC = () => {
                 <td className="py-3.5 px-4">
                   <span
                     className={`font-bold text-[10px] px-2 py-0.5 rounded-full ${
-                      t.status === 'OPEN' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'
+                      t.status === 'OPEN' ? 'bg-[#EBF5EE] text-[#1B4D3E] border border-[#C8DFD2]' : 'bg-emerald-100 text-emerald-800'
                     }`}
                   >
                     {t.status}

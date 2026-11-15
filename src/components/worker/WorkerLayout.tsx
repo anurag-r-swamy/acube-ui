@@ -113,12 +113,12 @@ export const WorkerLayout: React.FC = () => {
       </main>
 
       {/* Clean Professional Worker Bottom Navigation Bar */}
-      <nav className="shrink-0 bg-white border-t border-slate-200 z-40 select-none shadow-soft">
+      <nav className="shrink-0 bg-[#FBFBFA]/95 backdrop-blur-md border-t border-[#E3E6DF] z-40 select-none shadow-soft">
         <div className="grid grid-cols-5 py-2 px-1">
           <button
             onClick={() => switchTab('DASHBOARD')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'DASHBOARD' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'DASHBOARD' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <Zap className="w-5 h-5" />
@@ -130,13 +130,13 @@ export const WorkerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('JOBS')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'JOBS' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'JOBS' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <div className="relative">
               <Briefcase className="w-5 h-5" />
               {myAssignedJobsCount > 0 && (
-                <span className="absolute -top-1 -right-1.5 w-4 h-4 bg-blue-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1.5 w-4 h-4 bg-forest-800 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                   {myAssignedJobsCount}
                 </span>
               )}
@@ -149,7 +149,7 @@ export const WorkerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('EARNINGS')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'EARNINGS' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'EARNINGS' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <DollarSign className="w-5 h-5" />
@@ -161,7 +161,7 @@ export const WorkerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('NOTIFICATIONS')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'NOTIFICATIONS' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'NOTIFICATIONS' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <div className="relative">
@@ -180,7 +180,7 @@ export const WorkerLayout: React.FC = () => {
           <button
             onClick={() => switchTab('PROFILE')}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
-              activeTab === 'PROFILE' ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+              activeTab === 'PROFILE' ? 'text-forest-800' : 'text-slate-400 hover:text-slate-600'
             }`}
           >
             <User className="w-5 h-5" />

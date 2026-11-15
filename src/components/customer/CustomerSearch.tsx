@@ -149,7 +149,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
               onClick={() => setSelectedCategory(c.name)}
               className={`px-3 py-1.5 rounded-xl border whitespace-nowrap text-xs font-semibold transition-colors ${
                 selectedCategory === c.name
-                  ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
+                  ? 'bg-[#1B4D3E] text-white border-[#1B4D3E] shadow-xs'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
               }`}
             >
@@ -211,14 +211,14 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                     alt={worker.fullName}
                     className="w-14 h-14 rounded-2xl object-cover border border-gray-200"
                   />
-                  <div className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-0.5 rounded-full ring-2 ring-white">
+                  <div className="absolute -bottom-1 -right-1 bg-[#1B4D3E] text-white p-0.5 rounded-full ring-2 ring-white">
                     <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 <div className="flex-1 cursor-pointer" onClick={() => onSelectWorker(worker)}>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-slate-900 text-sm hover:text-blue-600">
+                    <h3 className="font-bold text-slate-900 text-sm hover:text-[#1B4D3E]">
                       {worker.fullName}
                     </h3>
                     <span className="font-extrabold text-slate-900 text-xs">
@@ -240,7 +240,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                       {worker.completedJobsCount} jobs
                     </span>
                     <span className="text-slate-300">•</span>
-                    <span className="text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold text-[10px] border border-blue-100">
+                    <span className="text-[#1B4D3E] bg-[#EBF5EE] px-1.5 py-0.5 rounded font-semibold text-[10px] border border-[#C8DFD2]">
                       {worker.experienceYears}+ yrs exp
                     </span>
                   </div>
@@ -274,7 +274,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                   </button>
                   <button
                     onClick={() => onBookWorker(worker)}
-                    className="py-1.5 px-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xs transition-colors"
+                    className="py-1.5 px-3.5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl shadow-xs transition-colors"
                   >
                     Book Now
                   </button>

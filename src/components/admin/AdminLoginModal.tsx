@@ -38,7 +38,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
       name: 'Vikram Rao',
       role: 'DISPUTES_VERIFICATION',
       department: 'Trust & Safety / Quality Assurance',
-      badgeColor: 'bg-blue-100 text-blue-800',
+      badgeColor: 'bg-[#EBF5EE] text-[#1B4D3E] border border-[#C8DFD2]',
     },
     {
       id: 'user-admin-finance',

@@ -8,39 +8,55 @@ export default {
     extend: {
       colors: {
         brand: {
-          dark: '#0F172A', // Slate 900 - Deep, professional Apple/Urban Company tone
-          darker: '#020617', // Slate 950
-          light: '#1E293B', // Slate 800
-          accent: '#2563EB', // Trust Blue - Industry-standard, ultra-clean
-          'accent-hover': '#1D4ED8', // Blue 700
-          'accent-light': '#EFF6FF', // Blue 50 wash
-          bg: '#F8FAFC', // Ultra-clean Off-White Slate 50
-          card: '#FFFFFF', // Pure White
-          charcoal: '#0F172A', // Crisp primary text
-          muted: '#64748B', // Slate 500 secondary text
-          border: '#E2E8F0', // Hairline clean border
-          subtle: '#F1F5F9', // Slate 100 soft fill
+          dark: '#11291D', // Deep Forest Pine
+          darker: '#0A1C13', // Deepest Midnight Forest
+          light: '#1B4332', // Rich Forest Green
+          accent: '#1B4D3E', // Deep Forest Green Accent
+          'accent-hover': '#133B2E', // Darker Forest
+          'accent-vibrant': '#2D6A4F', // Vibrant Forest Green
+          'accent-light': '#EBF5EE', // Soft Sage Tint
+          bg: '#FBFBFA', // Warm Off-White Canvas (Apple/Aesop aesthetic)
+          surface: '#F4F4F0', // Warm Secondary Container
+          card: '#FFFFFF', // Pure Crisp White
+          charcoal: '#1A1D1A', // Warm Forest Charcoal Text
+          muted: '#666D64', // Warm Forest Grey Secondary Text
+          border: '#E3E6DF', // Hairline Clean Border
+          subtle: '#EEF0EA', // Soft Neutral Fill
+        },
+        forest: {
+          50: '#F0F6F2',
+          100: '#E0EDE5',
+          200: '#C2DBCB',
+          300: '#9BC3AC',
+          400: '#6FA78A',
+          500: '#4D8C6D',
+          600: '#387355',
+          700: '#2A5A42',
+          800: '#1E4332',
+          900: '#153225',
+          950: '#0C1E16',
         },
         semantic: {
-          success: '#10B981',
-          'success-bg': '#ECFDF5',
-          warning: '#F59E0B',
-          'warning-bg': '#FFFBEB',
-          error: '#EF4444',
-          'error-bg': '#FEF2F2',
-          info: '#2563EB',
-          'info-bg': '#EFF6FF',
+          success: '#2D6A4F',
+          'success-bg': '#EBF5EE',
+          warning: '#B46C13',
+          'warning-bg': '#FDF7EB',
+          error: '#BA3939',
+          'error-bg': '#FDF2F2',
+          info: '#1B4D3E',
+          'info-bg': '#EBF5EE',
         }
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        'soft': '0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
-        'medium': '0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04)',
-        'lifted': '0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04)',
-        'sheet': '0 -4px 16px rgba(15, 23, 42, 0.08)',
+        '2xs': '0 1px 2px 0 rgba(20, 25, 22, 0.03)',
+        'xs': '0 1px 2px 0 rgba(20, 25, 22, 0.05)',
+        'soft': '0 1px 3px 0 rgba(20, 25, 22, 0.05), 0 1px 2px -1px rgba(20, 25, 22, 0.03)',
+        'medium': '0 4px 6px -1px rgba(20, 25, 22, 0.07), 0 2px 4px -2px rgba(20, 25, 22, 0.03)',
+        'lifted': '0 10px 15px -3px rgba(20, 25, 22, 0.07), 0 4px 6px -4px rgba(20, 25, 22, 0.03)',
+        'sheet': '0 -4px 16px rgba(20, 25, 22, 0.06)',
       }
     },
   },

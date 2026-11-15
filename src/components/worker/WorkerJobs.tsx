@@ -154,7 +154,7 @@ export const WorkerJobs: React.FC = () => {
                           'Worker arrived at customer site in Bengaluru.'
                         )
                       }
-                      className="py-1.5 px-3 bg-blue-600 text-white font-bold rounded-xl"
+                      className="py-1.5 px-3 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-bold rounded-xl transition-colors shadow-xs"
                     >
                       Mark Arrived
                     </button>
