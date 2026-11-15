@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { APP_CONFIG } from '../../config/branding';
 import { WorkerProfile, ServiceCategory } from '../../types';
-import { CategoryIcon } from '../common/Icons';
 import {
   MapPin,
   Search,
@@ -11,18 +10,7 @@ import {
   ShieldCheck,
   ArrowRight,
   Clock,
-  PlusCircle,
-  CheckCircle2,
-  Briefcase,
-  ChevronRight,
   Sparkles,
-  BadgeCheck,
-  ShoppingCart,
-  Bell,
-  Plus,
-  Minus,
-  Percent,
-  Award,
   Zap,
   Droplets,
   Wind,
@@ -30,7 +18,9 @@ import {
   Paintbrush,
   Scissors,
   Wrench,
-  ThumbsUp,
+  ChevronRight,
+  Briefcase,
+  X,
 } from 'lucide-react';
 
 interface CustomerHomeProps {
@@ -42,17 +32,16 @@ interface CustomerHomeProps {
   ) => void;
   onOpenLocationModal: () => void;
   onNavigateToBookings: () => void;
-  onNavigateToSearch: (query?: string) => void;
-  onNavigateToNotifications?: () => void;
+  onNavigateToProfile: () => void;
 }
 
 const POPULAR_SEARCH_CHIPS = [
-  'AC Servicing',
-  'Bathroom Cleaning',
+  'AC Repair',
   'Electrician',
-  'Tap Leakage',
-  'Water Purifier',
-  'Carpentry',
+  'Cleaning',
+  'Plumber',
+  'Carpenter',
+  'Painting',
 ];
 
 const SEARCH_PLACEHOLDERS = [
@@ -63,96 +52,81 @@ const SEARCH_PLACEHOLDERS = [
   "Search for 'Plumbing & tap leaks'...",
 ];
 
-// Urban Company Visual Category Grid with soft pastel icon containers
+// Clean Service Categories
 const UC_CATEGORIES = [
   {
     id: 'cat-4',
     name: 'AC Repair',
     icon: Wind,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-3',
     name: 'Cleaning',
     icon: Sparkles,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-1',
     name: 'Electrician',
     icon: Zap,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-2',
     name: 'Plumber',
     icon: Droplets,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-5',
     name: 'Carpenter',
     icon: Hammer,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-6',
     name: 'Painting',
     icon: Paintbrush,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-water',
     name: 'Purifier',
     icon: Wrench,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
   {
     id: 'cat-salon',
     name: 'Salon & Spa',
     icon: Scissors,
-    bgTint: 'bg-emerald-50 text-forest-800 border-forest-200',
   },
 ];
 
-// Urban Company Promotional Carousel Banners
-const PROMO_BANNERS = [
+// The 2 specific offer banners requested by user
+const TWO_OFFER_BANNERS = [
   {
     id: 'banner-ac',
-    tag: 'SUMMER COOLING',
+    tag: 'HOT SUMMER OFFER',
     title: 'Split AC Deep Clean',
+    description: 'High-pressure power jet wash & 30-day warranty',
     price: 499,
     originalPrice: 799,
     discountBadge: '37% OFF',
-    bgGradient: 'from-[#0D241A] via-[#143526] to-[#1E4D38]',
+    bgColor: 'bg-[#0D2218]',
     accentColor: 'text-[#85D2A6]',
-    buttonColor: 'bg-[#2D6A4F] hover:bg-[#24563F]',
-  },
-  {
-    id: 'banner-clean',
-    tag: 'HYGIENE PRO',
-    title: 'Intensive Bathroom Cleaning',
-    price: 399,
-    originalPrice: 599,
-    discountBadge: '33% OFF',
-    bgGradient: 'from-[#10291D] via-[#173B2A] to-[#204E38]',
-    accentColor: 'text-[#85D2A6]',
-    buttonColor: 'bg-[#2D6A4F] hover:bg-[#24563F]',
+    borderColor: 'border-[#1B4D3E]',
+    serviceName: 'Split AC Deep Clean (Power Jet)',
   },
   {
     id: 'banner-elec',
     tag: 'INSTANT ASSIST',
-    title: 'Electrician Doorstep (30 Mins)',
+    title: 'Electrician Doorstep (30m)',
+    description: 'Short circuit, switchboard & fan quick repair',
     price: 199,
     originalPrice: 299,
     discountBadge: '33% OFF',
-    bgGradient: 'from-[#172E21] via-[#1F3D2D] to-[#29543E]',
-    accentColor: 'text-[#F6D38B]',
-    buttonColor: 'bg-[#C07D1C] hover:bg-[#A66914]',
+    bgColor: 'bg-[#0A0D0B]',
+    accentColor: 'text-emerald-400',
+    borderColor: 'border-slate-800',
+    serviceName: 'Switchboard, Socket & MCB Diagnostic',
   },
 ];
 
-// Curated Most Booked Services (Urban Company Style)
+// Curated Most Booked Services
 const CURATED_SERVICES = [
   {
     id: 'srv-1',
@@ -165,7 +139,7 @@ const CURATED_SERVICES = [
     discount: '37% off',
     tag: 'Bestseller',
     timeEst: '45 mins',
-    features: ['High-pressure indoor & outdoor jet wash', 'Filter antibacterial disinfection', '30-day cooling warranty'],
+    features: ['High-pressure jet wash', 'Antibacterial disinfection', '30-day warranty'],
     image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=240',
   },
   {
@@ -179,7 +153,7 @@ const CURATED_SERVICES = [
     discount: '33% off',
     tag: 'Popular',
     timeEst: '60 mins',
-    features: ['Mechanized tile scrubbing', 'Hard water limescale removal', 'Safe eco-friendly chemicals'],
+    features: ['Mechanized tile scrubbing', 'Hard water stain removal', 'Safe chemicals'],
     image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=240',
   },
   {
@@ -193,7 +167,7 @@ const CURATED_SERVICES = [
     discount: '33% off',
     tag: 'Quick Fix',
     timeEst: '30 mins',
-    features: ['Short circuit tracing', 'Modular switch replacement', 'Load test & safety grounding check'],
+    features: ['Short circuit tracing', 'Modular switch repair', 'Load test & grounding check'],
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=240',
   },
   {
@@ -207,7 +181,7 @@ const CURATED_SERVICES = [
     discount: '38% off',
     tag: 'Standard',
     timeEst: '40 mins',
-    features: ['Spindle & gasket resealing', 'P-trap drain clearout', 'Teflon thread sealing'],
+    features: ['Spindle & gasket resealing', 'P-trap drain clearout', 'Teflon sealing'],
     image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=240',
   },
   {
@@ -221,32 +195,8 @@ const CURATED_SERVICES = [
     discount: '30% off',
     tag: 'Intense Clean',
     timeEst: '75 mins',
-    features: ['Baffle filter chemical soak', 'Motor housing wipedown', 'Exhaust suction testing'],
+    features: ['Baffle filter chemical soak', 'Motor housing wipedown', 'Exhaust suction test'],
     image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=240',
-  },
-];
-
-// Real Bengaluru Homeowner Testimonials
-const CUSTOMER_REVIEWS = [
-  {
-    id: 'rev-1',
-    customerName: 'Anandita Roy',
-    area: 'Indiranagar, Bengaluru',
-    service: 'Split AC Powerjet Service',
-    rating: 5,
-    date: '2 days ago',
-    comment:
-      'The technician arrived in 25 mins with a full uniform, ID badge, and pressure jet kit. The AC is chilling like day one! Completely transparent pricing.',
-  },
-  {
-    id: 'rev-2',
-    customerName: 'Vikram Menon',
-    area: 'HSR Layout Sector 2',
-    service: 'Bathroom Deep Cleaning',
-    rating: 5,
-    date: 'Yesterday',
-    comment:
-      'Unbelievable transformation of hard water marks on my shower glass and floor tiles. Cleaned thoroughly without any mess.',
   },
 ];
 
@@ -256,88 +206,27 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
   onOpenBookingFlow,
   onOpenLocationModal,
   onNavigateToBookings,
-  onNavigateToSearch,
-  onNavigateToNotifications,
+  onNavigateToProfile,
 }) => {
   const {
     categories,
     workerProfiles,
     selectedLocation,
     bookings,
-    notifications,
     currentUser,
-    setIsAuthModalOpen,
-    setAuthModalMode,
     setIsWorkerRegModalOpen,
   } = useApp();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeBannerIndex, setActiveBannerIndex] = useState(0);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
-  // Cart state: serviceId -> quantity
-  const [cartItems, setCartItems] = useState<Record<string, number>>({});
-
-  // Cycle placeholder text smoothly every 3 seconds
+  // Cycle placeholder smoothly
   useEffect(() => {
     const timer = setInterval(() => {
       setPlaceholderIndex((prev) => (prev + 1) % SEARCH_PLACEHOLDERS.length);
     }, 3200);
     return () => clearInterval(timer);
   }, []);
-
-  // Cycle promo banner every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveBannerIndex((prev) => (prev + 1) % PROMO_BANNERS.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Compute Cart totals
-  const totalCartCount = Object.values(cartItems).reduce((sum, qty) => sum + qty, 0);
-  const totalCartPrice = Object.entries(cartItems).reduce((sum, [srvId, qty]) => {
-    const srv = CURATED_SERVICES.find((s) => s.id === srvId);
-    return sum + (srv ? srv.price * qty : 0);
-  }, 0);
-
-  const handleAddToCart = (serviceId: string) => {
-    setCartItems((prev) => ({
-      ...prev,
-      [serviceId]: (prev[serviceId] || 0) + 1,
-    }));
-  };
-
-  const handleRemoveFromCart = (serviceId: string) => {
-    setCartItems((prev) => {
-      const next = { ...prev };
-      if (next[serviceId] > 1) {
-        next[serviceId] -= 1;
-      } else {
-        delete next[serviceId];
-      }
-      return next;
-    });
-  };
-
-  const handleCheckoutCart = () => {
-    if (totalCartCount === 0) {
-      onOpenBookingFlow();
-      return;
-    }
-    const addedServices = Object.entries(cartItems)
-      .map(([id, qty]) => {
-        const item = CURATED_SERVICES.find((s) => s.id === id);
-        return item ? `${item.name} (x${qty})` : '';
-      })
-      .filter(Boolean)
-      .join(' + ');
-
-    onOpenBookingFlow(undefined, {
-      name: addedServices,
-      price: totalCartPrice,
-    });
-  };
 
   const activeBooking = bookings.find(
     (b) =>
@@ -346,98 +235,70 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
   );
 
   const approvedWorkers = workerProfiles.filter((w) => w.verificationStatus === 'APPROVED');
-  const unreadNotifsCount = notifications.filter((n) => n.userId === currentUser.id && !n.isRead).length;
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      onNavigateToSearch(searchQuery.trim());
-    }
-  };
+  // Filtered services based on search query
+  const filteredServices = searchQuery.trim()
+    ? CURATED_SERVICES.filter(
+        (s) =>
+          s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          s.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          s.features.some((f) => f.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : CURATED_SERVICES;
 
   return (
-    <div className="space-y-4 pb-28 text-slate-900 bg-white">
-      {/* ================= URBAN COMPANY TOP HEADER (LOCATION & ACTIONS) ================= */}
+    <div className="space-y-4 pb-20 text-slate-900 bg-white">
+      {/* ================= TOP HEADER: LOCATION & PROFILE ================= */}
       <div className="flex items-center justify-between pt-1 px-1">
         {/* Location Dropdown */}
         <button
           onClick={onOpenLocationModal}
-          className="flex items-center gap-1.5 py-1 px-2.5 rounded-full hover:bg-forest-50/50 transition-colors text-left group"
+          className="flex items-center gap-2 py-1 px-2.5 rounded-full hover:bg-slate-50 transition-colors text-left group"
         >
-          <div className="w-7 h-7 rounded-full bg-[#EBF5EE] text-[#1B4D3E] border border-[#C8DFD2] flex items-center justify-center shrink-0">
-            <MapPin className="w-4 h-4" />
+          <div className="w-7 h-7 rounded-full bg-[#0D2218] text-white flex items-center justify-center shrink-0">
+            <MapPin className="w-3.5 h-3.5 text-emerald-400" />
           </div>
-          <div className="truncate max-w-[170px]">
+          <div className="truncate max-w-[200px]">
             <div className="flex items-center gap-1">
-              <span className="text-xs font-black text-brand-charcoal tracking-tight">Home</span>
-              <ChevronDown className="w-3.5 h-3.5 text-brand-muted group-hover:text-[#1B4D3E] transition-colors" />
+              <span className="text-xs font-black text-black tracking-tight">Home Location</span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-500 group-hover:text-black transition-colors" />
             </div>
-            <span className="text-[11px] text-brand-muted truncate block">
+            <span className="text-[11px] text-slate-500 truncate block">
               {selectedLocation.split(',')[0]}
             </span>
           </div>
         </button>
 
-        {/* Top Right Utilities: Cart + Notifications + Profile */}
-        <div className="flex items-center gap-1.5">
-          {/* Cart Icon Button with dynamic count */}
-          <button
-            onClick={handleCheckoutCart}
-            className="relative p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors"
-            title="View Cart"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            {totalCartCount > 0 && (
-              <span className="absolute 0 top-0.5 right-0.5 w-4 h-4 bg-[#1B4D3E] text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse shadow-xs">
-                {totalCartCount}
-              </span>
-            )}
-          </button>
-
-          {/* Notifications Bell */}
-          <button
-            onClick={() => onNavigateToNotifications?.()}
-            className="relative p-2 rounded-full hover:bg-slate-100 text-slate-700 transition-colors"
-            title="Alerts"
-          >
-            <Bell className="w-5 h-5" />
-            {unreadNotifsCount > 0 && (
-              <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full" />
-            )}
-          </button>
-
-          {/* User Profile Avatar */}
-          <button
-            onClick={() => {
-              setAuthModalMode('SIGN_UP');
-              setIsAuthModalOpen(true);
-            }}
-            className="w-7 h-7 rounded-full bg-[#11291D] text-white font-bold text-xs flex items-center justify-center hover:opacity-90 transition-opacity ml-1 ring-2 ring-forest-100"
-            title="User Account"
-          >
-            {currentUser.name.charAt(0)}
-          </button>
-        </div>
+        {/* User Profile Avatar (Directly navigates to Profile) */}
+        <button
+          onClick={onNavigateToProfile}
+          className="w-8 h-8 rounded-full bg-[#0D2218] text-white font-black text-xs flex items-center justify-center hover:opacity-90 transition-opacity ring-2 ring-emerald-500/30"
+          title="My Profile"
+        >
+          {currentUser.name ? currentUser.name.charAt(0) : 'U'}
+        </button>
       </div>
 
-      {/* ================= SEARCH INPUT PILL WITH ROTATING PLACEHOLDER ================= */}
+      {/* ================= INLINE SEARCH BAR ================= */}
       <div className="space-y-2 px-1">
-        <form onSubmit={handleSearchSubmit} className="relative">
+        <div className="relative">
           <input
             type="text"
             placeholder={SEARCH_PLACEHOLDERS[placeholderIndex]}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full py-3 pl-11 pr-20 bg-brand-surface text-brand-charcoal rounded-2xl text-xs placeholder:text-brand-muted border border-brand-border focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4D3E] focus:border-transparent transition-all shadow-2xs"
+            className="w-full py-2.5 pl-10 pr-10 bg-[#FBFBFA] text-black rounded-xl text-xs placeholder:text-slate-400 border border-slate-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0D2218] transition-all"
           />
-          <Search className="w-4 h-4 text-brand-muted absolute left-4 top-3.5" />
-          <button
-            type="submit"
-            className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 bg-[#1B4D3E] hover:bg-[#153E32] text-white font-semibold rounded-xl text-xs transition-colors shadow-2xs"
-          >
-            Search
-          </button>
-        </form>
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+          {searchQuery ? (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-black"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          ) : null}
+        </div>
 
         {/* Quick Search Chips */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
@@ -445,8 +306,12 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
             <button
               key={chip}
               type="button"
-              onClick={() => onNavigateToSearch(chip)}
-              className="shrink-0 py-1 px-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-[11px] font-medium text-slate-600 transition-colors"
+              onClick={() => setSearchQuery(chip)}
+              className={`shrink-0 py-1 px-2.5 rounded-lg text-[11px] font-semibold transition-colors ${
+                searchQuery.toLowerCase() === chip.toLowerCase()
+                  ? 'bg-[#0D2218] text-white'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+              }`}
             >
               {chip}
             </button>
@@ -454,13 +319,13 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         </div>
       </div>
 
-      {/* ================= ACTIVE LIVE SERVICE BANNER (IF BOOKING IN PROGRESS) ================= */}
+      {/* ================= ACTIVE LIVE BOOKING (IF ANY) ================= */}
       {activeBooking && (
         <div
           onClick={onNavigateToBookings}
-          className="mx-1 p-3.5 bg-slate-900 text-white rounded-2xl shadow-soft cursor-pointer hover:bg-slate-850 transition-colors border border-slate-800 flex items-center justify-between"
+          className="mx-1 p-3 bg-[#0A0D0B] text-white rounded-2xl shadow-sm cursor-pointer hover:bg-black transition-colors border border-slate-800 flex items-center justify-between"
         >
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
@@ -469,7 +334,7 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
             </div>
             <h4 className="text-xs font-bold text-white">{activeBooking.serviceName}</h4>
             <p className="text-[11px] text-slate-400">
-              {activeBooking.workerName ? `Technician: ${activeBooking.workerName}` : 'Technician dispatched'} •{' '}
+              {activeBooking.workerName ? `Technician: ${activeBooking.workerName}` : 'Technician assigned'} •{' '}
               <span className="text-slate-200 font-semibold">{activeBooking.status.replace('_', ' ')}</span>
             </p>
           </div>
@@ -477,103 +342,103 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         </div>
       )}
 
-      {/* ================= URBAN COMPANY HERO PROMO CAROUSEL ================= */}
-      <div className="mx-1 relative">
-        {PROMO_BANNERS.map((banner, index) => {
-          if (index !== activeBannerIndex) return null;
-          return (
-            <div
-              key={banner.id}
-              className={`p-4 rounded-2xl bg-gradient-to-br ${banner.bgGradient} text-white shadow-soft relative overflow-hidden transition-all duration-300`}
-            >
-              <div className="space-y-2 relative z-10">
-                <div className="flex items-center justify-between">
-                  <span className={`text-[10px] font-black uppercase tracking-wider ${banner.accentColor}`}>
-                    {banner.tag}
-                  </span>
-                  <span className="text-[10px] font-bold bg-white/10 backdrop-blur-md text-white px-2 py-0.5 rounded-full border border-white/20">
-                    {banner.discountBadge}
-                  </span>
-                </div>
+      {/* ================= ONLY THE 2 PROMO BANNERS ================= */}
+      {!searchQuery && (
+        <div className="px-1 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D2218]">
+              Featured Offers
+            </span>
+          </div>
 
-                <div>
-                  <h2 className="text-base font-extrabold text-white leading-tight">
-                    {banner.title}
-                  </h2>
-                </div>
+          <div className="grid grid-cols-1 gap-2.5">
+            {TWO_OFFER_BANNERS.map((banner) => (
+              <div
+                key={banner.id}
+                className={`p-3.5 rounded-2xl ${banner.bgColor} text-white border ${banner.borderColor} shadow-sm relative overflow-hidden`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="space-y-1 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[9px] font-black tracking-wider uppercase ${banner.accentColor}`}>
+                        {banner.tag}
+                      </span>
+                      <span className="text-[9px] font-bold bg-white/10 text-white px-2 py-0.5 rounded-full border border-white/20">
+                        {banner.discountBadge}
+                      </span>
+                    </div>
 
-                <div className="flex items-center justify-between pt-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-base font-black text-white">
-                      {APP_CONFIG.currencySymbol}{banner.price}
-                    </span>
-                    <span className="text-xs text-slate-400 line-through">
-                      {APP_CONFIG.currencySymbol}{banner.originalPrice}
-                    </span>
+                    <h3 className="text-sm font-black text-white leading-tight">
+                      {banner.title}
+                    </h3>
+                    <p className="text-[11px] text-slate-300 leading-tight">
+                      {banner.description}
+                    </p>
+
+                    <div className="flex items-baseline gap-2 pt-1">
+                      <span className="text-sm font-black text-white">
+                        {APP_CONFIG.currencySymbol}{banner.price}
+                      </span>
+                      <span className="text-xs text-slate-400 line-through">
+                        {APP_CONFIG.currencySymbol}{banner.originalPrice}
+                      </span>
+                    </div>
                   </div>
 
                   <button
                     onClick={() =>
                       onOpenBookingFlow(undefined, {
-                        name: banner.title,
+                        name: banner.serviceName,
                         price: banner.price,
                       })
                     }
-                    className={`py-1.5 px-3.5 ${banner.buttonColor} text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm`}
+                    className="shrink-0 self-end py-1.5 px-4 bg-white text-[#0D2218] hover:bg-emerald-50 font-black rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm"
                   >
                     <span>Book</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>
               </div>
-            </div>
-          );
-        })}
-
-        {/* Carousel Slide Indicators */}
-        <div className="flex items-center justify-center gap-1.5 pt-2">
-          {PROMO_BANNERS.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveBannerIndex(idx)}
-              className={`h-1.5 rounded-full transition-all ${
-                activeBannerIndex === idx ? 'w-5 bg-[#1B4D3E]' : 'w-1.5 bg-brand-border'
-              }`}
-            />
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* ================= URBAN COMPANY CATEGORIES (WHAT ARE YOU LOOKING FOR?) ================= */}
+      {/* ================= SERVICE CATEGORIES ================= */}
       <div className="px-1">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Services</h3>
-          <button
-            onClick={() => onNavigateToSearch()}
-            className="text-[11px] font-bold text-[#1B4D3E] hover:underline flex items-center gap-0.5"
-          >
-            <span>See All</span>
-            <ChevronRight className="w-3 h-3" />
-          </button>
+          <h3 className="text-xs font-black text-black uppercase tracking-wider">
+            Categories
+          </h3>
         </div>
 
         <div className="grid grid-cols-4 gap-2">
           {UC_CATEGORIES.map((cat) => {
-            const IconComponent = cat.icon;
-            // Match with mock category if available
-            const matchedCategory = categories.find((c) => c.id === cat.id) || categories[0];
+            const Icon = cat.icon;
+            const fullCat: ServiceCategory = categories.find((c) => c.id === cat.id) || {
+              id: cat.id,
+              name: cat.name,
+              slug: cat.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+              description: `${cat.name} doorstep services`,
+              iconName: 'Wrench',
+              isActive: true,
+              baseCommissionPct: 15,
+              subcategories: [],
+            };
+
             return (
               <button
                 key={cat.id}
-                onClick={() => onSelectCategory(matchedCategory)}
-                className="flex flex-col items-center py-2.5 px-1 rounded-2xl bg-white hover:bg-forest-50/40 border border-brand-border/60 hover:border-forest-200 transition-all text-center group shadow-2xs"
+                onClick={() => {
+                  onSelectCategory(fullCat);
+                  setSearchQuery(cat.name);
+                }}
+                className="flex flex-col items-center p-2.5 bg-[#FBFBFA] hover:bg-slate-100 rounded-xl border border-slate-200 transition-all text-center group"
               >
-                <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center mb-1.5 border transition-transform group-hover:scale-105 ${cat.bgTint}`}
-                >
-                  <IconComponent className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-white text-[#0D2218] border border-slate-200 flex items-center justify-center mb-1.5 shadow-2xs group-hover:scale-105 transition-transform">
+                  <Icon className="w-5 h-5 text-[#0D2218]" />
                 </div>
-                <span className="text-[11px] font-bold text-brand-charcoal leading-tight line-clamp-1">
+                <span className="text-[11px] font-bold text-black leading-tight">
                   {cat.name}
                 </span>
               </button>
@@ -582,212 +447,160 @@ export const CustomerHome: React.FC<CustomerHomeProps> = ({
         </div>
       </div>
 
-      {/* ================= URBAN COMPANY "UC PLUS" MEMBERSHIP BANNER ================= */}
-      <div className="mx-1 p-3 bg-gradient-to-r from-[#0E241A] via-[#143527] to-[#1C4635] text-white rounded-2xl border border-[#235841] flex items-center justify-between shadow-soft">
-        <div className="flex items-center gap-2">
-          <span className="px-1.5 py-0.5 rounded bg-amber-400 text-[#0E241A] text-[9px] font-black uppercase tracking-wider">
-            Plus
-          </span>
-          <span className="text-xs font-bold text-white">Save 15% on every booking</span>
-        </div>
-        <button
-          onClick={() => onOpenBookingFlow()}
-          className="shrink-0 py-1 px-3 bg-amber-400 hover:bg-amber-300 text-[#0E241A] font-bold rounded-xl text-xs transition-colors shadow-2xs"
-        >
-          Join ₹299
-        </button>
-      </div>
-
-      {/* ================= MOST BOOKED SERVICES (INTERACTIVE ADD TO CART STEPPER) ================= */}
+      {/* ================= SEARCH RESULTS OR MOST BOOKED SERVICES ================= */}
       <div className="px-1">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Most Booked</h3>
-          <button
-            onClick={() => onNavigateToSearch()}
-            className="text-[11px] font-bold text-[#1B4D3E] hover:underline"
-          >
-            View All
-          </button>
+          <h3 className="text-xs font-black text-black uppercase tracking-wider">
+            {searchQuery ? `Search Results (${filteredServices.length})` : 'Most Booked Services'}
+          </h3>
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="text-[11px] font-semibold text-[#0D2218] hover:underline"
+            >
+              Clear
+            </button>
+          )}
         </div>
 
-        <div className="space-y-2.5">
-          {CURATED_SERVICES.map((item) => {
-            const quantity = cartItems[item.id] || 0;
-            return (
+        {filteredServices.length === 0 ? (
+          <div className="p-6 bg-[#FBFBFA] rounded-2xl border border-slate-200 text-center space-y-1">
+            <p className="text-xs font-bold text-black">No services found for "{searchQuery}"</p>
+            <p className="text-[11px] text-slate-500">
+              Try searching for AC, Electrician, Plumber, or Cleaning
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-2.5">
+            {filteredServices.map((item) => (
               <div
                 key={item.id}
-                className="p-3 bg-white rounded-2xl border border-brand-border shadow-2xs flex items-center justify-between gap-3 hover:border-forest-200 transition-all"
+                className="p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-between gap-3 hover:border-[#0D2218] transition-all"
               >
                 {/* Service Details */}
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-[#EBF5EE] text-[#1B4D3E] border border-[#C8DFD2]">
+                    <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-[#0D2218] text-white">
                       {item.tag}
                     </span>
-                    <span className="text-[10px] text-brand-muted flex items-center gap-0.5">
+                    <span className="text-[10px] text-slate-500 flex items-center gap-0.5">
                       <Clock className="w-3 h-3" />
                       {item.timeEst}
                     </span>
                   </div>
 
-                  <h4 className="text-xs font-bold text-brand-charcoal leading-snug">
+                  <h4 className="text-xs font-bold text-black leading-snug">
                     {item.name}
                   </h4>
 
                   <div className="flex items-center gap-2 text-[11px]">
-                    <span className="flex items-center gap-0.5 font-bold text-brand-charcoal">
+                    <span className="flex items-center gap-0.5 font-bold text-black">
                       <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
                       {item.rating}
                     </span>
-                    <span className="text-brand-muted text-[10px]">({item.reviewsCount} reviews)</span>
+                    <span className="text-slate-400 text-[10px]">({item.reviewsCount} reviews)</span>
                   </div>
 
                   <div className="flex items-baseline gap-1.5 pt-0.5">
-                    <span className="font-black text-xs text-brand-charcoal">
+                    <span className="font-black text-xs text-black">
                       {APP_CONFIG.currencySymbol}{item.price}
                     </span>
-                    <span className="text-[10px] text-brand-muted line-through">
+                    <span className="text-[10px] text-slate-400 line-through">
                       {APP_CONFIG.currencySymbol}{item.originalPrice}
                     </span>
-                    <span className="text-[10px] font-bold text-[#2D6A4F]">
+                    <span className="text-[10px] font-bold text-[#0D2218]">
                       {item.discount}
                     </span>
                   </div>
                 </div>
 
-                {/* Right side: Thumbnail + Interactive Add Stepper */}
+                {/* Right side: Thumbnail + Direct Book Button (No cart) */}
                 <div className="flex flex-col items-center gap-2 shrink-0">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-16 h-16 rounded-xl object-cover border border-brand-border/60"
+                    className="w-16 h-16 rounded-xl object-cover border border-slate-200"
                   />
 
-                  {/* Urban Company "+ Add" or "- 1 +" stepper */}
-                  {quantity === 0 ? (
-                    <button
-                      onClick={() => handleAddToCart(item.id)}
-                      className="py-1 px-4 bg-white hover:bg-[#EBF5EE] border border-[#1B4D3E] text-[#1B4D3E] font-bold rounded-lg text-xs transition-colors shadow-2xs"
-                    >
-                      + Add
-                    </button>
-                  ) : (
-                    <div className="flex items-center gap-2 bg-[#1B4D3E] text-white rounded-lg px-2 py-0.5 shadow-xs">
-                      <button
-                        onClick={() => handleRemoveFromCart(item.id)}
-                        className="p-0.5 hover:opacity-80"
-                        title="Remove"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="text-xs font-black min-w-[12px] text-center">
-                        {quantity}
-                      </span>
-                      <button
-                        onClick={() => handleAddToCart(item.id)}
-                        className="p-0.5 hover:opacity-80"
-                        title="Add more"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
-                  )}
+                  <button
+                    onClick={() =>
+                      onOpenBookingFlow(undefined, {
+                        name: item.name,
+                        price: item.price,
+                        categoryName: item.category,
+                      })
+                    }
+                    className="py-1 px-4 bg-[#0D2218] hover:bg-black text-white font-bold rounded-lg text-xs transition-colors shadow-2xs"
+                  >
+                    Book
+                  </button>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* ================= THE URBAN COMPANY PROMISE (CLEAN TRUST BAR) ================= */}
-      <div className="mx-1 py-2.5 px-3 bg-white rounded-2xl border border-brand-border flex items-center justify-between text-[11px] font-semibold text-brand-charcoal shadow-2xs">
-        <div className="flex items-center gap-1.5">
-          <BadgeCheck className="w-4 h-4 text-[#1B4D3E]" />
-          <span>Verified Pros</span>
-        </div>
-        <span className="text-brand-border">•</span>
-        <div className="flex items-center gap-1.5">
-          <Percent className="w-4 h-4 text-[#1B4D3E]" />
-          <span>Upfront Pricing</span>
-        </div>
-        <span className="text-brand-border">•</span>
-        <div className="flex items-center gap-1.5">
-          <Award className="w-4 h-4 text-[#1B4D3E]" />
-          <span>30-Day Warranty</span>
-        </div>
-      </div>
-
-      {/* ================= RECENT RATINGS ================= */}
+      {/* ================= VERIFIED EXPERTS NEARBY ================= */}
       <div className="px-1">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-black text-brand-charcoal tracking-tight">Top Ratings</h3>
-          <span className="text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full flex items-center gap-1">
-            <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-            4.84 / 5
-          </span>
+          <h3 className="text-xs font-black text-black uppercase tracking-wider">
+            Verified Professionals
+          </h3>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          {CUSTOMER_REVIEWS.slice(0, 2).map((rev) => (
+        <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-0.5">
+          {approvedWorkers.slice(0, 4).map((worker) => (
             <div
-              key={rev.id}
-              className="p-2.5 bg-white rounded-xl border border-brand-border space-y-1 shadow-2xs"
+              key={worker.id}
+              onClick={() => onSelectWorker(worker)}
+              className="shrink-0 w-44 p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-2 cursor-pointer hover:border-[#0D2218] transition-all"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-brand-charcoal truncate">{rev.customerName}</span>
-                <div className="flex items-center gap-0.5 text-amber-500">
-                  <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  <span className="text-[10px] font-bold text-brand-charcoal">{rev.rating}.0</span>
+              <div className="flex items-center gap-2">
+                <img
+                  src={worker.avatarUrl}
+                  alt={worker.fullName}
+                  className="w-10 h-10 rounded-xl object-cover border border-slate-200"
+                />
+                <div className="truncate">
+                  <h4 className="text-xs font-bold text-black truncate">{worker.fullName}</h4>
+                  <span className="text-[10px] text-slate-500 truncate block">
+                    {worker.primaryCategory.split('&')[0]}
+                  </span>
                 </div>
               </div>
-              <span className="text-[10px] font-semibold text-[#1B4D3E] bg-[#EBF5EE] px-1.5 py-0.5 rounded block truncate">
-                {rev.service}
-              </span>
+
+              <div className="flex items-center justify-between text-[11px] pt-1 border-t border-slate-100">
+                <span className="flex items-center gap-0.5 font-bold text-black">
+                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                  {worker.rating.toFixed(1)}
+                </span>
+                <span className="font-extrabold text-[#0D2218] text-xs">
+                  ₹{worker.hourlyRate}/hr
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ================= PARTNER NETWORK RECRUITMENT BANNER ================= */}
-      <div className="mx-1 p-3 bg-[#0E241A] text-white rounded-2xl flex items-center justify-between gap-3 shadow-soft border border-[#1E4D37]">
-        <div>
-          <span className="text-[9px] font-black uppercase tracking-wider text-[#82C3A3] block">
+      {/* ================= PARTNER OPPORTUNITY CALLOUT ================= */}
+      <div className="mx-1 p-3.5 bg-[#0D2218] text-white rounded-2xl flex items-center justify-between gap-3 border border-[#1B4D3E]">
+        <div className="space-y-0.5">
+          <span className="text-[9px] font-black uppercase tracking-wider text-emerald-400 block">
             Partner Network
           </span>
           <h4 className="text-xs font-bold text-white">Join as a Service Professional</h4>
+          <p className="text-[10px] text-slate-300">Earn with ACube in Bengaluru</p>
         </div>
         <button
           onClick={() => setIsWorkerRegModalOpen(true)}
-          className="shrink-0 py-1.5 px-3 bg-[#1B4D3E] hover:bg-[#256653] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+          className="shrink-0 py-1.5 px-3 bg-white hover:bg-slate-100 text-[#0D2218] font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm"
         >
           <Briefcase className="w-3.5 h-3.5" />
           <span>Register</span>
         </button>
       </div>
-
-      {/* ================= STICKY FLOATING CART BAR (URBAN COMPANY BOTTOM BAR) ================= */}
-      {totalCartCount > 0 && (
-        <div className="fixed bottom-14 left-0 right-0 max-w-[420px] mx-auto p-3 z-30 animate-in slide-in-from-bottom-3 duration-200">
-          <div className="bg-[#0E241A] text-white p-2.5 rounded-2xl shadow-lifted flex items-center justify-between border border-[#1E4D37]">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-xl bg-[#2D6A4F] text-white flex items-center justify-center font-black text-xs shadow-xs">
-                {totalCartCount}
-              </div>
-              <p className="text-xs font-black text-white">
-                {totalCartCount} {totalCartCount === 1 ? 'service' : 'services'} • {APP_CONFIG.currencySymbol}{totalCartPrice}
-              </p>
-            </div>
-
-            <button
-              onClick={handleCheckoutCart}
-              className="py-1.5 px-3.5 bg-[#2D6A4F] hover:bg-[#23563F] text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1 shadow-sm"
-            >
-              <span>View Cart</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -401,8 +401,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (mode === 'WORKER') {
       const hasWorkerProfile = workerProfiles.some((wp) => wp.userId === currentUser.id);
       if (!hasWorkerProfile && currentUser.role !== 'WORKER') {
-        showToast('Worker profile required. Please complete partner onboarding.', 'warning', 'Role Authorization Required');
-        setIsWorkerRegModalOpen(true);
+        switchPersona('user-wrk-1');
+        return;
+      }
+    } else {
+      if (currentUser.role === 'WORKER') {
+        switchPersona('user-cust-1');
         return;
       }
     }
@@ -418,10 +422,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     if (mode === 'WORKER') {
       setCurrentRoute('/worker');
-      showToast('Switched to Worker Dashboard mode', 'info');
+      showToast('Switched to Worker Account mode', 'info');
     } else {
       setCurrentRoute('/customer');
-      showToast('Switched to Customer mode', 'info');
+      showToast('Switched to Customer Account mode', 'info');
     }
   };
 
@@ -470,6 +474,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         skills: ['General Maintenance', 'Diagnostics'],
         experienceYears: 2,
         hourlyRate: 350,
+        dailyRate: 1800,
         baseFare: 199,
         rating: 5.0,
         reviewCount: 0,
@@ -515,6 +520,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       skills: profileData.skills || ['General Maintenance'],
       experienceYears: profileData.experienceYears || 3,
       hourlyRate: profileData.hourlyRate || 350,
+      dailyRate: profileData.dailyRate || 1800,
       baseFare: profileData.baseFare || 199,
       rating: 5.0,
       reviewCount: 0,

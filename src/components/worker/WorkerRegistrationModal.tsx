@@ -75,6 +75,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
   // Step 3: Rates & Coverage
   const [baseFare, setBaseFare] = useState(249);
   const [hourlyRate, setHourlyRate] = useState(350);
+  const [dailyRate, setDailyRate] = useState(1800);
   const [selectedZones, setSelectedZones] = useState<string[]>([
     'Koramangala',
     'HSR Layout',
@@ -132,6 +133,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
       experienceYears: Number(experienceYears),
       baseFare: Number(baseFare),
       hourlyRate: Number(hourlyRate),
+      dailyRate: Number(dailyRate),
       serviceAreas: selectedZones,
       languages: selectedLanguages,
       documents: [
@@ -387,25 +389,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
           {/* ================= STEP 3: RATES & LOCALITIES ================= */}
           {step === 'RATES_ZONES' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-brand-bg rounded-xl border border-gray-200">
-                  <label className="block font-bold text-gray-800 text-[11px] mb-1">
-                    Base Diagnostic Fare ({APP_CONFIG.currencySymbol})
-                  </label>
-                  <input
-                    type="number"
-                    min={99}
-                    max={999}
-                    value={baseFare}
-                    onChange={(e) => setBaseFare(Number(e.target.value))}
-                    className="w-full p-2 bg-white border border-gray-200 rounded-lg text-sm font-extrabold text-brand-dark"
-                  />
-                  <p className="text-[10px] text-gray-400 mt-1">Starting callout rate</p>
-                </div>
-
-                <div className="p-3 bg-brand-bg rounded-xl border border-gray-200">
-                  <label className="block font-bold text-gray-800 text-[11px] mb-1">
-                    Hourly Labor Rate ({APP_CONFIG.currencySymbol})
+              <div className="grid grid-cols-3 gap-2.5">
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <label className="block font-bold text-slate-800 text-[10px] mb-1">
+                    Per Hour Fare ({APP_CONFIG.currencySymbol})
                   </label>
                   <input
                     type="number"
@@ -413,9 +400,39 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                     max={1500}
                     value={hourlyRate}
                     onChange={(e) => setHourlyRate(Number(e.target.value))}
-                    className="w-full p-2 bg-white border border-gray-200 rounded-lg text-sm font-extrabold text-brand-dark"
+                    className="w-full p-2 bg-white border border-slate-200 rounded-lg text-sm font-extrabold text-[#0D2218]"
                   />
-                  <p className="text-[10px] text-gray-400 mt-1">Standard hourly bill rate</p>
+                  <p className="text-[9px] text-slate-400 mt-1">Hourly labor rate</p>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <label className="block font-bold text-slate-800 text-[10px] mb-1">
+                    Per Day Fare ({APP_CONFIG.currencySymbol})
+                  </label>
+                  <input
+                    type="number"
+                    min={800}
+                    max={10000}
+                    value={dailyRate}
+                    onChange={(e) => setDailyRate(Number(e.target.value))}
+                    className="w-full p-2 bg-white border border-slate-200 rounded-lg text-sm font-extrabold text-[#0D2218]"
+                  />
+                  <p className="text-[9px] text-slate-400 mt-1">Full-day shift fare</p>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <label className="block font-bold text-slate-800 text-[10px] mb-1">
+                    Base Callout ({APP_CONFIG.currencySymbol})
+                  </label>
+                  <input
+                    type="number"
+                    min={99}
+                    max={999}
+                    value={baseFare}
+                    onChange={(e) => setBaseFare(Number(e.target.value))}
+                    className="w-full p-2 bg-white border border-slate-200 rounded-lg text-sm font-extrabold text-black"
+                  />
+                  <p className="text-[9px] text-slate-400 mt-1">Diagnostic check</p>
                 </div>
               </div>
 

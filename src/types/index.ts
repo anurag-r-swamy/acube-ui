@@ -96,6 +96,7 @@ export interface WorkerProfile {
   skills: string[];
   experienceYears: number;
   hourlyRate: number;
+  dailyRate?: number;
   baseFare: number;
   rating: number;
   reviewCount: number;

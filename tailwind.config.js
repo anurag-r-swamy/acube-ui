@@ -8,20 +8,20 @@ export default {
     extend: {
       colors: {
         brand: {
-          dark: '#11291D', // Deep Forest Pine
-          darker: '#0A1C13', // Deepest Midnight Forest
-          light: '#1B4332', // Rich Forest Green
+          dark: '#0D2218', // Deep Forest Dark Green
+          darker: '#0A0D0B', // Pure Deep Black
+          light: '#143827', // Rich Dark Green
           accent: '#1B4D3E', // Deep Forest Green Accent
-          'accent-hover': '#133B2E', // Darker Forest
-          'accent-vibrant': '#2D6A4F', // Vibrant Forest Green
-          'accent-light': '#EBF5EE', // Soft Sage Tint
-          bg: '#FBFBFA', // Warm Off-White Canvas (Apple/Aesop aesthetic)
-          surface: '#F4F4F0', // Warm Secondary Container
-          card: '#FFFFFF', // Pure Crisp White
-          charcoal: '#1A1D1A', // Warm Forest Charcoal Text
-          muted: '#666D64', // Warm Forest Grey Secondary Text
-          border: '#E3E6DF', // Hairline Clean Border
-          subtle: '#EEF0EA', // Soft Neutral Fill
+          'accent-hover': '#0D2218', // Dark Forest
+          'accent-vibrant': '#1E5240', // Refined Deep Forest Green
+          'accent-light': '#EBF5EE', // Soft Mint/White Tint
+          bg: '#FBFBFA', // Crisp Off-White Canvas
+          surface: '#F4F5F2', // Clean Secondary Container
+          card: '#FFFFFF', // Pure White
+          charcoal: '#0A0D0B', // Deep Black Text
+          muted: '#666D64', // Clean Muted Secondary Text
+          border: '#E3E6DF', // Subtle Hairline Border
+          subtle: '#EEF0EA', // Soft Fill
         },
         forest: {
           50: '#F0F6F2',
