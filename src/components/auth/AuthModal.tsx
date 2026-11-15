@@ -185,9 +185,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
       <div className="w-full max-w-md bg-white rounded-t-3xl sm:rounded-2xl max-h-[92vh] flex flex-col shadow-lifted animate-in slide-in-from-bottom-4">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div className="flex items-center justify-between p-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-xs uppercase tracking-wider text-cyan-400 bg-[#0A192F] px-2 py-0.5 rounded">
+            <span className="font-bold text-xs uppercase tracking-wider text-white bg-slate-900 px-2 py-0.5 rounded">
               {APP_CONFIG.parentCompany}
             </span>
             <span className="text-slate-400 text-xs">|</span>
@@ -213,11 +213,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* ================= MODE: WELCOME ONBOARDING ================= */}
           {mode === 'WELCOME' && (
             <div className="space-y-5 text-center py-2">
-              <div className="p-6 bg-gradient-to-br from-[#0A192F] via-[#0F172A] to-slate-900 text-white rounded-3xl shadow-medium relative overflow-hidden space-y-3 border border-slate-800">
+              <div className="p-6 bg-slate-900 text-white rounded-2xl shadow-medium relative overflow-hidden space-y-3 border border-slate-800">
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto border border-white/20">
                   {welcomeSlides[welcomeSlide].icon}
                 </div>
-                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-cyan-500 text-slate-950 px-2.5 py-0.5 rounded-full">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-blue-600 text-white px-2.5 py-0.5 rounded-full">
                   {welcomeSlides[welcomeSlide].badge}
                 </span>
                 <h3 className="font-extrabold text-base leading-snug">
@@ -233,7 +233,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       key={idx}
                       onClick={() => setWelcomeSlide(idx)}
                       className={`h-1.5 rounded-full transition-all ${
-                        welcomeSlide === idx ? 'w-6 bg-cyan-400' : 'w-1.5 bg-white/30'
+                        welcomeSlide === idx ? 'w-6 bg-blue-500' : 'w-1.5 bg-white/30'
                       }`}
                     />
                   ))}
@@ -243,10 +243,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="space-y-2 pt-2">
                 <button
                   onClick={() => setMode('SIGN_UP')}
-                  className="w-full py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-sm flex items-center justify-center gap-2 transition-colors"
                 >
                   <span>Register New Account</span>
-                  <ArrowRight className="w-4 h-4 text-cyan-400" />
+                  <ArrowRight className="w-4 h-4 text-white" />
                 </button>
 
                 <button

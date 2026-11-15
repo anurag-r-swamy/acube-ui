@@ -168,13 +168,13 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
       <div className="w-full max-w-lg bg-white rounded-t-3xl sm:rounded-2xl max-h-[92vh] flex flex-col shadow-lifted animate-in slide-in-from-bottom-4 text-xs">
         {/* Header */}
-        <div className="bg-[#0A192F] text-white p-4 rounded-t-3xl sm:rounded-t-2xl flex items-center justify-between border-b border-slate-800">
+        <div className="bg-slate-900 text-white p-4 rounded-t-3xl sm:rounded-t-2xl flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-cyan-400">
+            <div className="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center text-blue-400">
               <Briefcase className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-extrabold text-cyan-400 uppercase tracking-wider block">
+              <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider block">
                 {APP_CONFIG.parentCompany} Partner Network
               </span>
               <h2 className="text-sm font-bold text-white">
@@ -214,12 +214,12 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
                 <div key={label} className="text-center">
                   <div
                     className={`h-1.5 rounded-full mb-1 transition-all ${
-                      isPast ? 'bg-cyan-500' : 'bg-slate-200'
+                      isPast ? 'bg-blue-600' : 'bg-slate-200'
                     }`}
                   ></div>
                   <span
                     className={`text-[9px] font-bold uppercase ${
-                      isPast ? 'text-[#0A192F]' : 'text-slate-400'
+                      isPast ? 'text-slate-900' : 'text-slate-400'
                     }`}
                   >
                     {label}
@@ -643,10 +643,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('TRADE_SKILLS')}
-                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
+                className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Trade & Skills</span>
-                <ChevronRight className="w-4 h-4 text-cyan-400" />
+                <ChevronRight className="w-4 h-4 text-white" />
               </button>
             )}
 
@@ -654,10 +654,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('RATES_ZONES')}
-                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
+                className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Rates & Bengaluru Localities</span>
-                <ChevronRight className="w-4 h-4 text-cyan-400" />
+                <ChevronRight className="w-4 h-4 text-white" />
               </button>
             )}
 
@@ -665,10 +665,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('DOCUMENTS')}
-                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
+                className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Document Upload</span>
-                <ChevronRight className="w-4 h-4 text-cyan-400" />
+                <ChevronRight className="w-4 h-4 text-white" />
               </button>
             )}
 
@@ -676,10 +676,10 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={() => setStep('BANK')}
-                className="flex-1 py-3 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors"
+                className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs flex items-center justify-center gap-1.5 transition-colors"
               >
                 <span>Next: Settlement Payout Details</span>
-                <ChevronRight className="w-4 h-4 text-cyan-400" />
+                <ChevronRight className="w-4 h-4 text-white" />
               </button>
             )}
 
@@ -687,7 +687,7 @@ export const WorkerRegistrationModal: React.FC<WorkerRegistrationModalProps> = (
               <button
                 type="button"
                 onClick={handleSubmitRegistration}
-                className="flex-1 py-3 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black rounded-xl text-xs shadow-md flex items-center justify-center gap-1.5 transition-colors active:scale-95"
+                className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs flex items-center justify-center gap-1.5 transition-colors"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Submit Partner Registration</span>

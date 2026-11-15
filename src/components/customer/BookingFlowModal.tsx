@@ -629,7 +629,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('SCHEDULE_ADDRESS')}
-                className="flex-1 py-3 px-5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow transition-all"
+                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
               >
                 Continue to Schedule & Address →
               </button>
@@ -639,7 +639,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('SUMMARY')}
-                className="flex-1 py-3 px-5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow transition-all"
+                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
               >
                 Review Booking Details →
               </button>
@@ -649,10 +649,10 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('PAYMENT')}
-                className="flex-1 py-3 px-5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow transition-all flex items-center justify-center gap-2"
+                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
               >
                 <span>Proceed to Demo Payment</span>
-                <span className="bg-cyan-500 text-slate-950 px-2 py-0.5 rounded text-[11px] font-black">
+                <span className="bg-blue-800 text-white px-2 py-0.5 rounded text-[11px] font-bold">
                   {APP_CONFIG.currencySymbol}{totalAmount}
                 </span>
               </button>
@@ -662,7 +662,7 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
               <button
                 type="button"
                 onClick={handleCreateAndPay}
-                className="flex-1 py-3 px-5 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2 active:scale-95"
+                className="flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Authorize Demo Payment ({APP_CONFIG.currencySymbol}{totalAmount})</span>
@@ -672,13 +672,13 @@ export const BookingFlowModal: React.FC<BookingFlowModalProps> = ({
         )}
 
         {step === 'SUCCESS' && createdBookingResult && (
-          <div className="p-4 border-t border-gray-100 bg-white">
+          <div className="p-4 border-t border-slate-100 bg-white">
             <button
               onClick={() => {
                 onClose();
                 onBookingSuccess(createdBookingResult);
               }}
-              className="w-full py-3 px-4 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl text-xs shadow"
+              className="w-full py-3 px-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs shadow-xs transition-colors"
             >
               Go to My Bookings
             </button>

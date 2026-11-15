@@ -57,9 +57,9 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
 
       {/* Prominent "Become a Worker" Banner (if not already worker) */}
       {!isAlreadyWorker && (
-        <div className="p-4 bg-gradient-to-r from-[#0A192F] via-[#0E2038] to-[#122A48] text-white rounded-3xl shadow-lifted relative overflow-hidden border border-slate-800">
+        <div className="p-4 bg-slate-900 text-white rounded-2xl shadow-lifted relative overflow-hidden border border-slate-800">
           <div className="relative z-10 space-y-2">
-            <span className="inline-flex items-center gap-1 bg-cyan-500 text-slate-950 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1 bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
               <Sparkles className="w-3 h-3" />
               Partner Opportunity
             </span>
@@ -72,7 +72,7 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => setIsWorkerRegModalOpen(true)}
-                className="py-2.5 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
+                className="py-2 px-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs shadow transition-all flex items-center gap-1.5"
               >
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>Partner Registration Wizard</span>
@@ -80,7 +80,7 @@ export const CustomerProfile: React.FC<CustomerProfileProps> = ({ onStartWorkerO
               </button>
               <button
                 onClick={onStartWorkerOnboarding}
-                className="py-2.5 px-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs transition-all"
+                className="py-2 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl text-xs transition-all border border-slate-700"
               >
                 Quick Convert Account
               </button>

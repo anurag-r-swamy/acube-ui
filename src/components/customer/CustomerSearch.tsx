@@ -136,8 +136,8 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
             onClick={() => setSelectedCategory('ALL')}
             className={`px-3 py-1.5 rounded-xl border whitespace-nowrap text-xs font-semibold transition-colors ${
               selectedCategory === 'ALL'
-                ? 'bg-brand-dark text-white border-brand-dark'
-                : 'bg-white text-gray-700 border-gray-200'
+                ? 'bg-slate-900 text-white border-slate-900'
+                : 'bg-white text-slate-700 border-slate-200'
             }`}
           >
             All Services
@@ -149,7 +149,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
               onClick={() => setSelectedCategory(c.name)}
               className={`px-3 py-1.5 rounded-xl border whitespace-nowrap text-xs font-semibold transition-colors ${
                 selectedCategory === c.name
-                  ? 'bg-[#0A192F] text-cyan-400 border-[#0A192F] shadow-xs'
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
               }`}
             >
@@ -211,17 +211,17 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                     alt={worker.fullName}
                     className="w-14 h-14 rounded-2xl object-cover border border-gray-200"
                   />
-                  <div className="absolute -bottom-1 -right-1 bg-cyan-500 text-slate-950 p-0.5 rounded-full ring-2 ring-white">
+                  <div className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-0.5 rounded-full ring-2 ring-white">
                     <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 <div className="flex-1 cursor-pointer" onClick={() => onSelectWorker(worker)}>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-slate-900 text-sm hover:text-cyan-700">
+                    <h3 className="font-bold text-slate-900 text-sm hover:text-blue-600">
                       {worker.fullName}
                     </h3>
-                    <span className="font-extrabold text-[#0A192F] text-xs">
+                    <span className="font-extrabold text-slate-900 text-xs">
                       {APP_CONFIG.currencySymbol}{worker.baseFare}
                       <span className="text-[10px] text-slate-400 font-normal"> base</span>
                     </span>
@@ -230,8 +230,8 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                   <p className="text-slate-500 text-[11px] mt-0.5 line-clamp-1">{worker.headline}</p>
 
                   <div className="flex flex-wrap items-center gap-2.5 mt-2 text-[11px]">
-                    <span className="flex items-center gap-0.5 text-cyan-700 font-extrabold">
-                      <Star className="w-3.5 h-3.5 fill-cyan-500 text-cyan-500" />
+                    <span className="flex items-center gap-0.5 text-amber-600 font-extrabold">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                       {worker.rating.toFixed(1)}
                       <span className="text-slate-400 font-normal">({worker.reviewCount})</span>
                     </span>
@@ -240,7 +240,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                       {worker.completedJobsCount} jobs
                     </span>
                     <span className="text-slate-300">•</span>
-                    <span className="text-cyan-800 bg-cyan-50 px-1.5 py-0.5 rounded font-semibold text-[10px] border border-cyan-200">
+                    <span className="text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded font-semibold text-[10px] border border-blue-100">
                       {worker.experienceYears}+ yrs exp
                     </span>
                   </div>
@@ -252,7 +252,7 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
                 {worker.skills.slice(0, 3).map((skill) => (
                   <span
                     key={skill}
-                    className="text-[10px] bg-brand-bg text-gray-700 px-2 py-0.5 rounded-md font-medium"
+                    className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-medium"
                   >
                     {skill}
                   </span>
@@ -262,19 +262,19 @@ export const CustomerSearch: React.FC<CustomerSearchProps> = ({
               {/* Action Buttons */}
               <div className="flex items-center justify-between mt-3 pt-2">
                 <span className="text-[11px] text-gray-400 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-brand-accent" />
+                  <MapPin className="w-3 h-3 text-slate-400" />
                   <span className="truncate max-w-[150px]">{worker.serviceAreas.join(', ')}</span>
                 </span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => onSelectWorker(worker)}
-                    className="py-1.5 px-3 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50"
+                    className="py-1.5 px-3 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition-colors"
                   >
                     Profile
                   </button>
                   <button
                     onClick={() => onBookWorker(worker)}
-                    className="py-1.5 px-3.5 bg-[#0A192F] hover:bg-slate-800 text-cyan-400 font-bold rounded-xl shadow-xs transition-colors"
+                    className="py-1.5 px-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xs transition-colors"
                   >
                     Book Now
                   </button>
